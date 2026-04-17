@@ -1,0 +1,68 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { t } from '~/data/i18n';
+
+const all = (await getCollection('publications', (p: any) => p.data.lang === 'en'))
+  .sort((a: any, b: any) => b.data.year - a.data.year);
+
+const groups: { key: string; label: string; items: any[] }[] = [
+  { key: 'article', label: t.sections.peerReviewed.en, items: all.filter((p: any) => p.data.type === 'article') },
+  { key: 'chapter', label: t.sections.chapters.en, items: all.filter((p: any) => p.data.type === 'chapter') },
+  { key: 'report', label: t.sections.reports.en, items: all.filter((p: any) => p.data.type === 'report') },
+  { key: 'intervention', label: t.sections.interventions.en, items: all.filter((p: any) => p.data.type === 'intervention') },
+  { key: 'wip', label: t.sections.wip.en, items: all.filter((p: any) => p.data.type === 'wip') },
+];
+
+function cite(p: any): string {
+  const authors = p.data.authors.join(', ');
+  const year = p.data.year;
+  const venue = p.data.venue ? ` <em>${p.data.venue}</em>` : '';
+  const vol = p.data.volume ? `, ${p.data.volume}` : '';
+  const publisher = p.data.publisher && !p.data.venue ? ` ${p.data.publisher}.` : '';
+  return `${authors} (${year}). ${p.data.title}.${venue}${vol}.${publisher}`;
+}
+---
+<BaseLayout title="Publications" lang="en" current="publications">
+  <h1>Publications</h1>
+
+  <p>
+    Peer-reviewed articles, book chapters, human rights and policy reports, and amicus curiae
+    briefs filed before Colombian high courts, the Inter-American system, and the International
+    Criminal Court. Full list below; for works-in-progress see also the <a href="/en/research/">Research</a> page.
+  </p>
+
+  {groups.map((g) => g.items.length > 0 && (
+    <section class="pub-group">
+      <h2>{g.label}</h2>
+      <ul class="pub-list">
+        {g.items.map((p: any) => (
+          <li>
+            <div class="pub-badges">
+              <span class={`badge ${p.data.type}`}>{t.pubTypes[p.data.type as keyof typeof t.pubTypes].en}</span>
+              {p.data.featured && <span class="badge featured">Featured</span>}
+            </div>
+            <div class="pub-cite" set:html={cite(p)}></div>
+            {p.data.court && (
+              <div class="pub-meta">
+                <strong>{t.labels.court.en}:</strong> {p.data.court}
+                {p.data.ruling && <> · <strong>{t.labels.ruling.en}:</strong> {p.data.ruling}</>}
+                {p.data.caseNumber && <> · {p.data.caseNumber}</>}
+              </div>
+            )}
+            {p.data.status && <div class="pub-meta"><em>{p.data.status}</em></div>}
+            {p.data.abstract && <details class="pub-abstract"><summary>{t.labels.abstract.en}</summary><p>{p.data.abstract}</p></details>}
+            <div class="pub-links">
+              {p.data.url && <a href={p.data.url} target="_blank" rel="noopener noreferrer">Link</a>}
+              {p.data.pdf && <a href={p.data.pdf} target="_blank" rel="noopener noreferrer">PDF</a>}
+              {p.data.doi && <a href={`https://doi.org/${p.data.doi}`} target="_blank" rel="noopener noreferrer">DOI</a>}
+            </div>
+            {p.data.tags.length > 0 && (
+              <div class="pub-tags">{p.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}</div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>

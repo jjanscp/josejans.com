@@ -1,0 +1,82 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Avatar from '~/components/Avatar.astro';
+import { profile } from '~/data/profile';
+---
+<BaseLayout title="About" lang="en" current="about">
+  <section class="hero">
+    <Avatar size={120} />
+    <div class="hero-text">
+      <h1 class="name">About</h1>
+      <p class="subtitle">{profile.title.en} · {profile.affiliation.en}</p>
+    </div>
+  </section>
+
+  <p>
+    I am a PhD student in Political Science at the <a href={profile.social.uic}>University of
+    Illinois Chicago (UIC)</a> and a <strong>Fulbright–MinCiencias Scholar</strong> (2025–2030),
+    with tracks in Comparative Politics and Political Theory. My career bridges advocacy and
+    research on civil rights, courts, transitions, and social movements. I come to the academy
+    after a decade of frontline legal practice and public-interest scholarship in Colombia, and
+    the questions that now organize my doctoral work grew directly out of that empirical
+    experience.
+  </p>
+
+  <p>
+    Most recently, I served as <strong>Lead Counsel for Judicial Representation</strong> before
+    Colombia's <em>Special Jurisdiction for Peace</em> (JEP), the ad hoc transitional tribunal
+    created by the 2016 Peace Agreement. I supervised a team of six counsel and two assistants
+    representing over 2,079 individual and 26 collective victims of war crimes in the macro-cases
+    on extrajudicial executions ("false positives") — work that contributed to the indictment of
+    25 army officials, including five generals, for 303 victims in Casanare and 135 in the
+    Caribbean region. Earlier, I was senior attorney at the <a href={profile.social.cajar}>José
+    Alvear Restrepo Lawyers' Collective (CAJAR)</a>, consultant for the
+    <a href={profile.social.fidh}>International Federation for Human Rights (FIDH)</a>, and
+    attorney at the Committee in Solidarity with Political Prisoners (CSPP). Across these roles
+    I submitted more than 30 amicus curiae briefs and constitutional actions before Colombia's
+    Constitutional Court, Supreme Court, JEP, the Inter-American Court of Human Rights, and the
+    International Criminal Court.
+  </p>
+
+  <h2>Education</h2>
+  <ul>
+    <li><strong>PhD, Political Science</strong>, University of Illinois Chicago, 2025–2030 (Fulbright–MinCiencias Scholar).</li>
+    <li><strong>LL.M. (Master of Laws)</strong>, Universidad de los Andes, Bogotá, 2018–2019 (Academic Vice President fully funded assistantship).</li>
+    <li><strong>LL.B. (Bachelor of Laws)</strong>, Universidad de los Andes, Bogotá, 2008–2015 ("Quiero Estudiar" Scholarship; top-ranked in the Colombian National Saber Pro Exam in Law, 2013-II, and Humanities, 2014-I).</li>
+  </ul>
+
+  <h2>Additional training</h2>
+  <ul>
+    <li>Diploma in Drug Policy, Health, and Human Rights — <strong>CIDE</strong>, Mexico, 2020.</li>
+    <li>Leadership, Organizing, and Action: Leading Change Certification — <strong>Harvard Kennedy School of Government</strong>, 2018.</li>
+    <li>Clinical Seminar in Human Rights — <strong>Central European University</strong>, Budapest, 2017.</li>
+    <li>Bertha Justice Human Rights Global Convening — <strong>University of the Witwatersrand</strong> / Centre for Applied Legal Studies (CALS), South Africa, 2018.</li>
+  </ul>
+
+  <h2>Research interests</h2>
+  <ul>
+    <li>Transitional justice and post-conflict institutional design</li>
+    <li>Public-interest litigation and rights mobilization</li>
+    <li>Courts, truth commissions, and state accountability</li>
+    <li>Social movements and the political sociology of law</li>
+    <li>Drug policy, prohibition, and health-rights frameworks</li>
+    <li>Latin America: Colombia, Mexico, Central America</li>
+  </ul>
+
+  <h2>Affiliations</h2>
+  <ul>
+    <li>Department of Political Science, University of Illinois Chicago.</li>
+    <li>Fulbright Scholar — Fulbright–MinCiencias Endowed program.</li>
+    <li>Advisory Committee member, <a href={profile.social.bertha}>Bertha Justice Global Network</a> (2018–2020).</li>
+    <li>Alumnus, José Alvear Restrepo Lawyers' Collective (CAJAR) &amp; FIDH Americas Desk.</li>
+  </ul>
+
+  <h2>Languages</h2>
+  <ul>
+    <li>Spanish — native speaker.</li>
+    <li>English — TOEFL-ITP 106; Duolingo 120.</li>
+    <li>French — reading, speaking, listening, writing (B1).</li>
+  </ul>
+
+  <p class="small"><a href="/en/cv/">Full CV →</a></p>
+</BaseLayout>

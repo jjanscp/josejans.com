@@ -1,0 +1,87 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Avatar from '~/components/Avatar.astro';
+import { profile } from '~/data/profile';
+import { getCollection } from 'astro:content';
+
+const featured = (await getCollection('publications', (p: any) => p.data.featured && (p.data.lang === 'es' || p.data.lang === 'en')))
+  .sort((a: any, b: any) => b.data.year - a.data.year)
+  .slice(0, 4);
+---
+<BaseLayout title={profile.name} lang="es" current="home">
+  <section class="hero">
+    <Avatar size={120} />
+    <div class="hero-text">
+      <div class="eyebrow">{profile.fellowship}</div>
+      <h1 class="name">{profile.name}</h1>
+      <p class="subtitle">
+        {profile.title.es} &middot; {profile.affiliation.es}<br />
+        Ejes: {profile.tracks.es}
+      </p>
+    </div>
+  </section>
+
+  <p class="lead">
+    Politólogo que trabaja en la intersección del litigio de interés público, los movimientos
+    sociales y la reforma judicial de los sistemas penal y constitucional.
+  </p>
+
+  <p>
+    Mi investigación estudia cómo los mecanismos de rendición de cuentas del Estado — cortes,
+    comisiones de la verdad y movilización de derechos a través del amicus curiae — se
+    configuran y disputan en contextos de transición desde el conflicto armado o el régimen
+    autoritario en América Latina (Colombia, México, Centroamérica).
+  </p>
+
+  <p>
+    Antes de iniciar mi doctorado en <a href={profile.social.uic}>UIC</a>, fui abogado líder de
+    representación judicial ante la <em>Jurisdicción Especial para la Paz</em> (JEP), donde
+    coordiné un equipo que representó a más de 2.000 víctimas de crímenes de guerra; abogado
+    senior del <a href={profile.social.cajar}>Colectivo José Alvear Restrepo</a>;
+    y consultor internacional de la
+    <a href={profile.social.fidh}>Federación Internacional de Derechos Humanos</a>.
+    Esa experiencia empírica — una década de litigio estratégico, reportes de política y
+    movilización de derechos ante las altas cortes colombianas, la Corte Interamericana y la
+    Corte Penal Internacional — es el fundamento de mi agenda académica actual.
+  </p>
+
+  <div class="callouts">
+    <a class="callout" href="/es/research/">
+      <h3>Investigación</h3>
+      <p>Justicia transicional, movimientos sociales, cortes y movilización de derechos.</p>
+      <span class="callout-arrow">Leer más →</span>
+    </a>
+    <a class="callout" href="/es/publications/">
+      <h3>Publicaciones</h3>
+      <p>Artículos arbitrados, capítulos, reportes de política y 30+ amicus curiae.</p>
+      <span class="callout-arrow">Explorar →</span>
+    </a>
+    <a class="callout" href="/es/cv/">
+      <h3>Hoja de vida</h3>
+      <p>CV académico completo: formación, becas, docencia y servicio.</p>
+      <span class="callout-arrow">Descargar →</span>
+    </a>
+    <a class="callout" href="/es/contact/">
+      <h3>Contacto</h3>
+      <p>Correo, perfiles profesionales e invitación abierta a colaboraciones.</p>
+      <span class="callout-arrow">Escríbeme →</span>
+    </a>
+  </div>
+
+  {featured.length > 0 && (
+    <section>
+      <h2>Trabajos destacados</h2>
+      <ul class="pub-list">
+        {featured.map((p: any) => (
+          <li>
+            <div class="pub-badges"><span class={`badge ${p.data.type}`}>{p.data.type}</span></div>
+            <div class="pub-title">{p.data.title}</div>
+            <div class="pub-meta">{p.data.authors.join(', ')} · {p.data.year}{p.data.venue ? ` · ${p.data.venue}` : ''}</div>
+            {p.data.url && <div class="pub-links"><a href={p.data.url} target="_blank" rel="noopener">Ver →</a></div>}
+          </li>
+        ))}
+      </ul>
+      <p class="small" style="margin-top: var(--sp-4)"><a href="/es/publications/">Todas las publicaciones →</a></p>
+    </section>
+  )}
+</BaseLayout>

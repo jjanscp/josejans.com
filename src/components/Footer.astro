@@ -1,0 +1,37 @@
+---
+import { profile } from '~/data/profile';
+import { t, type Lang } from '~/data/i18n';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const socialLinks = [
+  { label: 'Email', href: `mailto:${profile.email}` },
+  { label: 'LinkedIn', href: profile.social.linkedin },
+  { label: 'X / Twitter', href: profile.social.twitter },
+  { label: 'GitHub', href: profile.social.github },
+  { label: 'UIC Profile', href: profile.social.uic },
+  profile.social.scholar ? { label: 'Google Scholar', href: profile.social.scholar } : null,
+  profile.social.orcid ? { label: 'ORCID', href: profile.social.orcid } : null,
+  profile.social.ssrn ? { label: 'SSRN', href: profile.social.ssrn } : null,
+  profile.social.researchgate ? { label: 'ResearchGate', href: profile.social.researchgate } : null,
+  profile.social.academia ? { label: 'Academia.edu', href: profile.social.academia } : null,
+].filter(Boolean) as { label: string; href: string }[];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="social-row">
+    {socialLinks.map((l) => (
+      <a href={l.href} rel="noopener noreferrer" target={l.href.startsWith('mailto') ? '_self' : '_blank'}>
+        {l.label}
+      </a>
+    ))}
+  </div>
+  <div>
+    &copy; {year} {profile.name} &middot;
+    <a href={`/${lang}/cv/`}>{t.labels.downloadCV[lang]}</a> &middot;
+    <a href="/rss.xml">RSS</a>
+  </div>
+</footer>

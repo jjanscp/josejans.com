@@ -1,0 +1,60 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const wip = (await getCollection('publications', (p: any) => p.data.type === 'wip' && p.data.lang === 'en'))
+  .sort((a: any, b: any) => b.data.year - a.data.year);
+---
+<BaseLayout title="Research" lang="en" current="research">
+  <h1>Research</h1>
+
+  <p>
+    My research focuses on the intersection of <strong>public interest litigation, social
+    movements, and judicial reform</strong> of criminal and constitutional justice systems.
+    Specifically, I study <strong>state accountability mechanisms</strong> — courts, truth
+    commissions, and amicus-curiae-based rights mobilization — in contexts of transition from
+    authoritarian rule and/or armed conflict in Latin America (Colombia, Mexico, Central
+    America). I am particularly interested in how the rules, practices, and discourses of
+    justice are shaped by the revolving interaction between international organizations,
+    courts, policymakers, and advocacy networks, and in what that interaction produces for
+    the resulting legal designs, both in the public-opinion arena and through institutional
+    pathways.
+  </p>
+
+  <p>
+    Methodologically, I combine an action-research participatory approach with a plural
+    toolkit: archival work, macro-historical analysis, discourse analysis, and ethnographic
+    fieldwork. My recent scholarship has examined the protection of social leaders in Colombia
+    through the lens of transnational human-rights networks (Carretero Pardo &amp; Ochoa
+    Sterling, <em>IdeAs</em> 2021); the role of victims' rights in the legislative
+    implementation of the 2016 Peace Agreement (Carretero Pardo &amp; Rodríguez, 2018); and
+    the limits of Colombian transitional justice in addressing international crimes under ICC
+    jurisdiction (FIDH &amp; CAJAR, 2020).
+  </p>
+
+  <h2>Research agenda</h2>
+  <ul>
+    <li><strong>Transitional justice &amp; courts</strong> — how transitional tribunals (like Colombia's JEP) reshape the relationship between ordinary and extraordinary justice, and how victims and advocacy networks influence that reshaping.</li>
+    <li><strong>Strategic litigation &amp; rights mobilization</strong> — the micro-dynamics of amicus curiae briefs and citizen interventions as tools for shaping constitutional jurisprudence in contexts of armed conflict and democratic backsliding.</li>
+    <li><strong>Drug policy &amp; the state</strong> — comparative study of how drug-control regimes interact with transitional-justice frameworks in Mexico and Colombia.</li>
+    <li><strong>Social movements and legal empowerment</strong> — the grammar of collective mobilization around constitutional rights, peacebuilding, and Indigenous self-governance (e.g., the Wiwa and Cañamomo cases).</li>
+  </ul>
+
+  <h2>Works in progress</h2>
+  {wip.length === 0 ? (
+    <p class="muted">Draft papers and works under review will be listed here as they are ready. Check back soon, or <a href="#contact">subscribe</a> for updates.</p>
+  ) : (
+    <ul class="pub-list">
+      {wip.map((p: any) => (
+        <li>
+          <div class="pub-badges"><span class="badge wip">{p.data.status || 'Work in progress'}</span></div>
+          <div class="pub-title">{p.data.title}</div>
+          <div class="pub-meta">{p.data.authors.join(', ')} · {p.data.year}</div>
+          {p.data.abstract && <div class="pub-abstract">{p.data.abstract}</div>}
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <p class="small"><a href="/en/publications/">Full publications list →</a></p>
+</BaseLayout>

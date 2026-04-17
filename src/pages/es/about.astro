@@ -1,0 +1,82 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Avatar from '~/components/Avatar.astro';
+import { profile } from '~/data/profile';
+---
+<BaseLayout title="Sobre mí" lang="es" current="about">
+  <section class="hero">
+    <Avatar size={120} />
+    <div class="hero-text">
+      <h1 class="name">Sobre mí</h1>
+      <p class="subtitle">{profile.title.es} · {profile.affiliation.es}</p>
+    </div>
+  </section>
+
+  <p>
+    Soy estudiante doctoral en Ciencia Política en la <a href={profile.social.uic}>Universidad
+    de Illinois en Chicago (UIC)</a> y <strong>becario Fulbright–MinCiencias</strong> (2025–2030),
+    con énfasis en Política Comparada y Teoría Política. Mi trayectoria une la práctica del
+    litigio de interés público y la investigación académica sobre derechos civiles, cortes,
+    transiciones y movimientos sociales. Llego a la academia después de una década de práctica
+    jurídica de primera línea en Colombia, y las preguntas que hoy organizan mi tesis doctoral
+    surgieron directamente de esa experiencia empírica.
+  </p>
+
+  <p>
+    Entre 2023 y 2024 me desempeñé como <strong>abogado líder de representación judicial</strong>
+    ante la <em>Jurisdicción Especial para la Paz</em> (JEP), el tribunal transicional creado
+    por el Acuerdo Final de 2016. Coordiné a seis abogados y dos asistentes en la representación
+    de más de 2.079 víctimas individuales y 26 colectivas en los macrocasos sobre ejecuciones
+    extrajudiciales ("falsos positivos") — un trabajo que contribuyó al llamamiento a juicio de
+    25 oficiales del Ejército, cinco de ellos generales, por 303 víctimas en Casanare y 135 en
+    la región Caribe. Antes fui abogado senior del <a href={profile.social.cajar}>Colectivo de
+    Abogados José Alvear Restrepo (CAJAR)</a>, consultor de la
+    <a href={profile.social.fidh}>Federación Internacional de Derechos Humanos (FIDH)</a> y
+    abogado del Comité de Solidaridad con los Presos Políticos (CSPP). En estos roles presenté
+    más de 30 intervenciones ciudadanas, amicus curiae y demandas de inconstitucionalidad ante
+    la Corte Constitucional, la Corte Suprema, la JEP, la Corte Interamericana de Derechos
+    Humanos y la Corte Penal Internacional.
+  </p>
+
+  <h2>Formación académica</h2>
+  <ul>
+    <li><strong>PhD en Ciencia Política</strong>, University of Illinois Chicago, 2025–2030 (beca Fulbright–MinCiencias).</li>
+    <li><strong>Magíster en Derecho (LL.M.)</strong>, Universidad de los Andes, Bogotá, 2018–2019 (asistencia graduada de la Vicepresidencia Académica).</li>
+    <li><strong>Abogado (LL.B.)</strong>, Universidad de los Andes, Bogotá, 2008–2015 (beca "Quiero Estudiar"; mejor puntaje nacional Saber Pro en Derecho 2013-II y Humanidades 2014-I).</li>
+  </ul>
+
+  <h2>Formación adicional</h2>
+  <ul>
+    <li>Diplomado en Política de Drogas, Salud y Derechos Humanos — <strong>CIDE</strong>, México, 2020.</li>
+    <li>"Leading Change" — <strong>Harvard Kennedy School of Government</strong>, 2018.</li>
+    <li>Seminario Clínico en Derechos Humanos — <strong>Central European University</strong>, Budapest, 2017.</li>
+    <li>Bertha Justice Human Rights Global Convening — <strong>University of the Witwatersrand</strong> / CALS, Sudáfrica, 2018.</li>
+  </ul>
+
+  <h2>Intereses de investigación</h2>
+  <ul>
+    <li>Justicia transicional y diseño institucional en escenarios de posconflicto</li>
+    <li>Litigio estratégico y movilización de derechos</li>
+    <li>Cortes, comisiones de la verdad y rendición de cuentas del Estado</li>
+    <li>Movimientos sociales y sociología política del derecho</li>
+    <li>Política de drogas, prohibición y enfoque de salud-derechos</li>
+    <li>América Latina: Colombia, México, Centroamérica</li>
+  </ul>
+
+  <h2>Afiliaciones</h2>
+  <ul>
+    <li>Departamento de Ciencia Política, University of Illinois Chicago.</li>
+    <li>Becario Fulbright — programa Fulbright–MinCiencias.</li>
+    <li>Miembro del Comité Asesor, <a href={profile.social.bertha}>Red Global Bertha Justice</a> (2018–2020).</li>
+    <li>Alumni del Colectivo de Abogados José Alvear Restrepo (CAJAR) y del Equipo de las Américas de la FIDH.</li>
+  </ul>
+
+  <h2>Idiomas</h2>
+  <ul>
+    <li>Español — lengua materna.</li>
+    <li>Inglés — TOEFL-ITP 106; Duolingo 120.</li>
+    <li>Francés — lectura, habla, escucha, escritura (B1).</li>
+  </ul>
+
+  <p class="small"><a href="/es/cv/">Hoja de vida completa →</a></p>
+</BaseLayout>

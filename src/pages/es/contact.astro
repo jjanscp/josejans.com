@@ -1,0 +1,75 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { profile } from '~/data/profile';
+import { t } from '~/data/i18n';
+
+const socialLinks = [
+  { label: 'Correo', href: `mailto:${profile.email}`, val: profile.email },
+  { label: 'LinkedIn', href: profile.social.linkedin, val: 'linkedin.com/in/josejans' },
+  { label: 'X / Twitter', href: profile.social.twitter, val: '@josejanscp' },
+  { label: 'GitHub', href: profile.social.github, val: 'github.com/josejanscp' },
+  { label: 'Perfil UIC', href: profile.social.uic, val: 'pols.uic.edu' },
+  profile.social.scholar && { label: 'Google Scholar', href: profile.social.scholar, val: 'scholar.google.com/citations' },
+  profile.social.orcid && { label: 'ORCID', href: profile.social.orcid, val: 'orcid.org' },
+  profile.social.ssrn && { label: 'SSRN', href: profile.social.ssrn, val: 'ssrn.com' },
+  profile.social.researchgate && { label: 'ResearchGate', href: profile.social.researchgate, val: 'researchgate.net/profile/Jose-Carretero-5' },
+  profile.social.academia && { label: 'Academia.edu', href: profile.social.academia, val: 'uniandes.academia.edu/josejanscarreteropardo' },
+].filter(Boolean) as { label: string; href: string; val: string }[];
+---
+<BaseLayout title="Contacto" lang="es" current="contact">
+  <div class="eyebrow">Contacto</div>
+  <h1>Escríbeme</h1>
+
+  <p class="lead">{t.labels.contactHeadline.es}</p>
+
+  <form
+    name="contact"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    class="contact-form"
+    action="/es/thanks/"
+  >
+    <input type="hidden" name="form-name" value="contact" />
+    <p hidden><label>No llenar: <input name="bot-field" /></label></p>
+    <label>{t.labels.yourName.es}
+      <input type="text" name="name" required autocomplete="name" />
+    </label>
+    <label>{t.labels.yourEmail.es}
+      <input type="email" name="email" required autocomplete="email" />
+    </label>
+    <label>{t.labels.yourMessage.es}
+      <textarea name="message" rows="5" required></textarea>
+    </label>
+    <button type="submit">{t.labels.contactSend.es}</button>
+  </form>
+
+  <h2>Perfiles académicos y profesionales</h2>
+  <ul class="profile-list">
+    {socialLinks.map((l) => (
+      <li>
+        <strong>{l.label}</strong>
+        <a href={l.href} target={l.href.startsWith('mailto') ? '_self' : '_blank'} rel="noopener noreferrer">{l.val}</a>
+      </li>
+    ))}
+  </ul>
+
+  <div class="newsletter-embed" id="newsletter">
+    <div class="eyebrow">Newsletter</div>
+    <h3>Actualizaciones de investigación, pocas veces al año.</h3>
+    <p>{t.labels.newsletterHeadline.es}</p>
+    {profile.newsletter.username ? (
+      <form
+        action={`https://buttondown.com/api/emails/embed-subscribe/${profile.newsletter.username}`}
+        method="post"
+        target="popupwindow"
+        onsubmit={`window.open('https://buttondown.com/${profile.newsletter.username}', 'popupwindow')`}
+      >
+        <input type="email" name="email" placeholder="tu@ejemplo.com" required />
+        <button type="submit">{t.labels.newsletterCTA.es}</button>
+      </form>
+    ) : (
+      <p class="muted small">Suscripción al newsletter disponible pronto.</p>
+    )}
+  </div>
+</BaseLayout>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const wip = (await getCollection('publications', (p: any) => p.data.type === 'wip'))
+  .sort((a: any, b: any) => b.data.year - a.data.year);
+---
+<BaseLayout title="Investigación" lang="es" current="research">
+  <h1>Investigación</h1>
+
+  <p>
+    Mi investigación se concentra en la intersección entre <strong>litigio de interés público,
+    movimientos sociales y reforma judicial</strong> de los sistemas penal y constitucional.
+    Específicamente, estudio los <strong>mecanismos de rendición de cuentas del Estado</strong>
+    — cortes, comisiones de la verdad y movilización de derechos a través del amicus curiae —
+    en contextos de transición desde el régimen autoritario y/o el conflicto armado en América
+    Latina (Colombia, México, Centroamérica). Me interesa particularmente cómo las reglas,
+    prácticas y discursos sobre justicia se configuran en la interacción entre organismos
+    internacionales, cortes, hacedores de política y redes de defensa de derechos, y qué
+    produce esa interacción en los diseños legales resultantes, tanto en la arena de la
+    opinión pública como en las rutas institucionales.
+  </p>
+
+  <p>
+    Metodológicamente combino un enfoque de investigación-acción participativa con un conjunto
+    plural de herramientas: trabajo de archivo, análisis macrohistórico, análisis de discurso
+    y trabajo etnográfico de campo. Mi producción reciente ha examinado la protección de
+    líderes sociales en Colombia desde las redes transnacionales de derechos humanos
+    (Carretero Pardo &amp; Ochoa Sterling, <em>IdeAs</em> 2021); los derechos de las víctimas
+    en la implementación normativa del Acuerdo Final de Paz (Carretero Pardo &amp; Rodríguez,
+    2018); y los límites de la justicia transicional colombiana frente a los crímenes
+    internacionales bajo jurisdicción de la CPI (FIDH &amp; CAJAR, 2020).
+  </p>
+
+  <h2>Agenda de investigación</h2>
+  <ul>
+    <li><strong>Justicia transicional y cortes</strong> — cómo tribunales transicionales como la JEP reconfiguran la relación entre la justicia ordinaria y la extraordinaria, y cómo víctimas y redes de defensa influyen en esa reconfiguración.</li>
+    <li><strong>Litigio estratégico y movilización de derechos</strong> — las micro-dinámicas de las intervenciones ciudadanas y amicus curiae como herramientas para moldear la jurisprudencia constitucional en contextos de conflicto armado y retroceso democrático.</li>
+    <li><strong>Política de drogas y Estado</strong> — estudio comparado de cómo los regímenes de control de drogas interactúan con los marcos de justicia transicional en México y Colombia.</li>
+    <li><strong>Movimientos sociales y empoderamiento legal</strong> — la gramática de la movilización colectiva alrededor de los derechos constitucionales, la construcción de paz y el autogobierno indígena (casos Wiwa y Cañamomo).</li>
+  </ul>
+
+  <h2>Trabajos en curso</h2>
+  {wip.length === 0 ? (
+    <p class="muted">Aquí aparecerán los papers en redacción y bajo evaluación a medida que estén listos. Vuelve pronto o <a href="#contact">suscríbete</a> para recibir actualizaciones.</p>
+  ) : (
+    <ul class="pub-list">
+      {wip.map((p: any) => (
+        <li>
+          <div class="pub-badges"><span class="badge wip">{p.data.status || 'Trabajo en curso'}</span></div>
+          <div class="pub-title">{p.data.title}</div>
+          <div class="pub-meta">{p.data.authors.join(', ')} · {p.data.year}</div>
+          {p.data.abstract && <div class="pub-abstract">{p.data.abstract}</div>}
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <p class="small"><a href="/es/publications/">Lista completa de publicaciones →</a></p>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const items = (await getCollection('archive')).sort((a: any, b: any) => (b.data.year || 0) - (a.data.year || 0));
+
+const groups = [
+  { key: 'dataset', label: 'Research datasets', items: items.filter((i: any) => i.data.kind === 'dataset') },
+  { key: 'litigation', label: 'Strategic litigation portfolio', items: items.filter((i: any) => i.data.kind === 'litigation') },
+  { key: 'writing', label: 'Earlier writings', items: items.filter((i: any) => i.data.kind === 'writing') },
+  { key: 'report', label: 'Earlier reports', items: items.filter((i: any) => i.data.kind === 'report') },
+];
+---
+<BaseLayout title="Research Archive" lang="en" current="archive">
+  <h1>Research Archive</h1>
+
+  <p>
+    Empirical foundations of my current research agenda, drawn from a decade of public-interest
+    litigation and human rights practice in Colombia. This section preserves datasets, case
+    portfolios, and earlier writings that originated outside the academy but feed directly into
+    my dissertation work on transitional justice, rights mobilization, and state accountability.
+  </p>
+
+  {groups.map((g) => g.items.length > 0 && (
+    <section class="archive-group">
+      <h2>{g.label}</h2>
+      <ul class="archive-list">
+        {g.items.map((item: any) => (
+          <li>
+            <h3>{item.data.title}</h3>
+            {item.data.year && <div class="pub-meta">{item.data.year}</div>}
+            {item.data.summary && <p>{item.data.summary}</p>}
+            <p class="small"><a href={`/en/archive/${item.id.replace(/\.(md|mdx)$/, '')}/`}>Read more →</a></p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>

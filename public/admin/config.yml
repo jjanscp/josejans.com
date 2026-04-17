@@ -1,0 +1,94 @@
+backend:
+  name: git-gateway
+  branch: main
+  # Alternative (Netlify Identity disabled): uncomment below and set GitHub OAuth in Netlify
+  # name: github
+  # repo: josejanscp/josejans.com
+  # branch: main
+
+media_folder: "site/public/media"
+public_folder: "/media"
+site_url: https://josejans.com
+display_url: https://josejans.com
+locale: en
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "posts"
+    label: "Blog posts"
+    folder: "site/src/content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Language", name: "lang", widget: "select", options: ["en", "es"], default: "en" }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Cover image", name: "cover", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "publications"
+    label: "Publications"
+    folder: "site/src/content/publications"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Authors", name: "authors", widget: "list" }
+      - { label: "Year", name: "year", widget: "number", value_type: "int", min: 1900, max: 2099 }
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "Peer-reviewed article", value: "article" }
+          - { label: "Book chapter", value: "chapter" }
+          - { label: "Policy / HR report", value: "report" }
+          - { label: "Amicus curiae / Constitutional intervention", value: "intervention" }
+          - { label: "Dataset", value: "dataset" }
+          - { label: "Work in progress", value: "wip" }
+      - { label: "Venue / Journal", name: "venue", widget: "string", required: false }
+      - { label: "Volume", name: "volume", widget: "string", required: false }
+      - { label: "Pages", name: "pages", widget: "string", required: false }
+      - { label: "Publisher", name: "publisher", widget: "string", required: false }
+      - { label: "DOI", name: "doi", widget: "string", required: false }
+      - { label: "URL", name: "url", widget: "string", required: false }
+      - { label: "PDF path", name: "pdf", widget: "file", required: false }
+      - { label: "Abstract", name: "abstract", widget: "text", required: false }
+      - { label: "Status (for WIP)", name: "status", widget: "string", required: false }
+      - { label: "Court (for interventions)", name: "court", widget: "string", required: false }
+      - { label: "Ruling (for interventions)", name: "ruling", widget: "string", required: false }
+      - { label: "Case number", name: "caseNumber", widget: "string", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Language", name: "lang", widget: "select", options: ["en", "es"], default: "en" }
+      - { label: "Body (optional)", name: "body", widget: "markdown", required: false }
+
+  - name: "archive"
+    label: "Research archive"
+    folder: "site/src/content/archive"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Kind"
+        name: "kind"
+        widget: "select"
+        options:
+          - { label: "Dataset", value: "dataset" }
+          - { label: "Litigation portfolio", value: "litigation" }
+          - { label: "Earlier writing", value: "writing" }
+          - { label: "Earlier report", value: "report" }
+      - { label: "Year", name: "year", widget: "number", value_type: "int", required: false }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "URL", name: "url", widget: "string", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Language", name: "lang", widget: "select", options: ["en", "es"], default: "es" }
+      - { label: "Body", name: "body", widget: "markdown" }

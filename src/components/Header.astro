@@ -1,0 +1,45 @@
+---
+import { t, otherLang, type Lang } from '~/data/i18n';
+import { profile } from '~/data/profile';
+
+interface Props {
+  lang: Lang;
+  current?: string;
+}
+const { lang, current } = Astro.props;
+const navItems = [
+  { href: 'about', key: 'about' },
+  { href: 'research', key: 'research' },
+  { href: 'publications', key: 'publications' },
+  { href: 'teaching', key: 'teaching' },
+  { href: 'archive', key: 'archive' },
+  { href: 'blog', key: 'blog' },
+  { href: 'cv', key: 'cv' },
+  { href: 'contact', key: 'contact' },
+] as const;
+
+const pathname = Astro.url.pathname;
+const other = otherLang(lang);
+
+// Build the "switch language" href by replacing /en/ with /es/ or vice versa
+const switchHref = pathname.replace(`/${lang}/`, `/${other}/`);
+---
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href={`/${lang}/`} class="site-title">{profile.shortName}</a>
+    <nav class="site-nav" aria-label="Primary">
+      {navItems.map((item) => (
+        <a
+          href={`/${lang}/${item.href}/`}
+          class={current === item.key ? 'active' : ''}
+        >
+          {t.nav[item.key][lang]}
+        </a>
+      ))}
+      <a href={switchHref} class="lang-toggle" aria-label="Switch language">
+        {t.labels.switchLang[lang]}
+      </a>
+    </nav>
+  </div>
+</header>

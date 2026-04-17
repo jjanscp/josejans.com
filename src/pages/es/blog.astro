@@ -1,0 +1,29 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', (p: any) => p.data.lang === 'es' && !p.data.draft))
+  .sort((a: any, b: any) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout title="Blog" lang="es" current="blog">
+  <h1>Blog y noticias</h1>
+
+  <p>
+    Textos breves sobre investigación, docencia y trabajo de campo en curso — con
+    comentarios ocasionales sobre política colombiana, justicia transicional y las cortes.
+  </p>
+
+  {posts.length === 0 ? (
+    <p class="muted">Aún no hay entradas. Vuelve pronto, o <a href="/es/contact/#newsletter">suscríbete</a> para recibir actualizaciones.</p>
+  ) : (
+    <ul class="post-list">
+      {posts.map((p: any) => (
+        <li>
+          <time datetime={p.data.date.toISOString()}>{p.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          <h2><a href={`/es/blog/${p.id.replace(/\.(md|mdx)$/, '')}/`}>{p.data.title}</a></h2>
+          {p.data.summary && <p>{p.data.summary}</p>}
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>

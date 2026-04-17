@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://josejans.com/sitemap-index.xml

@@ -1,0 +1,87 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Avatar from '~/components/Avatar.astro';
+import { profile } from '~/data/profile';
+import { getCollection } from 'astro:content';
+
+const featured = (await getCollection('publications', (p: any) => p.data.featured && p.data.lang === 'en'))
+  .sort((a: any, b: any) => b.data.year - a.data.year)
+  .slice(0, 4);
+---
+<BaseLayout title={profile.name} lang="en" current="home">
+  <section class="hero">
+    <Avatar size={120} />
+    <div class="hero-text">
+      <div class="eyebrow">{profile.fellowship}</div>
+      <h1 class="name">{profile.name}</h1>
+      <p class="subtitle">
+        {profile.title.en} &middot; {profile.affiliation.en}<br />
+        Tracks: {profile.tracks.en}
+      </p>
+    </div>
+  </section>
+
+  <p class="lead">
+    Political scientist working at the intersection of public interest litigation, social
+    movements, and judicial reform of criminal and constitutional justice systems.
+  </p>
+
+  <p>
+    My research examines how state accountability mechanisms — courts, truth commissions,
+    amicus-curiae-based rights mobilization — are shaped, contested, and reconfigured during
+    transitions from armed conflict or authoritarian rule in Latin America (Colombia, Mexico,
+    Central America).
+  </p>
+
+  <p>
+    Before starting my doctorate at <a href={profile.social.uic}>UIC</a>, I served as Lead Counsel
+    before Colombia's <em>Special Jurisdiction for Peace</em> (JEP), coordinating judicial
+    representation for over 2,000 victims of war crimes; as senior attorney at the
+    <a href={profile.social.cajar}>José Alvear Restrepo Lawyers' Collective</a>;
+    and as international consultant for the
+    <a href={profile.social.fidh}>International Federation for Human Rights</a>.
+    My empirical work sits at the foundation of my current research agenda — a decade of
+    strategic litigation, policy reports, and rights mobilization before Colombian high
+    courts, the Inter-American Court of Human Rights, and the International Criminal Court.
+  </p>
+
+  <div class="callouts">
+    <a class="callout" href="/en/research/">
+      <h3>Research</h3>
+      <p>Transitional justice, social movements, courts, and rights mobilization in Latin America.</p>
+      <span class="callout-arrow">Read more →</span>
+    </a>
+    <a class="callout" href="/en/publications/">
+      <h3>Publications</h3>
+      <p>Peer-reviewed articles, book chapters, policy reports, and 30+ amicus curiae briefs.</p>
+      <span class="callout-arrow">Browse →</span>
+    </a>
+    <a class="callout" href="/en/cv/">
+      <h3>Curriculum Vitae</h3>
+      <p>Full academic CV — education, fellowships, teaching, and service.</p>
+      <span class="callout-arrow">Download →</span>
+    </a>
+    <a class="callout" href="/en/contact/">
+      <h3>Contact</h3>
+      <p>Email, social profiles, and an invitation to research collaborations.</p>
+      <span class="callout-arrow">Get in touch →</span>
+    </a>
+  </div>
+
+  {featured.length > 0 && (
+    <section>
+      <h2>Selected work</h2>
+      <ul class="pub-list">
+        {featured.map((p: any) => (
+          <li>
+            <div class="pub-badges"><span class={`badge ${p.data.type}`}>{p.data.type}</span></div>
+            <div class="pub-title">{p.data.title}</div>
+            <div class="pub-meta">{p.data.authors.join(', ')} · {p.data.year}{p.data.venue ? ` · ${p.data.venue}` : ''}</div>
+            {p.data.url && <div class="pub-links"><a href={p.data.url} target="_blank" rel="noopener">View →</a></div>}
+          </li>
+        ))}
+      </ul>
+      <p class="small" style="margin-top: var(--sp-4)"><a href="/en/publications/">All publications →</a></p>
+    </section>
+  )}
+</BaseLayout>
