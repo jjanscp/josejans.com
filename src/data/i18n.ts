@@ -7,7 +7,8 @@ export const t = {
     research: { en: 'Research & Publications', es: 'Investigación y Publicaciones' },
     advocacy: { en: 'Advocacy & Consulting', es: 'Incidencia y Consultoría' },
     teaching: { en: 'Teaching', es: 'Docencia' },
-    media: { en: 'Media & Opinion', es: 'Medios y Opinión' },
+    writing: { en: 'Writing & Media', es: 'Textos y Medios' },
+    media: { en: 'Writing & Media', es: 'Textos y Medios' },
     blog: { en: 'Blog', es: 'Blog' },
     cv: { en: 'CV', es: 'CV' },
     contact: { en: 'Contact', es: 'Contacto' },
@@ -85,28 +86,28 @@ export const t = {
     // Promise
     promiseEyebrow: { en: 'What I do', es: 'Qué hago' },
     promiseTitle: {
-      en: 'Research, advocacy, and teaching on courts, transitions, and social change.',
-      es: 'Investigación, incidencia y docencia sobre cortes, transiciones y cambio social.',
+      en: 'Comparative research, strategic litigation, and clinical teaching on courts, accountability, and rights.',
+      es: 'Investigación comparada, litigio estratégico y docencia clínica sobre cortes, rendición de cuentas y derechos.',
     },
     promiseResearch: {
       title: { en: 'Research', es: 'Investigación' },
       body: {
-        en: 'Comparative politics of courts, transitional justice, and rights mobilization.',
-        es: 'Política comparada de las cortes, justicia transicional y movilización de derechos.',
+        en: 'The politics of transitional justice institutions, state accountability for macro-criminal violence, and rights mobilization in post-conflict settings.',
+        es: 'La política de las instituciones de justicia transicional, la rendición de cuentas del Estado por violencia macro-criminal y la movilización de derechos en posconflicto.',
       },
     },
     promiseAdvocacy: {
       title: { en: 'Advocacy & Consulting', es: 'Incidencia y Consultoría' },
       body: {
-        en: 'Strategic litigation, amicus curiae briefs, and policy advice for human-rights organizations and public institutions.',
-        es: 'Litigio estratégico, amicus curiae y asesoría a organizaciones de derechos humanos e instituciones públicas.',
+        en: 'Strategic litigation and amicus curiae briefs before Colombian high courts, the Inter-American system, and the ICC — and consulting for human-rights organizations and transitional justice institutions.',
+        es: 'Litigio estratégico y amicus curiae ante altas cortes colombianas, el sistema interamericano y la CPI — y asesoría a organizaciones de derechos humanos e instituciones de justicia transicional.',
       },
     },
     promiseTeaching: {
       title: { en: 'Teaching & Training', es: 'Docencia y Formación' },
       body: {
-        en: 'Constitutional theory, research methods, and clinical legal education grounded in real cases.',
-        es: 'Teoría constitucional, metodologías de investigación y educación jurídica clínica anclada en casos reales.',
+        en: 'Constitutional theory, human rights research methods, and clinical legal education — grounded in a decade of public-interest litigation and civil society knowledge production.',
+        es: 'Teoría constitucional, metodologías de investigación en derechos humanos y educación jurídica clínica — ancladas en una década de litigio de interés público y producción de conocimiento desde la sociedad civil.',
       },
     },
     // Section tease eyebrows
@@ -115,8 +116,8 @@ export const t = {
     teachingEyebrow: { en: 'Teaching', es: 'Docencia' },
     // Section tease bodies
     researchBody: {
-      en: 'Peer-reviewed articles, book chapters, policy reports, and datasets on transitional justice, rights mobilization, and the politics of courts.',
-      es: 'Artículos arbitrados, capítulos de libro, reportes de política y bases de datos sobre justicia transicional, movilización de derechos y política de las cortes.',
+      en: 'Peer-reviewed articles, book chapters, policy reports, and empirical datasets on transitional justice, state accountability for macro-criminal violence, criminal governance, and rights mobilization in conflict-to-peace transitions.',
+      es: 'Artículos arbitrados, capítulos de libro, reportes de política y bases de datos empíricas sobre justicia transicional, rendición de cuentas del Estado por violencia macro-criminal, gobernanza criminal y movilización de derechos en transiciones.',
     },
     advocacyBody: {
       en: 'Thirty-plus amicus curiae briefs and constitutional interventions filed before Colombian high courts, the Inter-American system, and the International Criminal Court. Available for consulting, expert reports, and training.',

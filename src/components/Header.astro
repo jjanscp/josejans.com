@@ -8,29 +8,35 @@ interface Props {
 }
 const { lang, current } = Astro.props;
 
-// Localised slug mapping — advocacy uses a different path in ES ("incidencia").
 const slug = (lang === 'en')
-  ? { about: 'about', research: 'research', advocacy: 'advocacy', teaching: 'teaching', media: 'media', blog: 'blog', contact: 'contact' }
-  : { about: 'about', research: 'research', advocacy: 'incidencia', teaching: 'teaching', media: 'media', blog: 'blog', contact: 'contact' };
+  ? { about: 'about', research: 'research', advocacy: 'advocacy', teaching: 'teaching', writing: 'writing', contact: 'contact' }
+  : { about: 'about', research: 'research', advocacy: 'incidencia', teaching: 'teaching', writing: 'writing', contact: 'contact' };
 
 const navItems = [
-  { href: slug.about,     key: 'about' as const },
-  { href: slug.research,  key: 'research' as const },
-  { href: slug.advocacy,  key: 'advocacy' as const },
-  { href: slug.teaching,  key: 'teaching' as const },
-  { href: slug.media,     key: 'media' as const },
-  { href: slug.blog,      key: 'blog' as const },
-  { href: slug.contact,   key: 'contact' as const },
+  { href: slug.about,    key: 'about' as const },
+  { href: slug.research, key: 'research' as const },
+  { href: slug.advocacy, key: 'advocacy' as const },
+  { href: slug.teaching, key: 'teaching' as const },
+  { href: slug.writing,  key: 'writing' as const },
+  { href: slug.contact,  key: 'contact' as const },
 ];
 
-const pathname = Astro.url.pathname;
 const other = otherLang(lang);
+const pathname = Astro.url.pathname;
 const switchHref = pathname.replace(`/${lang}/`, `/${other}/`);
 ---
 
 <header class="site-header">
   <div class="site-header-inner">
-    <a href={`/${lang}/`} class="site-title">{profile.shortName}</a>
+    <!-- Home link with icon -->
+    <a href={`/${lang}/`} class="site-home-link" aria-label="Home">
+      <svg class="site-home-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M3 9.5L10 3l7 6.5V17a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+        <path d="M7 18v-7h6v7"/>
+      </svg>
+      {profile.shortName}
+    </a>
+
     <nav class="site-nav" aria-label="Primary">
       {navItems.map((item) => (
         <a
@@ -40,9 +46,22 @@ const switchHref = pathname.replace(`/${lang}/`, `/${other}/`);
           {t.nav[item.key][lang]}
         </a>
       ))}
-      <a href={switchHref} class="lang-toggle" aria-label="Switch language">
-        {t.labels.switchLang[lang]}
-      </a>
+
+      <!-- Language buttons: EN | ES | FR· | PT· -->
+      <div class="lang-toggles" aria-label="Language">
+        <a
+          href={lang === 'en' ? '#' : switchHref.replace(`/${lang}/`, '/en/')}
+          class={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+          aria-current={lang === 'en' ? 'true' : undefined}
+        >EN</a>
+        <a
+          href={lang === 'es' ? '#' : switchHref.replace(`/${lang}/`, '/es/')}
+          class={`lang-btn ${lang === 'es' ? 'active' : ''}`}
+          aria-current={lang === 'es' ? 'true' : undefined}
+        >ES</a>
+        <span class="lang-btn disabled" title="Coming soon">FR</span>
+        <span class="lang-btn disabled" title="Coming soon">PT</span>
+      </div>
     </nav>
   </div>
 </header>

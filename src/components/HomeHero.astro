@@ -1,5 +1,4 @@
 ---
-import Avatar from '~/components/Avatar.astro';
 import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
 import { profile } from '~/data/profile';
 import { t, type Lang } from '~/data/i18n';
@@ -8,27 +7,52 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 ---
 <section class="home-hero" id="top">
-  <div class="hero-portrait">
-    <Avatar size={136} />
-    <div>
-      <div class="hero-eyebrow">{profile.fellowship}</div>
-      <h1 class="hero-headline">{profile.name}</h1>
-    </div>
-  </div>
+  <div class="hero-eyebrow">{profile.fellowship}</div>
+  <h1 class="hero-headline">{profile.name}</h1>
+  <div class="hero-divider"></div>
   <p class="hero-subtitle">{profile.heroSubtitle[lang]}</p>
-  <div class="hero-ctas">
-    <a class="btn btn-primary" href={`/${lang}/${lang === 'en' ? 'contact' : 'contact'}/`}>
-      {t.home.heroCTA[lang]} →
-    </a>
-    <a class="btn btn-outline" href="#newsletter">
-      {t.home.heroCTASub[lang]}
-    </a>
-  </div>
-  <!-- Portrait placeholder — user will supply headshot. -->
-  <ImagePlaceholder
-    kind="portrait"
-    emoji="📷"
-    desc={lang === 'en' ? 'Professional headshot — hero photo' : 'Retrato profesional — foto de hero'}
-    spec="1600×1000 JPG · neutral background"
-  />
 </section>
+
+<style>
+  .home-hero {
+    padding: clamp(3rem, 12vh, 7rem) var(--sp-4) var(--sp-5);
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+    display: grid;
+    gap: var(--sp-3);
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 2rem + 4vw, 5.5rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    margin: 0;
+    color: var(--text);
+    text-wrap: balance;
+  }
+  .hero-divider {
+    width: 3rem;
+    height: 1px;
+    background: var(--rule-strong);
+    margin: var(--sp-1) 0;
+  }
+  .hero-subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 0.9rem + 0.5vw, 1.3rem);
+    color: var(--text-soft);
+    line-height: 1.55;
+    max-width: 44rem;
+    margin: 0;
+  }
+</style>

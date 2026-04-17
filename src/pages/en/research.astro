@@ -101,17 +101,15 @@ const showReports   = reports.length   > 0 ? reports   : staticReports;
     </div>
   </section>
 
-  <!-- Works in progress -->
+  <!-- Works in progress (from bio.wip — bilingual data) -->
   <section class="section">
     <div class="section-inner" style="max-width: var(--measure);">
       <h2 class="section-title">{t.sections.wip[lang]}</h2>
       {wip.length > 0 ? (
         <ul class="pub-list">
           {wip.map((p: any) => (
-            <li>
-              <div class="pub-meta">
-                <span class="badge wip">{p.data.status || t.labels.inPreparation[lang]}</span>
-              </div>
+            <li class="wip-slot">
+              <span class="badge wip">{p.data.status || t.labels.inPreparation[lang]}</span>
               <div class="pub-title">{p.data.title}</div>
               <div class="pub-meta muted">{p.data.authors?.join(', ')} · {p.data.year}</div>
               {p.data.abstract && (
@@ -121,24 +119,19 @@ const showReports   = reports.length   > 0 ? reports   : staticReports;
           ))}
         </ul>
       ) : (
-        <>
-          <p class="muted">
-            Draft papers and works under review will appear here. Subscribe to the newsletter below for updates.
-          </p>
-          <div class="wip-placeholders">
-            <div class="wip-slot">
-              <span class="badge wip">{t.labels.underReview[lang]}</span>
-              <p class="wip-placeholder-title">Paper 1 — <em>title and abstract forthcoming</em></p>
-            </div>
-            <div class="wip-slot">
-              <span class="badge wip">{t.labels.inPreparation[lang]}</span>
-              <p class="wip-placeholder-title">Paper 2 — <em>title and abstract forthcoming</em></p>
-            </div>
-          </div>
-          <p class="muted small" style="margin-top: var(--sp-3);">
-            You can add papers directly via the <a href="/admin/">CMS</a> — no code needed.
-          </p>
-        </>
+        <ul class="pub-list wip-list">
+          {bio.wip.map((p) => (
+            <li class="wip-slot">
+              <span class="badge wip">{p.status[lang]}</span>
+              <div class="pub-title">{p.title[lang]}</div>
+              <div class="pub-meta muted">{p.authors[lang]}</div>
+              <details class="pub-abstract">
+                <summary>{t.labels.abstract[lang]}</summary>
+                <p>{p.abstract[lang]}</p>
+              </details>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   </section>

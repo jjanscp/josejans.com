@@ -3,21 +3,48 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import HomeHero from '~/components/HomeHero.astro';
 import Promise from '~/components/Promise.astro';
 import SectionTease from '~/components/SectionTease.astro';
-import LatestPosts from '~/components/LatestPosts.astro';
 import SocialRow from '~/components/SocialRow.astro';
 import NewsletterEmbed from '~/components/NewsletterEmbed.astro';
 import ContactInline from '~/components/ContactInline.astro';
+import { getCollection } from 'astro:content';
+import { fetchSubstackFeed } from '~/lib/substackFeed';
 import { profile } from '~/data/profile';
 import { t } from '~/data/i18n';
 import { bio } from '~/data/bio';
 
 const lang = 'en' as const;
 
+// Fetch latest posts for home preview
+const localPosts = (await getCollection('posts', (p: any) => p.data.lang === 'en' && !p.data.draft))
+  .sort((a: any, b: any) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const feedUrl = profile.social.substack ? `${profile.social.substack}/feed` : null;
+const substackRaw = feedUrl ? (await fetchSubstackFeed(feedUrl, 3)) : [];
+
+// Merge local + Substack, take top 3 by date
+const latestPosts = [
+  ...localPosts.map((p: any) => ({
+    date: p.data.date as Date,
+    title: p.data.title as string,
+    summary: (p.data.summary ?? '') as string,
+    href: `/${lang}/blog/${p.id.replace(/\.(md|mdx)$/, '')}/`,
+    external: false,
+  })),
+  ...substackRaw.map((p) => ({
+    date: p.published,
+    title: p.title,
+    summary: p.summary ?? '',
+    href: p.url,
+    external: true,
+  })),
+].sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 3);
+
 // Featured tease items for Research section
 const researchItems = [
   {
     year: 2021,
-    meta: 'IdeAs — Idées d\'Amériques',
+    meta: "IdeAs \u2014 Id\u00e9es d'Am\u00e9riques",
     title: 'Disputed fields in the protection of social leaders in Colombia',
     href: 'https://journals.openedition.org/ideas/10688',
   },
@@ -28,7 +55,7 @@ const researchItems = [
   },
   {
     year: 2018,
-    meta: 'Book chapter — Universidad Libre',
+    meta: 'Book chapter \u2014 Universidad Libre',
     title: "From the Havana talks to the Colombian Congress: Where were the victims\u2019 rights?",
   },
 ];
@@ -36,19 +63,19 @@ const researchItems = [
 // Featured tease items for Advocacy section
 const advocacyItems = [
   {
-    year: '2019–2020',
+    year: '2019\u20132020',
     meta: 'Constitutional Court',
     title: "Victims\u2019 rights in the JEP Procedure Law \u2014 C-590/2019, C-050/2020",
   },
   {
-    year: '2022–2023',
+    year: '2022\u20132023',
     meta: 'Constitutional Court',
-    title: 'Freedom of speech & Indigenous rights — T-087/2023, SU-545/2023, SU-546/2023',
+    title: 'Freedom of speech & Indigenous rights \u2014 T-087/2023, SU-545/2023, SU-546/2023',
   },
   {
     year: 2018,
     meta: 'Council of State',
-    title: 'Drug policy as a public health matter — 201800444',
+    title: 'Drug policy as a public health matter \u2014 201800444',
   },
 ];
 
@@ -56,15 +83,15 @@ const advocacyItems = [
 const teachingItems = [
   {
     meta: 'UIS Legal Clinic',
-    title: 'Founding Coordinator — Carlos Gaviria Díaz Strategic Litigation Legal Clinic',
+    title: 'Founding Coordinator \u2014 Carlos Gaviria D\u00edaz Strategic Litigation Legal Clinic',
   },
   {
-    meta: 'UIS Master\'s Program',
+    meta: "UIS Master\u2019s Program",
     title: 'Research Methodologies in Human Rights',
   },
   {
     meta: 'Universidad de los Andes',
-    title: 'TA & RA fellowships · Centre for Sociolegal Research (CIJUS)',
+    title: 'TA & RA fellowships \u00b7 Centre for Sociolegal Research (CIJUS)',
   },
 ];
 ---
@@ -77,7 +104,7 @@ const teachingItems = [
   <!-- 1. Hero -->
   <HomeHero lang={lang} />
 
-  <!-- 2. Promise -->
+  <!-- 2. What I do (Promise) -->
   <Promise lang={lang} />
 
   <!-- 3. Short bio -->
@@ -87,7 +114,16 @@ const teachingItems = [
     </div>
   </section>
 
-  <!-- 4. Research & Publications tease -->
+  <!-- 4. Subtle CTAs — positioned after bio, before section teases -->
+  <section class="section cta-strip">
+    <div class="section-inner cta-strip-inner">
+      <a class="btn btn-primary" href={`/${lang}/research/`}>Research &amp; Publications</a>
+      <a class="btn btn-outline" href={`/${lang}/cv/`}>Download CV</a>
+      <a class="btn btn-outline" href={`mailto:${profile.email}`}>Get in touch</a>
+    </div>
+  </section>
+
+  <!-- 5. Research & Publications tease -->
   <SectionTease
     lang={lang}
     eyebrow={t.home.researchEyebrow[lang]}
@@ -99,7 +135,7 @@ const teachingItems = [
     variant="subtle"
   />
 
-  <!-- 5. Advocacy & Consulting tease -->
+  <!-- 6. Advocacy & Consulting tease -->
   <SectionTease
     lang={lang}
     eyebrow={t.home.advocacyEyebrow[lang]}
@@ -111,7 +147,7 @@ const teachingItems = [
     variant="light"
   />
 
-  <!-- 6. Teaching tease -->
+  <!-- 7. Teaching tease -->
   <SectionTease
     lang={lang}
     eyebrow={t.home.teachingEyebrow[lang]}
@@ -123,10 +159,40 @@ const teachingItems = [
     variant="subtle"
   />
 
-  <!-- 7. Latest from blog -->
-  <LatestPosts lang={lang} limit={3} />
+  <!-- 8. Writing & Newsletter (merged single section) -->
+  <section class="section full-bleed" id="writing">
+    <div class="section-inner">
+      <div class="section-eyebrow">{t.nav.writing[lang]}</div>
+      <h2 class="section-title">{profile.newsletter.publicationName[lang]}</h2>
+      {latestPosts.length > 0 ? (
+        <ul class="post-list home-post-list">
+          {latestPosts.map((p) => (
+            <li>
+              <time datetime={p.date.toISOString()}>
+                {p.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <h3>
+                <a href={p.href} {...(p.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                  {p.title}
+                </a>
+              </h3>
+              {p.summary && <p class="muted">{p.summary}</p>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="muted">{t.labels.noPostsYet[lang]}</p>
+      )}
+      <p style="margin-top: var(--sp-5);">
+        <a class="btn btn-outline" href={`/${lang}/writing/`}>All writing &amp; press &rarr;</a>
+      </p>
+      <div style="margin-top: var(--sp-8); padding-top: var(--sp-6); border-top: 1px solid var(--rule);">
+        <NewsletterEmbed lang={lang} />
+      </div>
+    </div>
+  </section>
 
-  <!-- 8. Social row -->
+  <!-- 9. Social row -->
   <section class="section">
     <div class="section-inner">
       <div class="section-eyebrow">Find me online</div>
@@ -134,13 +200,19 @@ const teachingItems = [
     </div>
   </section>
 
-  <!-- 9. Newsletter -->
-  <section class="section full-bleed" id="newsletter">
-    <div class="section-inner">
-      <NewsletterEmbed lang={lang} />
-    </div>
-  </section>
-
   <!-- 10. Contact -->
   <ContactInline lang={lang} id="contact" />
 </BaseLayout>
+
+<style>
+  .cta-strip { padding-block: var(--sp-2); }
+  .cta-strip-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    align-items: center;
+  }
+  .home-post-list {
+    margin-top: var(--sp-5);
+  }
+</style>

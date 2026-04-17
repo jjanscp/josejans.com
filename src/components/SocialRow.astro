@@ -3,26 +3,49 @@ import { profile } from '~/data/profile';
 import type { Lang } from '~/data/i18n';
 
 interface Props { lang: Lang; variant?: 'default' | 'home'; }
-const { lang, variant = 'default' } = Astro.props;
+const { lang } = Astro.props;
 
-type Chip = { emoji: string; label: string; handle?: string; href: string };
+type Chip = { icon: string; label: string; handle?: string; href: string };
+
+// Inline SVG paths (stroke-based, monochrome — no color, no emoji)
+const icons = {
+  linkedin: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+  twitter: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.7 5.5 4.3 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>`,
+  instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>`,
+  substack: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h18M3 10h18M3 19l9-9 9 9V10H3z"/></svg>`,
+  scholar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 11v5c0 2.76 2.69 5 6 5s6-2.24 6-5v-5"/><path d="M22 8v4"/></svg>`,
+  researchgate: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M9 8h3a2 2 0 010 4H9V8zm4 4h1l2 4h-2l-1-2"/></svg>`,
+  academia: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3L3 8h18L12 3z"/><path d="M5 10v8"/><path d="M19 10v8"/><path d="M3 18h18"/><path d="M9 10v5a3 3 0 006 0v-5"/></svg>`,
+  uic: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="10" width="18" height="11" rx="1"/><path d="M7 10V7a5 5 0 0110 0v3"/><circle cx="12" cy="16" r="2"/></svg>`,
+  mail: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>`,
+};
+
 const raw: (Chip | null)[] = [
-  { emoji: '🔗', label: 'LinkedIn',        handle: 'josejans',          href: profile.social.linkedin },
-  { emoji: '🐦', label: 'X / Twitter',     handle: '@josejanscp',       href: profile.social.twitter },
-  { emoji: '📸', label: 'Instagram',       handle: '@josejanscp',       href: profile.social.instagram },
-  { emoji: '📝', label: 'Substack',        handle: 'josejanscp',        href: profile.social.substack ?? '#' },
-  { emoji: '🎓', label: 'Google Scholar',  handle: 'Scholar profile',   href: profile.social.scholar ?? '#' },
-  { emoji: '🧪', label: 'ResearchGate',    handle: 'Jose-Carretero-5',  href: profile.social.researchgate ?? '#' },
-  { emoji: '📚', label: 'Academia.edu',    handle: 'uniandes',          href: profile.social.academia ?? '#' },
-  { emoji: '🏛️', label: 'UIC Profile',     handle: 'pols.uic.edu',      href: profile.social.uic },
-  { emoji: '✉️', label: lang === 'en' ? 'Email' : 'Correo', handle: profile.email, href: `mailto:${profile.email}` },
+  { icon: icons.linkedin,   label: 'LinkedIn',       handle: 'josejans',        href: profile.social.linkedin },
+  { icon: icons.twitter,    label: 'X / Twitter',    handle: '@josejanscp',     href: profile.social.twitter },
+  { icon: icons.instagram,  label: 'Instagram',      handle: '@josejanscp',     href: profile.social.instagram },
+  { icon: icons.substack,   label: 'Substack',       handle: 'josejanscp',      href: profile.social.substack ?? '' },
+  profile.social.scholar
+    ? { icon: icons.scholar, label: 'Google Scholar', handle: 'profile',        href: profile.social.scholar }
+    : null,
+  profile.social.researchgate
+    ? { icon: icons.researchgate, label: 'ResearchGate', handle: 'profile',    href: profile.social.researchgate }
+    : null,
+  { icon: icons.uic,  label: 'UIC Profile',   handle: 'pols.uic.edu',    href: profile.social.uic },
+  { icon: icons.mail, label: lang === 'en' ? 'Email' : 'Correo', handle: profile.email, href: `mailto:${profile.email}` },
 ];
-const chips = raw.filter((c): c is Chip => Boolean(c && c.href && c.href !== '#'));
+const chips = raw.filter((c): c is Chip => Boolean(c && c.href));
 ---
-<div class={`social-row ${variant}`}>
+<div class="social-row">
   {chips.map((c) => (
-    <a class="social-chip" href={c.href} target={c.href.startsWith('mailto') ? '_self' : '_blank'} rel="noopener noreferrer" aria-label={c.label}>
-      <span class="emoji" aria-hidden="true">{c.emoji}</span>
+    <a
+      class="social-chip"
+      href={c.href}
+      target={c.href.startsWith('mailto') ? '_self' : '_blank'}
+      rel="noopener noreferrer"
+      aria-label={c.label}
+    >
+      <span class="icon-sm" aria-hidden="true" set:html={c.icon}></span>
       <span>{c.label}</span>
       {c.handle && <span class="handle">{c.handle}</span>}
     </a>

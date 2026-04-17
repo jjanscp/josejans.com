@@ -27,5 +27,11 @@
 # (routes exist natively; these handle any incoming /es/advocacy/ typo)
 /es/advocacy/                                                           /es/incidencia/                                               301
 
+# Blog + Media → unified Writing page
+/en/blog/                                                               /en/writing/                                                  301
+/en/media/                                                              /en/writing/                                                  301
+/es/blog/                                                               /es/writing/                                                  301
+/es/media/                                                              /es/writing/                                                  301
+
 # Archive: kept accessible at /en/archive/ and /es/archive/ but not in nav
 # No redirect needed — pages still exist at those routes.

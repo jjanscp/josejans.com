@@ -20,16 +20,59 @@ export const bio = {
     es: `Junto a mi práctica de litigio he construido una trayectoria de docencia académica en Colombia. Soy coordinador fundador de la <strong>Clínica Jurídica de Litigio Estratégico Carlos Gaviria Díaz</strong> del Consultorio Jurídico de la <strong>Universidad Industrial de Santander (UIS)</strong>, donde también fui profesor de Teoría Constitucional. Diseñé y dicté Metodologías de Investigación en la Maestría en Derechos Humanos de la UIS, y fui asistente docente e investigador en varios cursos de la <strong>Universidad de los Andes</strong>, incluyendo estancias en el Centro de Investigaciones Sociojurídicas (<strong>CIJUS</strong>). Esta línea paralela — clínica, metodológica y doctrinal — informa cómo diseño mi propia agenda de investigación y cómo formo estudiantes para conectar incidencia, evidencia y teoría.`,
   },
 
-  // Personal / story-telling paragraph (About long page — user will expand later; placeholder w/ seed).
+  // Personal / story-telling paragraph — verbatim from user.
   personal: {
-    en: `Beyond the courtroom and the seminar room, I am a triathlete, a community organizer, and an eternal student of Latin American political theory. Outside work I train on the Chicago lakefront, cook Colombian food for friends, and read a lot of fiction — the kind of ballast that keeps long-haul research honest.`,
-    es: `Fuera del litigio y del aula soy triatleta, organizador comunitario y estudiante permanente de teoría política latinoamericana. En mi tiempo libre entreno en el lago de Chicago, cocino comida colombiana para mis amigos y leo mucha ficción — el tipo de contrapeso que mantiene honesta a la investigación de largo aliento.`,
+    en: `Beyond the courtroom and classrooms, I am a triathlete, a community organizer, and an eternal student of political theory. Outside work I train on the Chicago lakefront and Little Village, love sharing food from all over with friends, and enjoy audiobooks, podcasts, and watching Real Madrid games with my cats — the kind of things that keeps the soul happy.`,
+    es: `Fuera de las audiencias y las aulas soy triatleta, organizador comunitario y estudiante permanente de teoría política. En mi tiempo libre entreno en el lago Chicago y en Little Village, me encanta compartir comidas de todo el mundo con amigos, y disfruto los audiolibros, los podcasts y ver los partidos del Real Madrid con mis gatos — el tipo de cosas que mantienen feliz el alma.`,
   },
+
+  // Working papers (3 — MPSA 2026 + 2 co-authored)
+  wip: [
+    {
+      id: 'sra-2026',
+      authors: { en: 'Carretero Pardo, J. J.', es: 'Carretero Pardo, J. J.' },
+      title: {
+        en: 'The Systemic Research Approach: How Accountability Institutions\u2019 Design Enables Investigating State-Criminal Networks',
+        es: 'El Enfoque de Investigación Sistémica: cómo el diseño de las instituciones de rendición de cuentas permite investigar redes estado-criminales',
+      },
+      status: { en: 'Under review · Presented at MPSA 2026, Chicago', es: 'En evaluación · Presentado en MPSA 2026, Chicago' },
+      abstract: {
+        en: 'Introduces the Systemic Research Approach (SRA): a model of judicial governance in which a single accountability institution develops five integrated capacities for reconstructing macro-criminal patterns rather than isolated acts. Using Colombia\u2019s JEP as a paradigmatic case and five comparators — Guatemala\u2019s CICIG, Cambodia\u2019s ECCC, Sierra Leone\u2019s SCSL, the ICC, and Argentina\u2019s ESMA mega-cause — the article demonstrates that deliberate institutional integration produces structural documentation of state-criminal networks and an \u201caccountability shock\u201d that partial deployments cannot achieve.',
+        es: 'Introduce el Enfoque de Investigación Sistémica (EIS): un modelo de gobernanza judicial en el que una sola institución de rendición de cuentas desarrolla cinco capacidades integradas para reconstruir patrones macro-criminales. Usando la JEP colombiana como caso paradigmático y cinco comparadores — la CICIG guatemalteca, el ECCC camboyano, el TSSL de Sierra Leona, la CPI y el mega-juicio ESMA de Argentina — el artículo demuestra que la integración institucional deliberada produce documentación estructural de redes estado-criminales y un \u201cchoque de rendición de cuentas\u201d que las implementaciones parciales no logran.',
+      },
+    },
+    {
+      id: 'catatumbo-2026',
+      authors: { en: 'Sanguino Cuéllar, K., & Carretero Pardo, J. J. — University of Illinois Chicago', es: 'Sanguino Cuéllar, K., & Carretero Pardo, J. J. — University of Illinois Chicago' },
+      title: {
+        en: 'From Body Counts to State-Criminal Accountability: How Justice System Capacities Evolved to Prosecute Extrajudicial Killings in Colombia\u2019s Catatumbo',
+        es: 'Del conteo de cuerpos a la rendición de cuentas estado-criminal: cómo evolucionaron las capacidades del sistema de justicia para enjuiciar los falsos positivos en el Catatumbo',
+      },
+      status: { en: 'Working draft, April 2026', es: 'Borrador de trabajo, abril 2026' },
+      abstract: {
+        en: 'Argues that deterrence and accountability are analytically separable outcomes with different institutional preconditions. In the Catatumbo case, the violent practice of extrajudicial killings ceased in 2008 through administrative and political pressure; upward accountability — reaching brigade-level commanders — required the JEP\u2019s integrated design combining investigative independence, cross-database articulation, conditional truth-telling incentives, subnational-national reach, and contextual analysis. Ordinary justice produced zero high-ranking convictions in a decade; the JEP achieved upward accountability in approximately four years.',
+        es: 'Argumenta que la disuasión y la rendición de cuentas son resultados analíticamente separables con precondiciones institucionales distintas. En el caso del Catatumbo, la práctica violenta cesó en 2008 por presión administrativa y política; la rendición de cuentas ascendente — llegar a los comandantes de brigada — requirió el diseño integrado de la JEP: independencia investigativa, articulación de bases de datos, incentivos condicionales de verdad, alcance subnacional-nacional y análisis contextual. La justicia ordinaria no logró ninguna condena de alto rango en una década; la JEP alcanzó la rendición de cuentas ascendente en aproximadamente cuatro años.',
+      },
+    },
+    {
+      id: 'par-tjustice-2026',
+      authors: { en: 'Carretero Pardo, J. J.', es: 'Carretero Pardo, J. J.' },
+      title: {
+        en: 'Beyond Judicial Truth: Civil Society Methodologies and the Transformation of Legal Knowledge in Colombia\u2019s Transitional Justice',
+        es: 'Más allá de la verdad judicial: metodologías de la sociedad civil y la transformación del conocimiento jurídico en la justicia transicional colombiana',
+      },
+      status: { en: 'Working paper', es: 'Documento de trabajo' },
+      abstract: {
+        en: 'Argues that human-rights organizations using Participatory Action Research (PAR) fundamentally transformed knowledge production within the JEP and the Truth Commission, subverting traditional boundaries between legal, academic, and social knowledge. Analysis of JEP\u2019s Case 03 on extrajudicial executions shows how PAR methodologies were integrated directly into judicial resolutions and indictments, enabling victims to co-construct legal and historical truth and embedding Global South peacebuilding innovation into state-centric transitional justice.',
+        es: 'Argumenta que las organizaciones de derechos humanos que emplean Investigación-Acción Participativa (IAP) transformaron fundamentalmente la producción de conocimiento en la JEP y la Comisión de la Verdad, subvirtiendo los límites tradicionales entre el conocimiento jurídico, académico y social. El análisis del Caso 03 de la JEP muestra cómo las metodologías de IAP se integraron directamente en resoluciones e imputaciones judiciales, permitiendo a las víctimas co-construir la verdad legal e histórica.',
+      },
+    },
+  ],
 
   // Research pitch (About + Research pages).
   research: {
-    en: `My research focuses on the intersection of <strong>public interest litigation, social movements, and judicial reform</strong> of criminal and constitutional justice systems. I study <strong>state accountability mechanisms</strong> — courts, truth commissions, and amicus-curiae-based rights mobilization — in contexts of transition from authoritarian rule and/or armed conflict. Methodologically, I combine an action-research participatory approach with archival work, macro-historical analysis, discourse analysis, and ethnographic fieldwork.`,
-    es: `Mi investigación se ubica en la intersección del <strong>litigio de interés público, los movimientos sociales y la reforma judicial</strong> de los sistemas de justicia penal y constitucional. Estudio <strong>mecanismos de rendición de cuentas del Estado</strong> — cortes, comisiones de la verdad y movilización de derechos vía amicus curiae — en contextos de transición desde regímenes autoritarios y/o conflicto armado. Metodológicamente combino un enfoque de investigación-acción participativa con trabajo de archivo, análisis macro-histórico, análisis de discurso y etnografía.`,
+    en: `My research sits at the intersection of <strong>comparative politics, transitional justice, and the political sociology of law</strong>. I study how states and armed actors jointly produce violence and criminal governance — and how accountability institutions are designed to investigate and disrupt those networks. My current work develops the concept of the <em>Systemic Research Approach</em>: a model of judicial governance that enables transitional justice institutions to reconstruct <strong>macro-criminal patterns</strong> and achieve upward accountability against high-ranking commanders. Using Colombia's JEP as a paradigmatic case alongside comparators in Guatemala, Cambodia, Sierra Leone, Argentina, and the ICC, I analyze when and why partial institutional configurations fail to produce structural documentation of state-criminal networks. Methodologically, I combine participatory action research, archival analysis, macro-historical comparison, discourse analysis, and ethnographic fieldwork.`,
+    es: `Mi investigación se ubica en la intersección de la <strong>política comparada, la justicia transicional y la sociología política del derecho</strong>. Estudio cómo los estados y actores armados producen conjuntamente violencia y gobernanza criminal — y cómo las instituciones de rendición de cuentas se diseñan para investigar y desarticular esas redes. Mi trabajo actual desarrolla el concepto de <em>Enfoque de Investigación Sistémica</em> (EIS): un modelo de gobernanza judicial que habilita a los tribunales de justicia transicional para reconstruir <strong>patrones macro-criminales</strong> y alcanzar rendición de cuentas ascendente frente a comandantes de alto rango. Usando la JEP colombiana como caso paradigmático y cinco comparadores (CICIG, ECCC, TSSL, CPI, mega-juicio ESMA), analizo cuándo y por qué las configuraciones institucionales parciales no logran producir documentación estructural de redes estado-criminales. Metodológicamente combino investigación-acción participativa, análisis de archivo, comparación macro-histórica, análisis de discurso y etnografía.`,
   },
 
   // Research interests (6 bullets, frozen per decision #5).

@@ -1,0 +1,108 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import NewsletterEmbed from '~/components/NewsletterEmbed.astro';
+import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import { getCollection } from 'astro:content';
+import { fetchSubstackFeed } from '~/lib/substackFeed';
+import { profile } from '~/data/profile';
+import { t } from '~/data/i18n';
+
+const lang = 'es' as const;
+
+const localPosts = (await getCollection('posts', (p: any) => p.data.lang === 'es' && !p.data.draft))
+  .sort((a: any, b: any) => b.data.date.getTime() - a.data.date.getTime());
+
+const feedUrl = profile.social.substack ? `${profile.social.substack}/feed` : null;
+const substackPosts = feedUrl ? await fetchSubstackFeed(feedUrl, 20) : [];
+
+const hasLocal = localPosts.length > 0;
+const hasSubstack = substackPosts.length > 0;
+---
+<BaseLayout
+  title="Textos y Medios"
+  description={`Blog, ensayos de opinión y apariciones en prensa de ${profile.name}.`}
+  lang={lang}
+  current="writing"
+>
+  <!-- Encabezado -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">{t.nav.writing[lang]}</div>
+      <h1 class="section-title">Textos, Blog y Medios</h1>
+      <p class="section-body">
+        Ensayos breves, notas de investigación y comentarios sobre justicia transicional, política colombiana,
+        cortes y movimientos sociales — publicados vía
+        <a href={profile.social.substack} target="_blank" rel="noopener noreferrer">Substack</a>.
+        Para consultas de prensa escribir a <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Entradas del blog (Substack feed) -->
+  {(hasLocal || hasSubstack) ? (
+    <section class="section full-bleed">
+      <div class="section-inner">
+        <h2 class="section-title">{profile.newsletter.publicationName[lang]}</h2>
+        <ul class="post-list">
+          {hasLocal && localPosts.map((p: any) => (
+            <li>
+              <time datetime={p.data.date.toISOString()}>
+                {p.data.date.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <h3><a href={`/${lang}/blog/${p.id.replace(/\.(md|mdx)$/, '')}/`}>{p.data.title}</a></h3>
+              {p.data.summary && <p class="muted">{p.data.summary}</p>}
+            </li>
+          ))}
+          {hasSubstack && substackPosts.map((p) => (
+            <li>
+              <time datetime={p.published.toISOString()}>
+                {p.published.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <h3><a href={p.url} target="_blank" rel="noopener noreferrer">{p.title}</a></h3>
+              {p.summary && <p class="muted">{p.summary}</p>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ) : (
+    <section class="section">
+      <div class="section-inner" style="max-width: var(--measure);">
+        <p class="muted">{t.labels.noPostsYet[lang]}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- Opinión y prensa -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Opinión y Prensa</h2>
+      <p class="muted">
+        Columnas de opinión, apariciones en medios y entrevistas se listarán aquí a medida que se publiquen.
+        Seguir <a href={profile.social.twitter} target="_blank" rel="noopener noreferrer">X / Twitter</a> para comentario en tiempo real.
+      </p>
+      <!--
+        PARA AGREGAR UN ÍTEM — formato:
+        <li style="border-left: 2px solid var(--rule); padding-left: var(--sp-4); margin-bottom: var(--sp-4);">
+          <div style="font-size:.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;">Mes AAAA · Medio</div>
+          <div style="font-family:var(--font-serif);font-size:1.05rem;"><a href="URL">Título de la pieza</a></div>
+        </li>
+      -->
+      <div style="margin-top: var(--sp-6);">
+        <ImagePlaceholder
+          kind="landscape"
+          emoji="🎙️"
+          desc="Foto de rueda de prensa, entrevista o podcast"
+          spec="1200×600 JPG"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Suscripción al boletín -->
+  <section class="section full-bleed" id="newsletter">
+    <div class="section-inner">
+      <NewsletterEmbed lang={lang} />
+    </div>
+  </section>
+</BaseLayout>
