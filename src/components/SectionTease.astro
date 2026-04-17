@@ -1,0 +1,46 @@
+---
+import type { Lang } from '~/data/i18n';
+
+interface TeaseItem {
+  year?: number | string;
+  meta?: string;
+  title: string;
+  href?: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  body: string;
+  href: string;
+  ctaLabel: string;
+  items?: TeaseItem[];
+  variant?: 'light' | 'subtle' | 'dark';
+  lang?: Lang;
+}
+const { eyebrow, title, body, href, ctaLabel, items = [], variant = 'light' } = Astro.props;
+const cls = variant === 'subtle' ? 'section full-bleed' : variant === 'dark' ? 'section dark' : 'section';
+---
+<section class={cls}>
+  <div class="section-inner">
+    <div class="section-eyebrow">{eyebrow}</div>
+    <h2 class="section-title">{title}</h2>
+    <div class="section-body" set:html={body}></div>
+    {items.length > 0 && (
+      <div class="tease-items">
+        {items.map((it) => (
+          it.href
+            ? (<a class="tease-item" href={it.href}>
+                {(it.year || it.meta) && <span class="tease-meta">{it.year ?? it.meta}</span>}
+                <h4>{it.title}</h4>
+              </a>)
+            : (<div class="tease-item">
+                {(it.year || it.meta) && <span class="tease-meta">{it.year ?? it.meta}</span>}
+                <h4>{it.title}</h4>
+              </div>)
+        ))}
+      </div>
+    )}
+    <a class="section-cta" href={href}>{ctaLabel} →</a>
+  </div>
+</section>

@@ -5,33 +5,41 @@ import { t, type Lang } from '~/data/i18n';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 
-const socialLinks = [
-  { label: 'Email', href: `mailto:${profile.email}` },
-  { label: 'LinkedIn', href: profile.social.linkedin },
-  { label: 'X / Twitter', href: profile.social.twitter },
-  { label: 'GitHub', href: profile.social.github },
-  { label: 'UIC Profile', href: profile.social.uic },
-  profile.social.scholar ? { label: 'Google Scholar', href: profile.social.scholar } : null,
-  profile.social.orcid ? { label: 'ORCID', href: profile.social.orcid } : null,
-  profile.social.ssrn ? { label: 'SSRN', href: profile.social.ssrn } : null,
-  profile.social.researchgate ? { label: 'ResearchGate', href: profile.social.researchgate } : null,
-  profile.social.academia ? { label: 'Academia.edu', href: profile.social.academia } : null,
-].filter(Boolean) as { label: string; href: string }[];
+// Emoji-led social chips. Keep labels short; the emoji carries the visual weight.
+type Chip = { emoji: string; label: string; href: string };
+const chips: (Chip | null)[] = [
+  { emoji: '✉️',  label: 'Email',           href: `mailto:${profile.email}` },
+  { emoji: '🔗',  label: 'LinkedIn',        href: profile.social.linkedin },
+  { emoji: '🐦',  label: 'X',               href: profile.social.twitter },
+  { emoji: '📸',  label: 'Instagram',       href: profile.social.instagram },
+  { emoji: '💻',  label: 'GitHub',          href: profile.social.github },
+  { emoji: '🏛️',  label: 'UIC Profile',     href: profile.social.uic },
+  profile.social.scholar      ? { emoji: '🎓', label: 'Google Scholar', href: profile.social.scholar }      : null,
+  profile.social.orcid        ? { emoji: '🆔', label: 'ORCID',          href: profile.social.orcid }        : null,
+  profile.social.ssrn         ? { emoji: '📄', label: 'SSRN',           href: profile.social.ssrn }         : null,
+  profile.social.researchgate ? { emoji: '🧪', label: 'ResearchGate',   href: profile.social.researchgate } : null,
+  profile.social.academia     ? { emoji: '📚', label: 'Academia.edu',   href: profile.social.academia }     : null,
+  profile.social.substack     ? { emoji: '📝', label: 'Substack',       href: profile.social.substack }     : null,
+];
+const socialChips = chips.filter(Boolean) as Chip[];
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="social-row">
-    {socialLinks.map((l) => (
-      <a href={l.href} rel="noopener noreferrer" target={l.href.startsWith('mailto') ? '_self' : '_blank'}>
-        {l.label}
-      </a>
-    ))}
-  </div>
-  <div>
-    &copy; {year} {profile.name} &middot;
-    <a href={`/${lang}/cv/`}>{t.labels.downloadCV[lang]}</a> &middot;
-    <a href="/rss.xml">RSS</a>
+  <div class="site-footer-inner">
+    <div class="footer-social">
+      {socialChips.map((l) => (
+        <a href={l.href} rel="noopener noreferrer" target={l.href.startsWith('mailto') ? '_self' : '_blank'} aria-label={l.label}>
+          <span class="emoji" aria-hidden="true">{l.emoji}</span>
+          <span>{l.label}</span>
+        </a>
+      ))}
+    </div>
+    <div class="footer-meta">
+      &copy; {year} {profile.name} ·
+      <a href={`/${lang}/cv/`}>{t.labels.downloadCV[lang]}</a> ·
+      <a href="/rss.xml">RSS</a>
+    </div>
   </div>
 </footer>

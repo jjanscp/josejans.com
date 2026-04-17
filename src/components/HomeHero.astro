@@ -1,0 +1,34 @@
+---
+import Avatar from '~/components/Avatar.astro';
+import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import { profile } from '~/data/profile';
+import { t, type Lang } from '~/data/i18n';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+<section class="home-hero" id="top">
+  <div class="hero-portrait">
+    <Avatar size={136} />
+    <div>
+      <div class="hero-eyebrow">{profile.fellowship}</div>
+      <h1 class="hero-headline">{profile.name}</h1>
+    </div>
+  </div>
+  <p class="hero-subtitle">{profile.heroSubtitle[lang]}</p>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href={`/${lang}/${lang === 'en' ? 'contact' : 'contact'}/`}>
+      {t.home.heroCTA[lang]} →
+    </a>
+    <a class="btn btn-outline" href="#newsletter">
+      {t.home.heroCTASub[lang]}
+    </a>
+  </div>
+  <!-- Portrait placeholder — user will supply headshot. -->
+  <ImagePlaceholder
+    kind="portrait"
+    emoji="📷"
+    desc={lang === 'en' ? 'Professional headshot — hero photo' : 'Retrato profesional — foto de hero'}
+    spec="1600×1000 JPG · neutral background"
+  />
+</section>

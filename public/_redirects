@@ -3,14 +3,29 @@
 
 # Legacy WordPress Spanish URLs → new structure
 /inicio/                                                                /es/                                                         301
-/contacto/                                                              /es/contact/                                                 301
-/blog/                                                                  /es/blog/                                                    301
-/trabajos/                                                              /es/publications/                                            301
-/trabajos/publicaciones/                                                /es/publications/                                            301
-/trabajos/bases-de-datos/                                               /es/archive/                                                 301
-/trabajos/bases-de-datos/base-de-datos-intervenciones-ciudadanas/       /es/archive/dataset-intervenciones-ciudadanas/               301
-/trabajos/bases-de-datos/base-de-datos-notas-de-prensa-implementacion-del-acuerdo-final-de-paz/  /es/archive/dataset-notas-prensa-acuerdo-paz/  301
-/base-de-datos-notas-de-prensa-implementacion-del-acuerdo-final-de-paz/ /es/archive/dataset-notas-prensa-acuerdo-paz/                301
-/base-de-datos-intervenciones-ciudadanas/                               /es/archive/dataset-intervenciones-ciudadanas/               301
-/2018/09/17/primera-entrada-del-blog/                                   /es/archive/early-writing-2018/                              301
-/publicaciones/                                                         /es/publications/                                            301
+/contacto/                                                              /es/contact/                                                  301
+/blog/                                                                  /es/blog/                                                     301
+/trabajos/                                                              /es/research/                                                 301
+/trabajos/publicaciones/                                                /es/research/                                                 301
+/publicaciones/                                                         /es/research/                                                 301
+
+# Datasets → Research & Publications (datasets subsection there)
+/trabajos/bases-de-datos/                                               /es/research/                                                 301
+/trabajos/bases-de-datos/base-de-datos-intervenciones-ciudadanas/       /es/research/                                                 301
+/trabajos/bases-de-datos/base-de-datos-notas-de-prensa-implementacion-del-acuerdo-final-de-paz/  /es/research/                      301
+/base-de-datos-notas-de-prensa-implementacion-del-acuerdo-final-de-paz/ /es/research/                                                301
+/base-de-datos-intervenciones-ciudadanas/                               /es/research/                                                 301
+
+# Legacy blog post → archive
+/2018/09/17/primera-entrada-del-blog/                                   /es/archive/                                                  301
+
+# Old advocacy/publications aliases
+/es/publications/                                                       /es/research/                                                 301
+/en/publications/                                                       /en/research/                                                 301
+
+# Advocacy: Spanish slug "incidencia" mirrors English "advocacy"
+# (routes exist natively; these handle any incoming /es/advocacy/ typo)
+/es/advocacy/                                                           /es/incidencia/                                               301
+
+# Archive: kept accessible at /en/archive/ and /es/archive/ but not in nav
+# No redirect needed — pages still exist at those routes.

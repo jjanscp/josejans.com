@@ -1,0 +1,30 @@
+---
+import { profile } from '~/data/profile';
+import type { Lang } from '~/data/i18n';
+
+interface Props { lang: Lang; variant?: 'default' | 'home'; }
+const { lang, variant = 'default' } = Astro.props;
+
+type Chip = { emoji: string; label: string; handle?: string; href: string };
+const raw: (Chip | null)[] = [
+  { emoji: '🔗', label: 'LinkedIn',        handle: 'josejans',          href: profile.social.linkedin },
+  { emoji: '🐦', label: 'X / Twitter',     handle: '@josejanscp',       href: profile.social.twitter },
+  { emoji: '📸', label: 'Instagram',       handle: '@josejanscp',       href: profile.social.instagram },
+  { emoji: '📝', label: 'Substack',        handle: 'josejanscp',        href: profile.social.substack ?? '#' },
+  { emoji: '🎓', label: 'Google Scholar',  handle: 'Scholar profile',   href: profile.social.scholar ?? '#' },
+  { emoji: '🧪', label: 'ResearchGate',    handle: 'Jose-Carretero-5',  href: profile.social.researchgate ?? '#' },
+  { emoji: '📚', label: 'Academia.edu',    handle: 'uniandes',          href: profile.social.academia ?? '#' },
+  { emoji: '🏛️', label: 'UIC Profile',     handle: 'pols.uic.edu',      href: profile.social.uic },
+  { emoji: '✉️', label: lang === 'en' ? 'Email' : 'Correo', handle: profile.email, href: `mailto:${profile.email}` },
+];
+const chips = raw.filter((c): c is Chip => Boolean(c && c.href && c.href !== '#'));
+---
+<div class={`social-row ${variant}`}>
+  {chips.map((c) => (
+    <a class="social-chip" href={c.href} target={c.href.startsWith('mailto') ? '_self' : '_blank'} rel="noopener noreferrer" aria-label={c.label}>
+      <span class="emoji" aria-hidden="true">{c.emoji}</span>
+      <span>{c.label}</span>
+      {c.handle && <span class="handle">{c.handle}</span>}
+    </a>
+  ))}
+</div>

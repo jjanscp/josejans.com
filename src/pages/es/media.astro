@@ -1,0 +1,67 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import { profile } from '~/data/profile';
+import { t } from '~/data/i18n';
+
+const lang = 'es' as const;
+---
+<BaseLayout
+  title="Medios y Opinión"
+  description={`Apariciones en medios y artículos de opinión de ${profile.name} sobre justicia transicional, derechos humanos y política colombiana.`}
+  lang={lang}
+  current="media"
+>
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">{t.nav.media[lang]}</div>
+      <h1 class="section-title">Medios y Opinión</h1>
+      <p class="section-body">
+        Apariciones en prensa, artículos de opinión y comentarios públicos sobre justicia transicional,
+        derechos humanos, política colombiana y las cortes. Para consultas de prensa, escríbeme a
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Opinión y comentario</h2>
+      <p class="muted">
+        Los artículos de opinión y ensayos de divulgación aparecerán aquí.
+        Mientras tanto, sigue el <a href={profile.social.substack} target="_blank" rel="noopener noreferrer">newsletter</a> para actualizaciones regulares.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Prensa y medios</h2>
+      <p class="muted">
+        Menciones en medios, entrevistas y apariciones en podcasts aparecerán aquí.
+        <a href={`mailto:${profile.email}`}>Contáctame para consultas de prensa →</a>
+      </p>
+      <div style="margin-top: var(--sp-6);">
+        <ImagePlaceholder
+          kind="landscape"
+          emoji="🎙️"
+          desc="Foto de rueda de prensa, entrevista o grabación de podcast"
+          spec="1200×600 JPG"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Sígueme</h2>
+      <p class="section-body">
+        Para comentario en tiempo real y actualizaciones, sígueme en
+        <a href={profile.social.twitter} target="_blank" rel="noopener noreferrer">X / Twitter</a>
+        y suscríbete a
+        <a href={profile.social.substack} target="_blank" rel="noopener noreferrer">Notes on Law, Politics &amp; Social Change</a>
+        en Substack.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

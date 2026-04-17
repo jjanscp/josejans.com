@@ -1,0 +1,98 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import { profile } from '~/data/profile';
+import { t } from '~/data/i18n';
+
+const lang = 'en' as const;
+
+// Press mentions — placeholder list. User will expand via CMS or inline edits.
+const pressMentions = [
+  {
+    outlet: 'El Espectador',
+    date: null,
+    title: 'Press mention — to be added',
+    url: null,
+    placeholder: true,
+  },
+];
+
+const opEds = [
+  // User will add opinion pieces here or via CMS
+];
+---
+<BaseLayout
+  title="Media & Opinion"
+  description={`Media appearances and opinion pieces by ${profile.name} on transitional justice, human rights, and Colombian politics.`}
+  lang={lang}
+  current="media"
+>
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">{t.nav.media[lang]}</div>
+      <h1 class="section-title">Media &amp; Opinion</h1>
+      <p class="section-body">
+        Press appearances, op-eds, and public commentary on transitional justice, human rights,
+        Colombian politics, and the courts. For press inquiries, write to
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Op-eds / Opinion -->
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Opinion &amp; commentary</h2>
+      <p class="muted">
+        Opinion pieces and public-facing essays will be listed here.
+        In the meantime, follow the <a href={profile.social.substack} target="_blank" rel="noopener noreferrer">newsletter</a> for regular updates.
+      </p>
+      <!-- Placeholder slot: add real entries below in format:
+        <li>
+          <time>Month YYYY</time>
+          <div class="pub-title"><a href="...">Title</a></div>
+          <div class="pub-meta muted">Outlet name</div>
+        </li>
+      -->
+    </div>
+  </section>
+
+  <!-- Press mentions -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Press &amp; media</h2>
+      <p class="muted">
+        Media mentions, interviews, and podcast appearances will be listed here.
+        <a href={`mailto:${profile.email}`}>Contact me for press enquiries →</a>
+      </p>
+      <!-- Photo placeholder for press/media -->
+      <div style="margin-top: var(--sp-6);">
+        <ImagePlaceholder
+          kind="landscape"
+          emoji="🎙️"
+          desc="Press conference, interview, or podcast recording photo"
+          spec="1200×600 JPG"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Social media aggregation note -->
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Follow along</h2>
+      <p class="section-body">
+        For real-time commentary and updates, follow me on
+        <a href={profile.social.twitter} target="_blank" rel="noopener noreferrer">X / Twitter</a>
+        and subscribe to
+        <a href={profile.social.substack} target="_blank" rel="noopener noreferrer">Notes on Law, Politics &amp; Social Change</a>
+        on Substack.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .pub-title { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.5; }
+  .pub-meta { font-size: 0.85rem; margin-top: var(--sp-1); }
+</style>

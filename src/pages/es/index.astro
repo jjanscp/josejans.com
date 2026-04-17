@@ -1,87 +1,143 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import Avatar from '~/components/Avatar.astro';
+import HomeHero from '~/components/HomeHero.astro';
+import Promise from '~/components/Promise.astro';
+import SectionTease from '~/components/SectionTease.astro';
+import LatestPosts from '~/components/LatestPosts.astro';
+import SocialRow from '~/components/SocialRow.astro';
+import NewsletterEmbed from '~/components/NewsletterEmbed.astro';
+import ContactInline from '~/components/ContactInline.astro';
 import { profile } from '~/data/profile';
-import { getCollection } from 'astro:content';
+import { t } from '~/data/i18n';
+import { bio } from '~/data/bio';
 
-const featured = (await getCollection('publications', (p: any) => p.data.featured && (p.data.lang === 'es' || p.data.lang === 'en')))
-  .sort((a: any, b: any) => b.data.year - a.data.year)
-  .slice(0, 4);
+const lang = 'es' as const;
+
+const researchItems = [
+  {
+    year: 2021,
+    meta: 'IdeAs — Idées d\'Amériques',
+    title: 'Campos en disputa en la protección de líderes sociales en Colombia',
+    href: 'https://journals.openedition.org/ideas/10688',
+  },
+  {
+    year: 2020,
+    meta: 'Reporte FIDH & CAJAR',
+    title: 'Colombia en riesgo de impunidad: puntos ciegos de la justicia transicional frente a crímenes internacionales',
+  },
+  {
+    year: 2018,
+    meta: 'Capítulo de libro — Universidad Libre',
+    title: 'De La Habana al Congreso colombiano: ¿dónde quedaron los derechos de las víctimas?',
+  },
+];
+
+const advocacyItems = [
+  {
+    year: '2019–2020',
+    meta: 'Corte Constitucional',
+    title: 'Derechos de las víctimas en la Ley de Procedimiento de la JEP — C-590/2019, C-050/2020',
+  },
+  {
+    year: '2022–2023',
+    meta: 'Corte Constitucional',
+    title: 'Libertad de expresión y derechos indígenas — T-087/2023, SU-545/2023, SU-546/2023',
+  },
+  {
+    year: 2018,
+    meta: 'Consejo de Estado',
+    title: 'Política de drogas como asunto de salud pública — 201800444',
+  },
+];
+
+const teachingItems = [
+  {
+    meta: 'Clínica Jurídica UIS',
+    title: 'Coordinador fundador — Clínica de Litigio Estratégico Carlos Gaviria Díaz',
+  },
+  {
+    meta: 'Maestría UIS',
+    title: 'Metodologías de Investigación en Derechos Humanos',
+  },
+  {
+    meta: 'Universidad de los Andes',
+    title: 'Asistente docente e investigador · CIJUS',
+  },
+];
 ---
-<BaseLayout title={profile.name} lang="es" current="home">
-  <section class="hero">
-    <Avatar size={120} />
-    <div class="hero-text">
-      <div class="eyebrow">{profile.fellowship}</div>
-      <h1 class="name">{profile.name}</h1>
-      <p class="subtitle">
-        {profile.title.es} &middot; {profile.affiliation.es}<br />
-        Ejes: {profile.tracks.es}
-      </p>
+<BaseLayout
+  title={profile.name}
+  description={`${profile.name} — Estudiante doctoral en Ciencia Política en UIC, becario Fulbright–MinCiencias. Investigación sobre justicia transicional, cortes y movilización de derechos.`}
+  lang={lang}
+  current="home"
+>
+  <!-- 1. Hero -->
+  <HomeHero lang={lang} />
+
+  <!-- 2. Promise -->
+  <Promise lang={lang} />
+
+  <!-- 3. Short bio -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <p class="lead" set:html={bio.short[lang]} />
     </div>
   </section>
 
-  <p class="lead">
-    Politólogo que trabaja en la intersección del litigio de interés público, los movimientos
-    sociales y la reforma judicial de los sistemas penal y constitucional.
-  </p>
+  <!-- 4. Research & Publications tease -->
+  <SectionTease
+    lang={lang}
+    eyebrow={t.home.researchEyebrow[lang]}
+    title="Artículos arbitrados, reportes de política y bases de datos de investigación."
+    body={t.home.researchBody[lang]}
+    href={`/${lang}/research/`}
+    ctaLabel={t.labels.viewFull[lang]}
+    items={researchItems}
+    variant="subtle"
+  />
 
-  <p>
-    Mi investigación estudia cómo los mecanismos de rendición de cuentas del Estado — cortes,
-    comisiones de la verdad y movilización de derechos a través del amicus curiae — se
-    configuran y disputan en contextos de transición desde el conflicto armado o el régimen
-    autoritario en América Latina (Colombia, México, Centroamérica).
-  </p>
+  <!-- 5. Advocacy & Consulting tease -->
+  <SectionTease
+    lang={lang}
+    eyebrow={t.home.advocacyEyebrow[lang]}
+    title="Más de treinta amicus curiae e intervenciones constitucionales."
+    body={t.home.advocacyBody[lang]}
+    href={`/${lang}/incidencia/`}
+    ctaLabel={t.labels.viewFull[lang]}
+    items={advocacyItems}
+    variant="light"
+  />
 
-  <p>
-    Antes de iniciar mi doctorado en <a href={profile.social.uic}>UIC</a>, fui abogado líder de
-    representación judicial ante la <em>Jurisdicción Especial para la Paz</em> (JEP), donde
-    coordiné un equipo que representó a más de 2.000 víctimas de crímenes de guerra; abogado
-    senior del <a href={profile.social.cajar}>Colectivo José Alvear Restrepo</a>;
-    y consultor internacional de la
-    <a href={profile.social.fidh}>Federación Internacional de Derechos Humanos</a>.
-    Esa experiencia empírica — una década de litigio estratégico, reportes de política y
-    movilización de derechos ante las altas cortes colombianas, la Corte Interamericana y la
-    Corte Penal Internacional — es el fundamento de mi agenda académica actual.
-  </p>
+  <!-- 6. Teaching tease -->
+  <SectionTease
+    lang={lang}
+    eyebrow={t.home.teachingEyebrow[lang]}
+    title="Docencia clínica, constitucional y metodológica."
+    body={t.home.teachingBody[lang]}
+    href={`/${lang}/teaching/`}
+    ctaLabel={t.labels.viewFull[lang]}
+    items={teachingItems}
+    variant="subtle"
+  />
 
-  <div class="callouts">
-    <a class="callout" href="/es/research/">
-      <h3>Investigación</h3>
-      <p>Justicia transicional, movimientos sociales, cortes y movilización de derechos.</p>
-      <span class="callout-arrow">Leer más →</span>
-    </a>
-    <a class="callout" href="/es/publications/">
-      <h3>Publicaciones</h3>
-      <p>Artículos arbitrados, capítulos, reportes de política y 30+ amicus curiae.</p>
-      <span class="callout-arrow">Explorar →</span>
-    </a>
-    <a class="callout" href="/es/cv/">
-      <h3>Hoja de vida</h3>
-      <p>CV académico completo: formación, becas, docencia y servicio.</p>
-      <span class="callout-arrow">Descargar →</span>
-    </a>
-    <a class="callout" href="/es/contact/">
-      <h3>Contacto</h3>
-      <p>Correo, perfiles profesionales e invitación abierta a colaboraciones.</p>
-      <span class="callout-arrow">Escríbeme →</span>
-    </a>
-  </div>
+  <!-- 7. Latest from blog -->
+  <LatestPosts lang={lang} limit={3} />
 
-  {featured.length > 0 && (
-    <section>
-      <h2>Trabajos destacados</h2>
-      <ul class="pub-list">
-        {featured.map((p: any) => (
-          <li>
-            <div class="pub-badges"><span class={`badge ${p.data.type}`}>{p.data.type}</span></div>
-            <div class="pub-title">{p.data.title}</div>
-            <div class="pub-meta">{p.data.authors.join(', ')} · {p.data.year}{p.data.venue ? ` · ${p.data.venue}` : ''}</div>
-            {p.data.url && <div class="pub-links"><a href={p.data.url} target="_blank" rel="noopener">Ver →</a></div>}
-          </li>
-        ))}
-      </ul>
-      <p class="small" style="margin-top: var(--sp-4)"><a href="/es/publications/">Todas las publicaciones →</a></p>
-    </section>
-  )}
+  <!-- 8. Social row -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-eyebrow">Encuéntrame en línea</div>
+      <SocialRow lang={lang} />
+    </div>
+  </section>
+
+  <!-- 9. Newsletter -->
+  <section class="section full-bleed" id="newsletter">
+    <div class="section-inner">
+      <NewsletterEmbed lang={lang} />
+    </div>
+  </section>
+
+  <!-- 10. Contact -->
+  <ContactInline lang={lang} id="contact" />
 </BaseLayout>

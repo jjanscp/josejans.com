@@ -1,0 +1,208 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import ContactInline from '~/components/ContactInline.astro';
+import { profile } from '~/data/profile';
+import { t } from '~/data/i18n';
+import { bio } from '~/data/bio';
+import { interventions, courtLabel, interventionUrl, interventionsByYear } from '~/data/interventions';
+import type { Lang } from '~/data/i18n';
+
+const lang = 'en' as const;
+
+// HR reports
+const reports = [
+  {
+    year: 2020,
+    authors: 'FIDH & CAJAR (Carretero Pardo, principal drafter)',
+    title: 'Colombia at Risk of Impunity: Blind spots of transitional justice regarding international crimes under ICC jurisdiction',
+    url: null,
+    tags: ['transitional justice', 'ICC', 'Colombia'],
+  },
+  {
+    year: 2020,
+    authors: 'CSPP et al. (Carretero Pardo, co-author)',
+    title: 'Dismantling Paramilitarism: Proposal for public policy guidelines',
+    url: null,
+    tags: ['paramilitarism', 'policy'],
+  },
+  {
+    year: 2019,
+    authors: 'CAJAR',
+    title: 'Web of Impunity: Voices of resilience against state and paramilitary violence in Magdalena Medio (1998–2000)',
+    url: null,
+    tags: ['impunity', 'human rights', 'Colombia'],
+  },
+  {
+    year: 2019,
+    authors: 'CAJAR',
+    title: 'The true story of the Wiwa people — From the heart of the world — in the context of the internal armed conflict (1990–2017)',
+    url: null,
+    tags: ['indigenous rights', 'armed conflict'],
+  },
+];
+
+const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'));
+---
+<BaseLayout
+  title="Advocacy & Consulting"
+  description="Strategic litigation portfolio, amicus curiae briefs, and policy consulting by José Jans Carretero Pardo — 30+ constitutional interventions before Colombian high courts, the IACHR, and the ICC."
+  lang={lang}
+  current="advocacy"
+>
+  <!-- Header -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">{t.advocacy.eyebrow[lang]}</div>
+      <h1 class="section-title">{t.advocacy.headline[lang]}</h1>
+      <p class="lead">{t.advocacy.intro[lang]}</p>
+    </div>
+  </section>
+
+  <!-- 1. Policy & Human Rights Reports -->
+  <section class="section full-bleed">
+    <div class="section-inner">
+      <h2 class="section-title">{t.advocacy.sections.reports[lang]}</h2>
+      <ul class="pub-list">
+        {reports.map((r) => (
+          <li>
+            <div class="pub-meta">{r.year} &middot; {r.authors}</div>
+            <div class="pub-title">
+              {r.url
+                ? <a href={r.url} target="_blank" rel="noopener noreferrer">{r.title}</a>
+                : r.title
+              }
+            </div>
+            <div class="pub-tags">
+              {r.tags.map(tag => <span class="badge">{tag}</span>)}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. Interventions table -->
+  <section class="section">
+    <div class="section-inner">
+      <h2 class="section-title">{t.advocacy.sections.interventions[lang]}</h2>
+      <p class="section-body muted" style="max-width: var(--measure); margin-bottom: var(--sp-5);">
+        Amicus curiae briefs, citizen interventions, and constitutional actions filed 2017–2023.
+        Where available, the ruling number links directly to the Constitutional Court's <em>Relatoría</em>.
+      </p>
+      <div style="overflow-x: auto;">
+        <table class="intervention-table">
+          <thead>
+            <tr>
+              <th>{t.labels.year[lang]}</th>
+              <th>{t.labels.court[lang]}</th>
+              <th>{t.labels.ruling[lang]}</th>
+              <th>Topic</th>
+              <th>Context</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((iv) => {
+              const url = interventionUrl(iv);
+              return (
+                <tr>
+                  <td>{iv.year}</td>
+                  <td>{courtLabel[iv.court][lang]}</td>
+                  <td>
+                    {iv.ruling
+                      ? url
+                        ? <a href={url} target="_blank" rel="noopener noreferrer">{iv.ruling}</a>
+                        : iv.ruling
+                      : iv.caseNumber ?? '—'}
+                  </td>
+                  <td>{iv.topic[lang]}</td>
+                  <td class="muted">{iv.ctx ? iv.ctx[lang] : ''}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted small" style="margin-top: var(--sp-4);">
+        This list covers 26 selected interventions. The full portfolio (30+) includes additional submissions before the IACHR and ICC not listed here.
+        <a href={`mailto:${profile.email}`}>{t.labels.requestFullCaseLog[lang]} →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. Strategic Litigation (JEP) -->
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">{t.advocacy.sections.litigation[lang]}</h2>
+      <div class="prose" style="font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.75;" set:html={bio.professional[lang]} />
+      <div style="margin-top: var(--sp-6);">
+        <ImagePlaceholder
+          kind="landscape"
+          emoji="⚖️"
+          desc="Courtroom or hearing photo — JEP, Constitutional Court, or IACHR"
+          spec="1200×600 JPG · horizontal, documentary style"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Consulting -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">{t.advocacy.sections.consulting[lang]}</h2>
+      <p class="lead">{t.labels.availableFor[lang]}.</p>
+      <p class="section-body">{t.advocacy.consultingBlurb[lang]}</p>
+      <p style="margin-top: var(--sp-5);">
+        <a class="btn btn-accent" href={`mailto:${profile.email}`}>Get in touch →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact inline -->
+  <ContactInline lang={lang} id="contact" />
+</BaseLayout>
+
+<style>
+  .pub-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+  .pub-list li {
+    border-left: 3px solid var(--accent);
+    padding-left: var(--sp-4);
+  }
+  .pub-meta {
+    font-size: 0.85rem;
+    font-family: var(--font-sans);
+    color: var(--muted);
+    margin-bottom: var(--sp-1);
+  }
+  .pub-title {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: var(--sp-2);
+  }
+  .pub-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.1em 0.55em;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+// A dashed editorial placeholder card that tells the user what photo/asset goes here
+// and what size/spec to provide. Harmless in production; user replaces by passing `src`.
+interface Props {
+  kind?: 'landscape' | 'portrait' | 'square' | 'book-cover';
+  src?: string;            // if provided, render a real <img> instead
+  alt?: string;
+  emoji?: string;          // big emoji inside the placeholder box
+  desc?: string;           // short description of what goes there
+  spec?: string;           // size / format spec
+  caption?: string;        // optional caption under the image
+}
+const { kind = 'landscape', src, alt = '', emoji = '🖼️', desc = 'Photo placeholder', spec = '', caption } = Astro.props;
+---
+{src ? (
+  <figure>
+    <img src={src} alt={alt} />
+    {caption && <figcaption class="muted small">{caption}</figcaption>}
+  </figure>
+) : (
+  <div class={`img-placeholder ${kind}`} role="img" aria-label={`${desc}${spec ? ` (${spec})` : ''}`}>
+    <span class="emoji" aria-hidden="true">{emoji}</span>
+    <span class="desc">{desc}</span>
+    {spec && <span class="spec">{spec}</span>}
+  </div>
+)}

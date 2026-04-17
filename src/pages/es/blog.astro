@@ -1,29 +1,103 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import NewsletterEmbed from '~/components/NewsletterEmbed.astro';
 import { getCollection } from 'astro:content';
+import { fetchSubstackFeed } from '~/lib/substackFeed';
+import { profile } from '~/data/profile';
+import { t } from '~/data/i18n';
 
-const posts = (await getCollection('posts', (p: any) => p.data.lang === 'es' && !p.data.draft))
+const lang = 'es' as const;
+
+const localPosts = (await getCollection('posts', (p: any) => p.data.lang === 'es' && !p.data.draft))
   .sort((a: any, b: any) => b.data.date.getTime() - a.data.date.getTime());
+
+const feedUrl = profile.social.substack ? `${profile.social.substack}/feed` : null;
+const substackPosts = feedUrl ? await fetchSubstackFeed(feedUrl, 20) : [];
+
+const hasLocal = localPosts.length > 0;
+const hasSubstack = substackPosts.length > 0;
 ---
-<BaseLayout title="Blog" lang="es" current="blog">
-  <h1>Blog y noticias</h1>
+<BaseLayout
+  title="Blog"
+  description={`Blog de ${profile.name} — textos breves sobre investigación, justicia transicional, cortes y política colombiana.`}
+  lang={lang}
+  current="blog"
+>
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">{t.labels.latestFromBlog[lang]}</div>
+      <h1 class="section-title">
+        {profile.newsletter.publicationName[lang]}
+      </h1>
+      <p class="section-body">
+        Textos breves sobre investigación en curso, docencia y trabajo de campo — con comentarios
+        ocasionales sobre política colombiana, justicia transicional y las cortes. Publicado en
+        <a href={profile.social.substack} target="_blank" rel="noopener noreferrer">Substack</a>.
+      </p>
+    </div>
+  </section>
 
-  <p>
-    Textos breves sobre investigación, docencia y trabajo de campo en curso — con
-    comentarios ocasionales sobre política colombiana, justicia transicional y las cortes.
-  </p>
-
-  {posts.length === 0 ? (
-    <p class="muted">Aún no hay entradas. Vuelve pronto, o <a href="/es/contact/#newsletter">suscríbete</a> para recibir actualizaciones.</p>
-  ) : (
-    <ul class="post-list">
-      {posts.map((p: any) => (
-        <li>
-          <time datetime={p.data.date.toISOString()}>{p.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-          <h2><a href={`/es/blog/${p.id.replace(/\.(md|mdx)$/, '')}/`}>{p.data.title}</a></h2>
-          {p.data.summary && <p>{p.data.summary}</p>}
-        </li>
-      ))}
-    </ul>
+  {hasLocal && (
+    <section class="section full-bleed">
+      <div class="section-inner">
+        <h2 class="section-title">Entradas en el sitio</h2>
+        <ul class="post-list">
+          {localPosts.map((p: any) => (
+            <li>
+              <time datetime={p.data.date.toISOString()}>
+                {p.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <h3><a href={`/${lang}/blog/${p.id.replace(/\.(md|mdx)$/, '')}/`}>{p.data.title}</a></h3>
+              {p.data.summary && <p class="muted">{p.data.summary}</p>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   )}
+
+  {hasSubstack ? (
+    <section class="section">
+      <div class="section-inner">
+        {hasLocal && <h2 class="section-title">Desde Substack</h2>}
+        <ul class="post-list">
+          {substackPosts.map((p) => (
+            <li>
+              <time datetime={p.published.toISOString()}>
+                {p.published.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <h3><a href={p.url} target="_blank" rel="noopener noreferrer">{p.title}</a></h3>
+              {p.summary && <p class="muted">{p.summary}</p>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ) : !hasLocal && (
+    <section class="section">
+      <div class="section-inner" style="max-width: var(--measure);">
+        <p class="muted">{t.labels.noPostsYet[lang]}</p>
+      </div>
+    </section>
+  )}
+
+  <section class="section full-bleed" id="newsletter">
+    <div class="section-inner">
+      <NewsletterEmbed lang={lang} />
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .post-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: var(--sp-6);
+  }
+  .post-list li { border-left: 3px solid var(--rule); padding-left: var(--sp-4); }
+  .post-list time {
+    display: block; font-size: 0.8rem; font-family: var(--font-sans);
+    color: var(--muted); margin-bottom: var(--sp-1);
+  }
+  .post-list h3 { margin: 0 0 var(--sp-2); font-size: 1.1rem; }
+  .post-list p { margin: 0; font-size: 0.9rem; }
+</style>

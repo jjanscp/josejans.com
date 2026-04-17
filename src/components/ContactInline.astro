@@ -1,0 +1,40 @@
+---
+import { t, type Lang } from '~/data/i18n';
+import { profile } from '~/data/profile';
+
+interface Props { lang: Lang; id?: string; }
+const { lang, id = 'contact' } = Astro.props;
+---
+<section id={id} class="section">
+  <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-eyebrow">{lang === 'en' ? 'Contact' : 'Contacto'}</div>
+    <h2 class="section-title">{t.home.contactInlineHeadline[lang]}</h2>
+    <p class="section-body">{t.home.contactInlineBody[lang]}</p>
+
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      class="contact-form"
+      action={`/${lang}/thanks/`}
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
+      <label>{t.labels.yourName[lang]}
+        <input type="text" name="name" required autocomplete="name" />
+      </label>
+      <label>{t.labels.yourEmail[lang]}
+        <input type="email" name="email" required autocomplete="email" />
+      </label>
+      <label>{t.labels.yourMessage[lang]}
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button type="submit">{t.labels.contactSend[lang]} →</button>
+    </form>
+    <p class="muted small" style="margin-top: var(--sp-4);">
+      {lang === 'en' ? 'Or write directly: ' : 'O escríbeme directamente: '}
+      <a href={`mailto:${profile.email}`}>{profile.email}</a>
+    </p>
+  </div>
+</section>

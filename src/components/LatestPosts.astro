@@ -1,0 +1,36 @@
+---
+import { fetchSubstackFeed } from '~/lib/substackFeed';
+import { profile } from '~/data/profile';
+import { t, type Lang } from '~/data/i18n';
+
+interface Props { lang: Lang; limit?: number; showTitle?: boolean; }
+const { lang, limit = 3, showTitle = true } = Astro.props;
+
+const feedUrl = profile.social.substack ? `${profile.social.substack}/feed` : null;
+const posts = feedUrl ? await fetchSubstackFeed(feedUrl, limit) : [];
+const localeFor = (l: Lang) => (l === 'en' ? 'en-US' : 'es-ES');
+---
+<section class="section">
+  <div class="section-inner">
+    {showTitle && <div class="section-eyebrow">{t.labels.latestFromBlog[lang]}</div>}
+    {showTitle && <h2 class="section-title">{profile.newsletter.publicationName[lang]}</h2>}
+
+    {posts.length > 0 ? (
+      <ul class="post-list">
+        {posts.map((p) => (
+          <li>
+            <time datetime={p.published.toISOString()}>
+              {p.published.toLocaleDateString(localeFor(lang), { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            <h3><a href={p.url} target="_blank" rel="noopener noreferrer">{p.title}</a></h3>
+            {p.summary && <p class="muted">{p.summary}</p>}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="section-body muted">{t.labels.noPostsYet[lang]}</p>
+    )}
+
+    <a class="section-cta" href={`/${lang}/blog/`}>{t.labels.readTheBlog[lang]} →</a>
+  </div>
+</section>

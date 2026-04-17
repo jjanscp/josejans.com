@@ -1,60 +1,374 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
 import { getCollection } from 'astro:content';
+import { t } from '~/data/i18n';
+import { bio } from '~/data/bio';
+import { profile } from '~/data/profile';
 
-const wip = (await getCollection('publications', (p: any) => p.data.type === 'wip' && p.data.lang === 'en'))
+const lang = 'en' as const;
+
+const all = (await getCollection('publications', (p: any) => p.data.lang === 'en' || !p.data.lang))
   .sort((a: any, b: any) => b.data.year - a.data.year);
+
+const articles    = all.filter((p: any) => p.data.type === 'article');
+const chapters    = all.filter((p: any) => p.data.type === 'chapter');
+const reports     = all.filter((p: any) => p.data.type === 'report');
+const wip         = all.filter((p: any) => p.data.type === 'wip');
+
+// Hard-coded publications (from CV) until CMS entries exist
+const staticArticles = [
+  {
+    authors: 'Carretero Pardo, J. J., & Ochoa Sterling, T.',
+    year: 2021,
+    title: 'Disputed fields in the protection of social leaders in Colombia',
+    venue: 'IdeAs — Idées d\'Amériques',
+    volume: '17',
+    url: 'https://journals.openedition.org/ideas/10688',
+    doi: '10.4000/ideas.10688',
+    abstract: 'Analyzes the protection of social leaders through the lens of transnational human-rights networks and the Colombian transitional justice framework.',
+    tags: ['social leaders', 'transitional justice', 'human rights', 'Colombia'],
+    lang: ['en', 'fr'],
+  },
+];
+
+const staticChapters = [
+  {
+    authors: 'Carretero Pardo, J. J., & Rodríguez, C.',
+    year: 2018,
+    title: 'From the Havana talks to the Colombian Congress: Where were the victims\u2019 rights in the implementation of the Final Peace Agreement?',
+    venue: 'Discussions on the implementation of the final peace agreement between the Government of Colombia and the FARC-EP',
+    publisher: 'Universidad Libre',
+    abstract: 'Examines victims\u2019 rights provisions in the legislative implementation of the 2016 Colombian Peace Agreement.',
+    tags: ['victims\u2019 rights', 'peace agreement', 'Colombia', 'transitional justice'],
+  },
+];
+
+const staticReports = [
+  {
+    authors: 'FIDH & CAJAR (Carretero Pardo, J. J., principal drafter)',
+    year: 2020,
+    title: 'Colombia at Risk of Impunity: Blind spots of transitional justice regarding international crimes under ICC jurisdiction',
+    tags: ['transitional justice', 'ICC', 'impunity', 'Colombia'],
+  },
+  {
+    authors: 'CSPP et al. (Carretero Pardo, J. J., co-author)',
+    year: 2020,
+    title: 'Dismantling Paramilitarism: Proposal for public policy guidelines',
+    tags: ['paramilitarism', 'policy', 'Colombia'],
+  },
+  {
+    authors: 'CAJAR (Carretero Pardo, J. J., contributor)',
+    year: 2019,
+    title: 'Web of Impunity: Voices of resilience against state and paramilitary violence in Magdalena Medio (1998–2000)',
+    tags: ['impunity', 'human rights', 'Colombia'],
+  },
+  {
+    authors: 'CAJAR (Carretero Pardo, J. J., contributor)',
+    year: 2019,
+    title: 'The true story of the Wiwa people — From the heart of the world — in the context of the internal armed conflict (1990–2017)',
+    tags: ['indigenous rights', 'armed conflict', 'Colombia'],
+  },
+];
+
+// Merge CMS + static (CMS entries take precedence if they exist)
+const showArticles  = articles.length  > 0 ? articles  : staticArticles;
+const showChapters  = chapters.length  > 0 ? chapters  : staticChapters;
+const showReports   = reports.length   > 0 ? reports   : staticReports;
 ---
-<BaseLayout title="Research" lang="en" current="research">
-  <h1>Research</h1>
+<BaseLayout
+  title="Research & Publications"
+  description="Research agenda, peer-reviewed articles, book chapters, policy reports, and datasets by José Jans Carretero Pardo on transitional justice, courts, and rights mobilization."
+  lang={lang}
+  current="research"
+>
+  <!-- Header -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">{t.sections.featuredPubs[lang]}</div>
+      <h1 class="section-title">Research &amp; Publications</h1>
+      <div class="lead prose" set:html={bio.research[lang]} />
+    </div>
+  </section>
 
-  <p>
-    My research focuses on the intersection of <strong>public interest litigation, social
-    movements, and judicial reform</strong> of criminal and constitutional justice systems.
-    Specifically, I study <strong>state accountability mechanisms</strong> — courts, truth
-    commissions, and amicus-curiae-based rights mobilization — in contexts of transition from
-    authoritarian rule and/or armed conflict in Latin America (Colombia, Mexico, Central
-    America). I am particularly interested in how the rules, practices, and discourses of
-    justice are shaped by the revolving interaction between international organizations,
-    courts, policymakers, and advocacy networks, and in what that interaction produces for
-    the resulting legal designs, both in the public-opinion arena and through institutional
-    pathways.
-  </p>
+  <!-- Research interests -->
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Research interests</h2>
+      <ul class="interest-list">
+        {bio.interests[lang].map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
 
-  <p>
-    Methodologically, I combine an action-research participatory approach with a plural
-    toolkit: archival work, macro-historical analysis, discourse analysis, and ethnographic
-    fieldwork. My recent scholarship has examined the protection of social leaders in Colombia
-    through the lens of transnational human-rights networks (Carretero Pardo &amp; Ochoa
-    Sterling, <em>IdeAs</em> 2021); the role of victims' rights in the legislative
-    implementation of the 2016 Peace Agreement (Carretero Pardo &amp; Rodríguez, 2018); and
-    the limits of Colombian transitional justice in addressing international crimes under ICC
-    jurisdiction (FIDH &amp; CAJAR, 2020).
-  </p>
+  <!-- Works in progress -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">{t.sections.wip[lang]}</h2>
+      {wip.length > 0 ? (
+        <ul class="pub-list">
+          {wip.map((p: any) => (
+            <li>
+              <div class="pub-meta">
+                <span class="badge wip">{p.data.status || t.labels.inPreparation[lang]}</span>
+              </div>
+              <div class="pub-title">{p.data.title}</div>
+              <div class="pub-meta muted">{p.data.authors?.join(', ')} · {p.data.year}</div>
+              {p.data.abstract && (
+                <details class="pub-abstract"><summary>{t.labels.abstract[lang]}</summary><p>{p.data.abstract}</p></details>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <>
+          <p class="muted">
+            Draft papers and works under review will appear here. Subscribe to the newsletter below for updates.
+          </p>
+          <div class="wip-placeholders">
+            <div class="wip-slot">
+              <span class="badge wip">{t.labels.underReview[lang]}</span>
+              <p class="wip-placeholder-title">Paper 1 — <em>title and abstract forthcoming</em></p>
+            </div>
+            <div class="wip-slot">
+              <span class="badge wip">{t.labels.inPreparation[lang]}</span>
+              <p class="wip-placeholder-title">Paper 2 — <em>title and abstract forthcoming</em></p>
+            </div>
+          </div>
+          <p class="muted small" style="margin-top: var(--sp-3);">
+            You can add papers directly via the <a href="/admin/">CMS</a> — no code needed.
+          </p>
+        </>
+      )}
+    </div>
+  </section>
 
-  <h2>Research agenda</h2>
-  <ul>
-    <li><strong>Transitional justice &amp; courts</strong> — how transitional tribunals (like Colombia's JEP) reshape the relationship between ordinary and extraordinary justice, and how victims and advocacy networks influence that reshaping.</li>
-    <li><strong>Strategic litigation &amp; rights mobilization</strong> — the micro-dynamics of amicus curiae briefs and citizen interventions as tools for shaping constitutional jurisprudence in contexts of armed conflict and democratic backsliding.</li>
-    <li><strong>Drug policy &amp; the state</strong> — comparative study of how drug-control regimes interact with transitional-justice frameworks in Mexico and Colombia.</li>
-    <li><strong>Social movements and legal empowerment</strong> — the grammar of collective mobilization around constitutional rights, peacebuilding, and Indigenous self-governance (e.g., the Wiwa and Cañamomo cases).</li>
-  </ul>
+  <!-- Peer-reviewed articles -->
+  <section class="section full-bleed">
+    <div class="section-inner">
+      <h2 class="section-title">{t.sections.peerReviewed[lang]}</h2>
+      <ul class="pub-list rich">
+        {showArticles.map((p: any) => (
+          <li>
+            <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {p.data?.venue ?? p.venue}{p.data?.volume ?? p.volume ? `, ${p.data?.volume ?? p.volume}` : ''}</div>
+            <div class="pub-title">
+              {(p.data?.url ?? p.url)
+                ? <a href={p.data?.url ?? p.url} target="_blank" rel="noopener noreferrer">{p.data?.title ?? p.title}</a>
+                : (p.data?.title ?? p.title)}
+            </div>
+            <div class="pub-authors muted">{(p.data?.authors ?? p.authors)?.join(', ')}</div>
+            {(p.data?.doi ?? p.doi) && (
+              <div class="pub-links">
+                <a href={`https://doi.org/${p.data?.doi ?? p.doi}`} target="_blank" rel="noopener noreferrer">DOI →</a>
+              </div>
+            )}
+            {(p.data?.abstract ?? p.abstract) && (
+              <details class="pub-abstract">
+                <summary>{t.labels.abstract[lang]}</summary>
+                <p>{p.data?.abstract ?? p.abstract}</p>
+              </details>
+            )}
+            <div class="pub-tags">
+              {(p.data?.tags ?? p.tags ?? []).map((tag: string) => <span class="tag">{tag}</span>)}
+              {(p.data?.lang ?? p.lang) && Array.isArray(p.data?.lang ?? p.lang) && (p.data?.lang ?? p.lang).map((l: string) => <span class="tag lang-tag">{l.toUpperCase()}</span>)}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-  <h2>Works in progress</h2>
-  {wip.length === 0 ? (
-    <p class="muted">Draft papers and works under review will be listed here as they are ready. Check back soon, or <a href="#contact">subscribe</a> for updates.</p>
-  ) : (
-    <ul class="pub-list">
-      {wip.map((p: any) => (
+  <!-- Book chapters -->
+  <section class="section">
+    <div class="section-inner">
+      <h2 class="section-title">{t.sections.chapters[lang]}</h2>
+      <ul class="pub-list rich">
+        {showChapters.map((p: any) => (
+          <li>
+            <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {p.data?.venue ?? p.venue ?? p.data?.publisher ?? p.publisher ?? ''}</div>
+            <div class="pub-title">{p.data?.title ?? p.title}</div>
+            <div class="pub-authors muted">{(p.data?.authors ?? p.authors)?.join(', ')}</div>
+            {(p.data?.abstract ?? p.abstract) && (
+              <details class="pub-abstract">
+                <summary>{t.labels.abstract[lang]}</summary>
+                <p>{p.data?.abstract ?? p.abstract}</p>
+              </details>
+            )}
+            <div class="pub-tags">
+              {(p.data?.tags ?? p.tags ?? []).map((tag: string) => <span class="tag">{tag}</span>)}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Policy & HR reports -->
+  <section class="section full-bleed">
+    <div class="section-inner">
+      <h2 class="section-title">{t.sections.reports[lang]}</h2>
+      <ul class="pub-list rich">
+        {showReports.map((p: any) => (
+          <li>
+            <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {p.data?.authors ?? p.authors}</div>
+            <div class="pub-title">
+              {(p.data?.url ?? p.url)
+                ? <a href={p.data?.url ?? p.url} target="_blank" rel="noopener noreferrer">{p.data?.title ?? p.title}</a>
+                : (p.data?.title ?? p.title)}
+            </div>
+            <div class="pub-tags">
+              {(p.data?.tags ?? p.tags ?? []).map((tag: string) => <span class="tag">{tag}</span>)}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Datasets -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">{t.sections.datasets[lang]}</h2>
+      <p class="section-body muted">
+        Empirical datasets compiled during a decade of strategic litigation and human-rights practice.
+        Structured and documented for reuse in sociolegal research.
+      </p>
+      <ul class="pub-list">
         <li>
-          <div class="pub-badges"><span class="badge wip">{p.data.status || 'Work in progress'}</span></div>
-          <div class="pub-title">{p.data.title}</div>
-          <div class="pub-meta">{p.data.authors.join(', ')} · {p.data.year}</div>
-          {p.data.abstract && <div class="pub-abstract">{p.data.abstract}</div>}
+          <span class="badge dataset">Dataset</span>
+          <div class="pub-title">Citizen Interventions before the Colombian Constitutional Court (2016–2020)</div>
+          <div class="pub-meta muted">Coded corpus of 30+ citizen interventions — court, ruling, topic, outcome, advocacy organization.</div>
+          <div class="pub-meta muted"><em>Documentation in preparation. Available upon request.</em></div>
         </li>
-      ))}
-    </ul>
-  )}
+        <li>
+          <span class="badge dataset">Dataset</span>
+          <div class="pub-title">Press Coverage of the Final Peace Agreement Implementation (2016–2019)</div>
+          <div class="pub-meta muted">Scraped and hand-coded corpus of Colombian press coverage on peace-agreement implementation.</div>
+          <div class="pub-meta muted"><em>Documentation in preparation. Available upon request.</em></div>
+        </li>
+      </ul>
+      <p class="muted small" style="margin-top: var(--sp-4);">
+        <a href={`mailto:${profile.email}`}>Request dataset access →</a>
+      </p>
+    </div>
+  </section>
 
-  <p class="small"><a href="/en/publications/">Full publications list →</a></p>
+  <!-- Amicus note -->
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">{t.sections.interventions[lang]}</h2>
+      <p class="section-body">
+        The 30+ amicus curiae briefs and constitutional interventions I submitted between 2017 and 2023
+        are documented separately on the <a href={`/${lang}/advocacy/`}>Advocacy &amp; Consulting</a> page,
+        where each entry links to the published Constitutional Court ruling where available.
+      </p>
+      <p style="margin-top: var(--sp-4);">
+        <a class="btn btn-outline" href={`/${lang}/advocacy/`}>View full interventions table →</a>
+      </p>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .interest-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+  .interest-list li {
+    padding-left: var(--sp-4);
+    position: relative;
+    line-height: 1.6;
+  }
+  .interest-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  .pub-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+  .pub-list.rich li {
+    border-left: 3px solid var(--rule);
+    padding-left: var(--sp-4);
+  }
+  .pub-title {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-block: var(--sp-1);
+  }
+  .pub-authors, .pub-meta { font-size: 0.85rem; }
+  .pub-links { margin-top: var(--sp-1); }
+  .pub-links a { font-size: 0.85rem; }
+  .pub-abstract { margin-top: var(--sp-2); font-size: 0.9rem; }
+  .pub-abstract summary { cursor: pointer; font-weight: 500; }
+  .pub-tags { display: flex; flex-wrap: wrap; gap: var(--sp-1); margin-top: var(--sp-2); }
+  .tag {
+    font-size: 0.72rem;
+    font-family: var(--font-sans);
+    padding: 0.1em 0.5em;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--accent-2) 12%, transparent);
+    color: var(--accent-2);
+    border: 1px solid color-mix(in srgb, var(--accent-2) 25%, transparent);
+  }
+  .lang-tag {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.1em 0.55em;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    margin-bottom: var(--sp-1);
+  }
+  .badge.wip {
+    background: color-mix(in srgb, var(--accent-2) 12%, transparent);
+    color: var(--accent-2);
+    border-color: color-mix(in srgb, var(--accent-2) 25%, transparent);
+  }
+  .badge.dataset {
+    background: color-mix(in srgb, #4a6fa5 12%, transparent);
+    color: #4a6fa5;
+    border-color: color-mix(in srgb, #4a6fa5 25%, transparent);
+  }
+  .wip-placeholders {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    margin-top: var(--sp-4);
+  }
+  .wip-slot {
+    border-left: 3px dashed var(--rule);
+    padding-left: var(--sp-4);
+  }
+  .wip-placeholder-title {
+    margin-top: var(--sp-1);
+    color: var(--muted);
+    font-family: var(--font-serif);
+  }
+  .prose {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+</style>

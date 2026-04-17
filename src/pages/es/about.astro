@@ -1,82 +1,169 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import Avatar from '~/components/Avatar.astro';
+import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import ContactInline from '~/components/ContactInline.astro';
 import { profile } from '~/data/profile';
+import { bio } from '~/data/bio';
+
+const lang = 'es' as const;
 ---
-<BaseLayout title="Sobre mí" lang="es" current="about">
-  <section class="hero">
-    <Avatar size={120} />
-    <div class="hero-text">
-      <h1 class="name">Sobre mí</h1>
-      <p class="subtitle">{profile.title.es} · {profile.affiliation.es}</p>
+<BaseLayout
+  title="Sobre mí"
+  description={`Sobre ${profile.name} — estudiante doctoral en Ciencia Política en UIC, becario Fulbright–MinCiencias, ex abogado líder en la JEP y abogado senior en CAJAR.`}
+  lang={lang}
+  current="about"
+>
+  <!-- Encabezado -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">Sobre mí</div>
+      <h1 class="section-title">{profile.name}</h1>
+      <p class="lead">{profile.title[lang]} &middot; {profile.affiliation[lang]}</p>
     </div>
   </section>
 
-  <p>
-    Soy estudiante doctoral en Ciencia Política en la <a href={profile.social.uic}>Universidad
-    de Illinois en Chicago (UIC)</a> y <strong>becario Fulbright–MinCiencias</strong> (2025–2030),
-    con énfasis en Política Comparada y Teoría Política. Mi trayectoria une la práctica del
-    litigio de interés público y la investigación académica sobre derechos civiles, cortes,
-    transiciones y movimientos sociales. Llego a la academia después de una década de práctica
-    jurídica de primera línea en Colombia, y las preguntas que hoy organizan mi tesis doctoral
-    surgieron directamente de esa experiencia empírica.
-  </p>
+  <!-- Foto de portada -->
+  <section class="section full-bleed" style="padding-block: 0;">
+    <ImagePlaceholder
+      kind="landscape"
+      emoji="📷"
+      desc="Foto de portada — en campo, en audiencia o en el aula"
+      spec="2400×900 JPG · fondo oscuro o neutro preferido"
+    />
+  </section>
 
-  <p>
-    Entre 2023 y 2024 me desempeñé como <strong>abogado líder de representación judicial</strong>
-    ante la <em>Jurisdicción Especial para la Paz</em> (JEP), el tribunal transicional creado
-    por el Acuerdo Final de 2016. Coordiné a seis abogados y dos asistentes en la representación
-    de más de 2.079 víctimas individuales y 26 colectivas en los macrocasos sobre ejecuciones
-    extrajudiciales ("falsos positivos") — un trabajo que contribuyó al llamamiento a juicio de
-    25 oficiales del Ejército, cinco de ellos generales, por 303 víctimas en Casanare y 135 en
-    la región Caribe. Antes fui abogado senior del <a href={profile.social.cajar}>Colectivo de
-    Abogados José Alvear Restrepo (CAJAR)</a>, consultor de la
-    <a href={profile.social.fidh}>Federación Internacional de Derechos Humanos (FIDH)</a> y
-    abogado del Comité de Solidaridad con los Presos Políticos (CSPP). En estos roles presenté
-    más de 30 intervenciones ciudadanas, amicus curiae y demandas de inconstitucionalidad ante
-    la Corte Constitucional, la Corte Suprema, la JEP, la Corte Interamericana de Derechos
-    Humanos y la Corte Penal Internacional.
-  </p>
+  <!-- Bloque 1: Agenda de investigación -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">Estudiante doctoral · Becario Fulbright</div>
+      <h2 class="section-title">La agenda de investigación</h2>
+      <div class="section-body prose" set:html={bio.research[lang]} />
+      <h3 style="margin-top: var(--sp-6);">Intereses de investigación</h3>
+      <ul class="interest-list">
+        {bio.interests[lang].map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
 
-  <h2>Formación académica</h2>
-  <ul>
-    <li><strong>PhD en Ciencia Política</strong>, University of Illinois Chicago, 2025–2030 (beca Fulbright–MinCiencias).</li>
-    <li><strong>Magíster en Derecho (LL.M.)</strong>, Universidad de los Andes, Bogotá, 2018–2019 (asistencia graduada de la Vicepresidencia Académica).</li>
-    <li><strong>Abogado (LL.B.)</strong>, Universidad de los Andes, Bogotá, 2008–2015 (beca "Quiero Estudiar"; mejor puntaje nacional Saber Pro en Derecho 2013-II y Humanidades 2014-I).</li>
-  </ul>
+  <!-- Bloque 2: Trayectoria de práctica profesional -->
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">2015–2024 · Colombia</div>
+      <h2 class="section-title">Una década de práctica de primera línea</h2>
+      <div class="section-body prose" set:html={bio.professional[lang]} />
+      <p style="margin-top: var(--sp-4);">
+        <a class="section-cta" href={`/${lang}/incidencia/`}>
+          Ver portafolio completo de incidencia →
+        </a>
+      </p>
+    </div>
+  </section>
 
-  <h2>Formación adicional</h2>
-  <ul>
-    <li>Diplomado en Política de Drogas, Salud y Derechos Humanos — <strong>CIDE</strong>, México, 2020.</li>
-    <li>"Leading Change" — <strong>Harvard Kennedy School of Government</strong>, 2018.</li>
-    <li>Seminario Clínico en Derechos Humanos — <strong>Central European University</strong>, Budapest, 2017.</li>
-    <li>Bertha Justice Human Rights Global Convening — <strong>University of the Witwatersrand</strong> / CALS, Sudáfrica, 2018.</li>
-  </ul>
+  <!-- Bloque 3: Docencia -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">Educación jurídica · Colombia</div>
+      <h2 class="section-title">Docencia y trabajo clínico</h2>
+      <div class="section-body prose" set:html={bio.teaching[lang]} />
+      <p style="margin-top: var(--sp-4);">
+        <a class="section-cta" href={`/${lang}/teaching/`}>
+          Portafolio de docencia →
+        </a>
+      </p>
+      <div style="margin-top: var(--sp-6);">
+        <ImagePlaceholder
+          kind="landscape"
+          emoji="🏛️"
+          desc="Foto de aula o clínica — seminario UIS o Uniandes"
+          spec="1200×600 JPG"
+        />
+      </div>
+    </div>
+  </section>
 
-  <h2>Intereses de investigación</h2>
-  <ul>
-    <li>Justicia transicional y diseño institucional en escenarios de posconflicto</li>
-    <li>Litigio estratégico y movilización de derechos</li>
-    <li>Cortes, comisiones de la verdad y rendición de cuentas del Estado</li>
-    <li>Movimientos sociales y sociología política del derecho</li>
-    <li>Política de drogas, prohibición y enfoque de salud-derechos</li>
-    <li>América Latina: Colombia, México, Centroamérica</li>
-  </ul>
+  <!-- Bloque 4: Historia personal -->
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">Más allá del trabajo</div>
+      <h2 class="section-title">Un poco más sobre mí</h2>
+      <div class="section-body prose" set:html={bio.personal[lang]} />
+    </div>
+  </section>
 
-  <h2>Afiliaciones</h2>
-  <ul>
-    <li>Departamento de Ciencia Política, University of Illinois Chicago.</li>
-    <li>Becario Fulbright — programa Fulbright–MinCiencias.</li>
-    <li>Miembro del Comité Asesor, <a href={profile.social.bertha}>Red Global Bertha Justice</a> (2018–2020).</li>
-    <li>Alumni del Colectivo de Abogados José Alvear Restrepo (CAJAR) y del Equipo de las Américas de la FIDH.</li>
-  </ul>
+  <!-- Bloque 5: Formación -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Formación académica</h2>
+      <ul class="cv-list">
+        {bio.education[lang].map((item) => (
+          <li set:html={item} />
+        ))}
+      </ul>
 
-  <h2>Idiomas</h2>
-  <ul>
-    <li>Español — lengua materna.</li>
-    <li>Inglés — TOEFL-ITP 106; Duolingo 120.</li>
-    <li>Francés — lectura, habla, escucha, escritura (B1).</li>
-  </ul>
+      <h3 style="margin-top: var(--sp-6);">Formación adicional</h3>
+      <ul class="cv-list">
+        {bio.training[lang].map((item) => (
+          <li set:html={item} />
+        ))}
+      </ul>
 
-  <p class="small"><a href="/es/cv/">Hoja de vida completa →</a></p>
+      <h3 style="margin-top: var(--sp-6);">Afiliaciones</h3>
+      <ul class="cv-list">
+        {bio.affiliations[lang].map((item) => (
+          <li set:html={item} />
+        ))}
+      </ul>
+
+      <h3 style="margin-top: var(--sp-6);">Idiomas</h3>
+      <p>{bio.languages[lang]}</p>
+
+      <p style="margin-top: var(--sp-6);">
+        <a class="btn btn-outline" href="/cv.pdf" target="_blank" rel="noopener">Descargar hoja de vida (PDF)</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <ContactInline lang={lang} id="contact" />
 </BaseLayout>
+
+<style>
+  .interest-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+  .interest-list li {
+    padding-left: var(--sp-4);
+    position: relative;
+  }
+  .interest-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-sans);
+  }
+  .cv-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .cv-list li {
+    border-left: 3px solid var(--rule);
+    padding-left: var(--sp-4);
+    line-height: 1.65;
+  }
+  .prose {
+    line-height: 1.75;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+  }
+</style>

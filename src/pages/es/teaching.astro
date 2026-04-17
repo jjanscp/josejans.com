@@ -1,40 +1,115 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import { bio } from '~/data/bio';
+import { t } from '~/data/i18n';
+
+const lang = 'es' as const;
 ---
-<BaseLayout title="Docencia" lang="es" current="teaching">
-  <h1>Docencia</h1>
+<BaseLayout
+  title="Docencia"
+  description="Portafolio de docencia de José Jans Carretero Pardo — teoría constitucional, metodología de investigación, clínica de litigio estratégico y educación comunitaria."
+  lang={lang}
+  current="teaching"
+>
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">{t.nav.teaching[lang]}</div>
+      <h1 class="section-title">Docencia y Educación Clínica</h1>
+      <div class="lead prose" set:html={bio.teaching[lang]} />
+    </div>
+  </section>
 
-  <p>
-    He diseñado y dictado cursos sobre teoría constitucional, metodología de investigación y litigio
-    de interés público en pregrado y posgrado, y he facilitado talleres sobre memoria, procedimiento
-    penal, derechos y acción colectiva con movimientos sociales de base y comunidades indígenas.
-  </p>
+  <section class="section full-bleed" style="padding-block: 0;">
+    <ImagePlaceholder
+      kind="landscape"
+      emoji="🏛️"
+      desc="Foto de aula o clínica — seminario UIS o taller en Uniandes"
+      spec="2400×900 JPG · estudiantes y profesor en trabajo"
+    />
+  </section>
 
-  <h2>Profesor y clínico</h2>
-  <p class="muted sans small">Universidad Industrial de Santander (UIS), Bucaramanga · Octubre 2020 – Febrero 2023</p>
-  <ul>
-    <li><strong>Teoría Constitucional</strong> — Pregrado en Derecho. Diseñé y dicté el curso.</li>
-    <li><strong>Metodología de la Investigación</strong> — Maestría en Derechos Humanos. Diseñé y dicté el curso.</li>
-    <li><strong>Coordinador y co-fundador</strong>, Clínica Jurídica de Litigio Estratégico "Carlos Gaviria Díaz". Dirigí proyectos clínicos que presentaron amicus ante la Corte Constitucional en casos emblemáticos sobre libertad de expresión (T-087/2023, T-452/2022) y derechos de comunidades indígenas (SU-545/2023).</li>
-  </ul>
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Profesor y Coordinador de Clínica</h2>
+      <p class="muted small">Universidad Industrial de Santander (UIS), Bucaramanga &middot; Octubre 2020 – Febrero 2023</p>
+      <ul class="cv-list">
+        <li>
+          <strong>Teoría Constitucional</strong> — Pregrado en Derecho.
+          Diseñé y dicté el curso completo; syllabus construido alrededor de un estudio de casos de la Corte Constitucional colombiana.
+        </li>
+        <li>
+          <strong>Metodologías de Investigación</strong> — Maestría en Derechos Humanos.
+          Diseñé y dicté el curso con enfoque en métodos sociojurídicos, diseño de investigación-acción y enfoques mixtos para el estudio de cortes y movimientos sociales.
+        </li>
+        <li>
+          <strong>Coordinador y cofundador</strong>, <em>Clínica Jurídica de Litigio Estratégico Carlos Gaviria Díaz</em>.
+          Dirigí proyectos clínicos que produjeron amicus curiae admitidos en sentencias emblemáticas sobre libertad de expresión (<a href="https://www.corteconstitucional.gov.co/relatoria/2023/T-087-23.htm" target="_blank" rel="noopener">T-087/2023</a>, T-452/2022) y derechos de comunidades indígenas (<a href="https://www.corteconstitucional.gov.co/relatoria/2023/SU545-23.htm" target="_blank" rel="noopener">SU-545/2023</a>).
+        </li>
+      </ul>
+    </div>
+  </section>
 
-  <h2>Asistencias docentes y de investigación</h2>
-  <p class="muted sans small">Universidad de los Andes, Bogotá · 2013–2014, 2016, 2018–2019</p>
-  <ul>
-    <li>Asistente docente, Centro Interdisciplinario de Estudios sobre Desarrollo — "Colombia: Espacio, Tiempo y Diferencias" (Otoño 2018 &amp; Primavera 2019, Prof. Nathalia Franco).</li>
-    <li>Asistente docente, Escuela de Gobierno — "El Derecho a la Ciudad" (Primavera 2016, Prof. Amy Ritterbush).</li>
-    <li>Asistente de investigación, Vicepresidencia Académica — "Necesidades educativas de posconflicto" (Prof. Silvia Restrepo).</li>
-    <li>Asistente de investigación, Centro de Investigaciones Sociojurídicas (Cijus), Facultad de Derecho — proyecto <em>Cumplimiento de fallos de tutela en Colombia</em> (Emory University y Banco Mundial, 2013–2014, Prof. Isabel Cristina Jaramillo).</li>
-  </ul>
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Asistencias Docentes y de Investigación</h2>
+      <p class="muted small">Universidad de los Andes, Bogotá &middot; 2013–2014, 2016, 2018–2019</p>
+      <ul class="cv-list">
+        <li>Asistente docente, Centro Interdisciplinario de Estudios sobre Desarrollo — "Colombia: Espacio, Tiempo y Diferencias" (Otoño 2018 &amp; Primavera 2019, Prof. Nathalia Franco).</li>
+        <li>Asistente docente, Escuela de Gobierno — "El Derecho a la Ciudad" (Primavera 2016, Prof. Amy Ritterbush).</li>
+        <li>Asistente de investigación, Vicepresidencia Académica — "Necesidades educativas de posconflicto" (Prof. Silvia Restrepo).</li>
+        <li>
+          Asistente de investigación, Centro de Investigaciones Sociojurídicas (<strong>CIJUS</strong>), Facultad de Derecho —
+          <em>Cumplimiento de fallos de tutela en Colombia</em>
+          (proyecto conjunto con Emory University y Banco Mundial, 2013–2014, Prof. Isabel Cristina Jaramillo).
+        </li>
+      </ul>
+    </div>
+  </section>
 
-  <h2>Beca de investigación</h2>
-  <ul>
-    <li><strong>Política de drogas y justicia transicional</strong>, Centro de Investigación y Docencia Económicas (CIDE), México — beca Open Society Foundation sobre política de drogas y justicia transicional comparada México–Colombia (2017).</li>
-  </ul>
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Beca de Investigación</h2>
+      <ul class="cv-list">
+        <li>
+          <strong>Política de drogas y justicia transicional</strong> — Centro de Investigación y Docencia Económicas (<strong>CIDE</strong>), Ciudad de México.
+          Beca Open Society Foundation sobre marcos comparados de política de drogas y justicia transicional en México y Colombia, 2017.
+        </li>
+      </ul>
+    </div>
+  </section>
 
-  <h2>Educación comunitaria y talleres de base</h2>
-  <ul>
-    <li>Red de defensa del pueblo indígena Cañamomo — talleres sobre memoria, derechos y acción colectiva.</li>
-    <li>Leading Change Network (LCS) — formación en organización comunitaria para iniciativas de construcción de paz.</li>
-  </ul>
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Educación Comunitaria y Talleres de Base</h2>
+      <ul class="cv-list">
+        <li>
+          <strong>Red de defensa del pueblo indígena Cañamomo</strong> — talleres sobre memoria, derechos y acción colectiva con líderes comunitarios.
+        </li>
+        <li>
+          <strong>Leading Change Network (LCS)</strong> — formación en organización comunitaria para iniciativas de construcción de paz; metodología Harvard Kennedy School adaptada al contexto colombiano.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <ImagePlaceholder
+        kind="square"
+        emoji="👩‍⚖️"
+        desc="Foto de sesión clínica o moot court"
+        spec="800×800 JPG"
+      />
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .cv-list {
+    list-style: none; margin: var(--sp-3) 0 0; padding: 0;
+    display: flex; flex-direction: column; gap: var(--sp-4);
+  }
+  .cv-list li { border-left: 3px solid var(--rule); padding-left: var(--sp-4); line-height: 1.7; }
+  .prose { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.75; }
+</style>

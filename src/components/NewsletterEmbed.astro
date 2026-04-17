@@ -1,0 +1,48 @@
+---
+import { profile } from '~/data/profile';
+import { t, type Lang } from '~/data/i18n';
+
+interface Props { lang: Lang; id?: string; }
+const { lang, id = 'newsletter' } = Astro.props;
+
+const pubName = profile.newsletter.publicationName[lang];
+const useSubstack = profile.newsletter.provider === 'substack' && !!profile.newsletter.substackEmbedUrl;
+const substackUrl = profile.newsletter.substackUrl;
+const buttondownUser = profile.newsletter.buttondownUsername;
+---
+<section id={id} class="newsletter-block">
+  <div class="eyebrow">{lang === 'en' ? 'Newsletter' : 'Newsletter'}</div>
+  <h3>{pubName}</h3>
+  <p>{t.labels.newsletterHeadline[lang]}</p>
+
+  {useSubstack ? (
+    <>
+      <iframe
+        src={profile.newsletter.substackEmbedUrl!}
+        height="180"
+        width="100%"
+        style="border:1px solid var(--rule); background: var(--bg);"
+        frameborder="0"
+        scrolling="no"
+        title={pubName}
+      ></iframe>
+      <p class="newsletter-meta">
+        {lang === 'en'
+          ? <>Hosted on <a href={substackUrl!} target="_blank" rel="noopener noreferrer">Substack</a>. One email per new post. Free, no spam.</>
+          : <>Alojado en <a href={substackUrl!} target="_blank" rel="noopener noreferrer">Substack</a>. Un correo por entrada. Gratis, sin spam.</>}
+      </p>
+    </>
+  ) : buttondownUser ? (
+    <form
+      action={`https://buttondown.com/api/emails/embed-subscribe/${buttondownUser}`}
+      method="post"
+      target="popupwindow"
+      onsubmit={`window.open('https://buttondown.com/${buttondownUser}', 'popupwindow')`}
+    >
+      <input type="email" name="email" placeholder="you@example.com" required />
+      <button class="btn btn-primary" type="submit">{t.labels.newsletterCTA[lang]}</button>
+    </form>
+  ) : (
+    <p class="newsletter-meta">{lang === 'en' ? 'Newsletter coming soon.' : 'Newsletter próximamente.'}</p>
+  )}
+</section>

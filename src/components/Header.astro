@@ -7,21 +7,24 @@ interface Props {
   current?: string;
 }
 const { lang, current } = Astro.props;
+
+// Localised slug mapping — advocacy uses a different path in ES ("incidencia").
+const slug = (lang === 'en')
+  ? { about: 'about', research: 'research', advocacy: 'advocacy', teaching: 'teaching', media: 'media', blog: 'blog', contact: 'contact' }
+  : { about: 'about', research: 'research', advocacy: 'incidencia', teaching: 'teaching', media: 'media', blog: 'blog', contact: 'contact' };
+
 const navItems = [
-  { href: 'about', key: 'about' },
-  { href: 'research', key: 'research' },
-  { href: 'publications', key: 'publications' },
-  { href: 'teaching', key: 'teaching' },
-  { href: 'archive', key: 'archive' },
-  { href: 'blog', key: 'blog' },
-  { href: 'cv', key: 'cv' },
-  { href: 'contact', key: 'contact' },
-] as const;
+  { href: slug.about,     key: 'about' as const },
+  { href: slug.research,  key: 'research' as const },
+  { href: slug.advocacy,  key: 'advocacy' as const },
+  { href: slug.teaching,  key: 'teaching' as const },
+  { href: slug.media,     key: 'media' as const },
+  { href: slug.blog,      key: 'blog' as const },
+  { href: slug.contact,   key: 'contact' as const },
+];
 
 const pathname = Astro.url.pathname;
 const other = otherLang(lang);
-
-// Build the "switch language" href by replacing /en/ with /es/ or vice versa
 const switchHref = pathname.replace(`/${lang}/`, `/${other}/`);
 ---
 

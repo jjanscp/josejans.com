@@ -1,0 +1,27 @@
+---
+import { t, type Lang } from '~/data/i18n';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const items = [
+  { icon: '📚', title: t.home.promiseResearch.title[lang],  body: t.home.promiseResearch.body[lang] },
+  { icon: '⚖️', title: t.home.promiseAdvocacy.title[lang],  body: t.home.promiseAdvocacy.body[lang] },
+  { icon: '🎓', title: t.home.promiseTeaching.title[lang],  body: t.home.promiseTeaching.body[lang] },
+];
+---
+<section class="section full-bleed">
+  <div class="section-inner">
+    <div class="section-eyebrow">{t.home.promiseEyebrow[lang]}</div>
+    <h2 class="section-title">{t.home.promiseTitle[lang]}</h2>
+    <div class="promise-grid">
+      {items.map((it) => (
+        <div class="promise-item">
+          <span class="promise-icon" aria-hidden="true">{it.icon}</span>
+          <h3>{it.title}</h3>
+          <p>{it.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

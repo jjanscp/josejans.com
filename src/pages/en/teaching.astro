@@ -1,41 +1,130 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import { bio } from '~/data/bio';
+import { t } from '~/data/i18n';
+
+const lang = 'en' as const;
 ---
-<BaseLayout title="Teaching" lang="en" current="teaching">
-  <h1>Teaching</h1>
+<BaseLayout
+  title="Teaching"
+  description="Teaching portfolio of José Jans Carretero Pardo — constitutional theory, research methods, strategic litigation clinic, and community education."
+  lang={lang}
+  current="teaching"
+>
+  <!-- Header -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow">{t.nav.teaching[lang]}</div>
+      <h1 class="section-title">Teaching &amp; Clinical Education</h1>
+      <div class="lead prose" set:html={bio.teaching[lang]} />
+    </div>
+  </section>
 
-  <p>
-    I have taught and coordinated courses on constitutional theory, research methods, and public-interest
-    litigation at the graduate and undergraduate levels, and I have designed and facilitated workshops
-    on memory, criminal procedure, rights, and collective action with grassroots movements and indigenous
-    communities.
-  </p>
+  <!-- Classroom photo placeholder -->
+  <section class="section full-bleed" style="padding-block: 0;">
+    <ImagePlaceholder
+      kind="landscape"
+      emoji="🏛️"
+      desc="Classroom or clinic photo — UIS seminar or Uniandes workshop"
+      spec="2400×900 JPG · students and professor at work"
+    />
+  </section>
 
-  <h2>Lecturer and clinical professor</h2>
-  <p class="muted sans small">Industrial University of Santander (UIS), Bucaramanga · October 2020 – February 2023</p>
-  <ul>
-    <li><strong>Constitutional Theory</strong> — Undergraduate Law Program. Designed and delivered the course.</li>
-    <li><strong>Research Methods</strong> — LLM in Human Rights. Designed and delivered the course.</li>
-    <li><strong>Coordinator &amp; co-founder</strong>, "Carlos Gaviria Díaz" Strategic Litigation Legal Clinic. Directed clinical research projects that filed amicus briefs in landmark rulings on freedom of speech (T-087/2023, T-452/2022) and the rights of Indigenous communities (SU-545/2023).</li>
-  </ul>
+  <!-- UIS -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Lecturer &amp; Clinical Professor</h2>
+      <p class="muted small">Industrial University of Santander (UIS), Bucaramanga &middot; October 2020 – February 2023</p>
+      <ul class="cv-list">
+        <li>
+          <strong>Constitutional Theory</strong> — Undergraduate Law Program.
+          Designed and delivered the full course; syllabus built around case-based reading of Colombian Constitutional Court rulings.
+        </li>
+        <li>
+          <strong>Research Methodologies</strong> — LLM in Human Rights.
+          Designed and delivered the course with focus on sociolegal methods, action-research design, and mixed-methods approaches to studying courts and social movements.
+        </li>
+        <li>
+          <strong>Coordinator &amp; co-founder</strong>, <em>Carlos Gaviria Díaz Strategic Litigation Legal Clinic</em>.
+          Directed clinical research projects that produced amicus curiae briefs accepted in landmark Constitutional Court rulings on freedom of speech (<a href="https://www.corteconstitucional.gov.co/relatoria/2023/T-087-23.htm" target="_blank" rel="noopener">T-087/2023</a>, T-452/2022) and the rights of Indigenous communities (<a href="https://www.corteconstitucional.gov.co/relatoria/2023/SU545-23.htm" target="_blank" rel="noopener">SU-545/2023</a>).
+        </li>
+      </ul>
+    </div>
+  </section>
 
-  <h2>Teaching &amp; research fellowships</h2>
-  <p class="muted sans small">Universidad de los Andes, Bogotá · 2013–2014, 2016, 2018–2019</p>
-  <ul>
-    <li>TA Fellowship, Center for Interdisciplinary Development Studies — "Colombia: Space, Time, and Differences" (Fall 2018 &amp; Spring 2019, Prof. Nathalia Franco).</li>
-    <li>TA Fellowship, School of Government — "The Right to the City" (Spring 2016, Prof. Amy Ritterbush).</li>
-    <li>RA Fellowship, Office of the Academic Vice President — "Post-Conflict Educational Needs" (Prof. Silvia Restrepo).</li>
-    <li>RA, Socio-Legal Research Center (Cijus), School of Law — <em>The Enforcement of Tutela Rulings in Colombia</em> (joint project with Emory University and the World Bank, 2013–2014, Prof. Isabel Cristina Jaramillo).</li>
-  </ul>
+  <!-- Uniandes -->
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Teaching &amp; Research Fellowships</h2>
+      <p class="muted small">Universidad de los Andes, Bogotá &middot; 2013–2014, 2016, 2018–2019</p>
+      <ul class="cv-list">
+        <li>TA Fellowship, Center for Interdisciplinary Development Studies — "Colombia: Space, Time, and Differences" (Fall 2018 &amp; Spring 2019, Prof. Nathalia Franco).</li>
+        <li>TA Fellowship, School of Government — "The Right to the City" (Spring 2016, Prof. Amy Ritterbush).</li>
+        <li>RA Fellowship, Office of the Academic Vice President — "Post-Conflict Educational Needs" (Prof. Silvia Restrepo).</li>
+        <li>
+          RA, Socio-Legal Research Center (<strong>CIJUS</strong>), School of Law —
+          <em>The Enforcement of Tutela Rulings in Colombia</em>
+          (joint project with Emory University and the World Bank, 2013–2014, Prof. Isabel Cristina Jaramillo).
+        </li>
+      </ul>
+    </div>
+  </section>
 
-  <h2>Research fellowship</h2>
-  <ul>
-    <li><strong>Drug Policy and Transitional Justice</strong>, Center for Research and Teaching in Economics (CIDE), Mexico — Open Society Foundation fellowship on drug policy and transitional-justice comparisons between Mexico and Colombia (2017).</li>
-  </ul>
+  <!-- Research fellowship -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Research Fellowship</h2>
+      <ul class="cv-list">
+        <li>
+          <strong>Drug Policy and Transitional Justice</strong> — Center for Research and Teaching in Economics (<strong>CIDE</strong>), Mexico City.
+          Open Society Foundation fellowship on comparative drug-policy and transitional-justice frameworks in Mexico and Colombia, 2017.
+        </li>
+      </ul>
+    </div>
+  </section>
 
-  <h2>Community education and grassroots workshops</h2>
-  <ul>
-    <li>Cañamomo Indigenous peoples' advocacy network — workshops on memory, rights, and collective action.</li>
-    <li>Leading Change Network (LCS) — community organizing training for peacebuilding initiatives.</li>
-  </ul>
+  <!-- Community education -->
+  <section class="section full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title">Community Education &amp; Grassroots Workshops</h2>
+      <ul class="cv-list">
+        <li>
+          <strong>Cañamomo Indigenous peoples' advocacy network</strong> — workshops on memory, rights, and collective action with community leaders and base organizations.
+        </li>
+        <li>
+          <strong>Leading Change Network (LCS)</strong> — community organizing training for peacebuilding initiatives; Harvard Kennedy School methodology adapted for Colombian contexts.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Photo slot: classroom activity -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <ImagePlaceholder
+        kind="square"
+        emoji="👩‍⚖️"
+        desc="Clinic session or moot-court photo"
+        spec="800×800 JPG"
+      />
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .cv-list {
+    list-style: none; margin: var(--sp-3) 0 0; padding: 0;
+    display: flex; flex-direction: column; gap: var(--sp-4);
+  }
+  .cv-list li {
+    border-left: 3px solid var(--rule);
+    padding-left: var(--sp-4);
+    line-height: 1.7;
+  }
+  .prose {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+</style>
