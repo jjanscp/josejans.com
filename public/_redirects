@@ -1,0 +1,16 @@
+# Default language: send bare root to /en/
+/                                                                       /en/                                                         302
+
+# Legacy WordPress Spanish URLs → new structure
+/inicio/                                                                /es/                                                         301
+/contacto/                                                              /es/contact/                                                 301
+/blog/                                                                  /es/blog/                                                    301
+/trabajos/                                                              /es/publications/                                            301
+/trabajos/publicaciones/                                                /es/publications/                                            301
+/trabajos/bases-de-datos/                                               /es/archive/                                                 301
+/trabajos/bases-de-datos/base-de-datos-intervenciones-ciudadanas/       /es/archive/dataset-intervenciones-ciudadanas/               301
+/trabajos/bases-de-datos/base-de-datos-notas-de-prensa-implementacion-del-acuerdo-final-de-paz/  /es/archive/dataset-notas-prensa-acuerdo-paz/  301
+/base-de-datos-notas-de-prensa-implementacion-del-acuerdo-final-de-paz/ /es/archive/dataset-notas-prensa-acuerdo-paz/                301
+/base-de-datos-intervenciones-ciudadanas/                               /es/archive/dataset-intervenciones-ciudadanas/               301
+/2018/09/17/primera-entrada-del-blog/                                   /es/archive/early-writing-2018/                              301
+/publicaciones/                                                         /es/publications/                                            301

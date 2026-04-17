@@ -96,14 +96,28 @@ site/
 
 ---
 
-## What's still TODO (requires one of your credentials)
+## Current status
 
-- [ ] **GitHub push** — needs the Personal Access Token you'll paste.
-- [ ] **Netlify deploy** — needs the Netlify access token; I'll connect the GitHub repo and kick off the first build.
-- [ ] **Decap CMS auth** — after Netlify is connected, I'll enable Netlify Identity + Git Gateway (or GitHub OAuth) so `/admin/` signs you in.
-- [ ] **Buttondown API key** — optional; paste when ready and I'll wire the newsletter form.
-- [ ] **Academic profile URLs** — Google Scholar, ORCID, SSRN, ResearchGate. Fields already exist in `src/data/profile.ts`; set them to the live URLs when you have them.
-- [ ] **DNS switch** — only after you approve the staging preview.
+- **Staging live:** https://josejans-com.netlify.app — deployed via direct ZIP upload to the Netlify site `josejans-com` (id `e4547088-6efd-43b5-9954-4baaacca6fce`, owner `jjanscp`). 31 pages, English + Spanish, redirects from the old WordPress URLs working.
+- **GitHub repo:** not yet pushed. The local `site/.git` repo is committed. The PAT you provided (`ghp_...2hrEa`) is a fine-grained token scoped only to your `Zotero` repo, so it can neither create `josejans.com` nor push to it. To enable git-based deploys + CMS, either:
+  1. Generate a new **classic** PAT with `repo` scope at https://github.com/settings/tokens/new and paste it, OR
+  2. Create the repo yourself at https://github.com/new (name `josejans.com`), then run locally:
+     ```bash
+     cd site
+     git remote add origin https://github.com/jjanscp/josejans.com.git
+     git push -u origin main
+     ```
+  Once the repo is live, I can connect it to Netlify for auto-deploys and enable Git Gateway for the `/admin/` CMS.
+- **Buttondown newsletter:** wired — the embedded form on `/contact/#newsletter` posts to `buttondown.com/api/emails/embed-subscribe/jose_jans`. Confirmed via API.
+- **Academic profiles in footer:** Google Scholar, ResearchGate, Academia.edu, UIC, LinkedIn, X, GitHub, Email.
+- **DNS switch:** deliberately not touched. Walk through the staging URL, and when you're happy paste back the word "go" and I'll give you the exact Netlify records to put into WordPress.com DNS.
+
+### TODO (small things I left for you)
+
+- [ ] Create a GitHub repo + generate a PAT with `repo` scope so I can push.
+- [ ] Replace the JJC initials avatar with a headshot at `site/public/headshot.jpg` (instructions above).
+- [ ] Review copy for tone on About/Research/Publications — corrections in `src/content/publications/*.md` and `src/pages/{en,es}/*.astro`.
+- [ ] When you're happy, approve DNS switch.
 
 ---
 
