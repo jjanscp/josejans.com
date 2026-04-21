@@ -325,7 +325,14 @@ em { font-style: italic; }
   max-width: var(--measure);
   margin-bottom: var(--sp-5);
 }
-.section.dark .section-body { color: var(--text-on-dark-muted); }
+.section.dark .section-body { color: rgba(215,209,161,0.88); }
+
+/* High-contrast overrides for all text inside navy sections */
+.section.dark .lead        { color: var(--cream-light); }
+.section.dark .prose       { color: rgba(215,209,161,0.92); font-size: 1.08rem; line-height: 1.85; }
+.section.dark p            { color: rgba(215,209,161,0.88); }
+.section.dark strong       { color: var(--cream-light); }
+.section.dark em           { color: var(--cream-light); opacity: 0.95; }
 
 /* ---------- Header ---------- */
 .site-header {
@@ -411,6 +418,9 @@ em { font-style: italic; }
   display: flex;
   align-items: center;
   gap: 2px;
+  margin-left: var(--sp-2);
+  padding-left: var(--sp-2);
+  border-left: 1px solid rgba(215,209,161,0.12);
   flex-shrink: 0;
 }
 .lang-btn {
@@ -418,17 +428,31 @@ em { font-style: italic; }
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  padding: 0.2em 0.45em;
+  padding: 0.25em 0.5em;
   border-radius: 3px;
   text-decoration: none;
   transition: color var(--dur-fast), background var(--dur-fast);
-  color: rgba(215,209,161,0.4);
+  /* Base: disabled / coming-soon spans */
+  color: rgba(215,209,161,0.25);
   cursor: default;
 }
+/* Clickable lang links (not the current active one) */
+a.lang-btn:not(.active) {
+  color: rgba(215,209,161,0.82);
+  cursor: pointer;
+  border: 1px solid rgba(215,209,161,0.22);
+}
+a.lang-btn:not(.active):hover {
+  color: var(--cream-light);
+  background: rgba(215,209,161,0.1);
+  border-color: rgba(215,209,161,0.45);
+}
+/* Current language: gold pill */
 .lang-btn.active {
   background: var(--gold);
   color: var(--navy);
-  cursor: pointer;
+  cursor: default;
+  border: 1px solid transparent;
 }
 .lang-btn.active:hover { background: var(--gold-light); color: var(--navy); }
 
@@ -457,22 +481,28 @@ em { font-style: italic; }
 .hero-overlay {
   position: absolute;
   inset: 0;
+  /* Gradient stays "full strength" — JS scroll handler controls element opacity */
   background: linear-gradient(
     110deg,
-    rgba(12,29,64,0.93) 0%,
-    rgba(12,29,64,0.82) 45%,
-    rgba(12,29,64,0.45) 100%
+    rgba(12,29,64,0.94) 0%,
+    rgba(12,29,64,0.78) 48%,
+    rgba(12,29,64,0.30) 100%
   );
+  /* Start almost transparent so the photo is visible; JS ramps to 1 on scroll */
+  opacity: 0.22;
+  will-change: opacity;
 }
-/* Bottom fade for smooth section transition */
-.hero-overlay::after {
-  content: '';
+
+/* Separate bottom-fade div so it's always visible regardless of overlay opacity */
+.hero-fade-bottom {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 200px;
   background: linear-gradient(to bottom, transparent, var(--navy));
+  z-index: 1;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -564,8 +594,13 @@ em { font-style: italic; }
 .photo-banner {
   position: relative;
   width: 100%;
-  height: clamp(280px, 35vw, 520px);
+  /* Default height — full-width openers. Override inline for inset banners. */
+  height: clamp(220px, 28vw, 400px);
   overflow: hidden;
+}
+/* Full-page-width banners (direct children of <main> or full-bleed sections) */
+.photo-banner.banner-tall {
+  height: clamp(280px, 36vh, 480px);
 }
 .photo-banner img {
   width: 100%;
@@ -573,9 +608,9 @@ em { font-style: italic; }
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.6s var(--ease);
+  transition: transform 0.8s var(--ease);
 }
-.photo-banner:hover img { transform: scale(1.02); }
+.photo-banner:hover img { transform: scale(1.015); }
 .photo-banner-overlay {
   position: absolute;
   inset: 0;
@@ -1122,6 +1157,75 @@ hr {
   border-top: 1px solid var(--rule);
   margin: var(--sp-5) 0;
 }
+
+/* ---------- Page TOC sidebar ---------- */
+.page-nav {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  width: 148px;
+  display: none;               /* hidden until ≥1440px */
+}
+@media (min-width: 1440px) {
+  .page-nav { display: block; }
+}
+.page-nav-label {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: var(--sp-3);
+  padding-left: 14px;
+}
+.page-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 2px solid var(--rule);
+}
+.page-nav li {
+  position: relative;
+}
+/* Track dot */
+.page-nav li::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--text-faint);
+  transition: border-color var(--dur-fast), background var(--dur-fast), transform var(--dur-fast);
+}
+.page-nav li.active::before {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: translateY(-50%) scale(1.15);
+}
+.page-nav-link {
+  display: block;
+  padding: 0.4em 0 0.4em var(--sp-4);
+  font-family: var(--font-sans);
+  font-size: 0.71rem;
+  font-weight: 400;
+  color: var(--text-faint);
+  text-decoration: none;
+  line-height: 1.3;
+  transition: color var(--dur-fast);
+}
+.page-nav li.active .page-nav-link {
+  color: var(--charcoal);
+  font-weight: 600;
+}
+.page-nav-link:hover { color: var(--text-soft); text-decoration: none; }
 
 /* ---------- Responsive tweaks ---------- */
 @media (max-width: 700px) {

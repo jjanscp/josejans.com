@@ -1,0 +1,71 @@
+---
+/**
+ * PageNav — sticky right-side table of contents.
+ * Visible only on very wide viewports (≥1440px via CSS).
+ * IntersectionObserver highlights the section currently in view.
+ */
+interface NavItem {
+  id: string;
+  label: string;
+}
+interface Props {
+  items: NavItem[];
+  label?: string;
+}
+const { items, label = 'Contents' } = Astro.props;
+---
+<nav class="page-nav" aria-label="Page contents">
+  <div class="page-nav-label">{label}</div>
+  <ul>
+    {items.map((item) => (
+      <li data-section={item.id}>
+        <a href={`#${item.id}`} class="page-nav-link">{item.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  const nav = document.querySelector('.page-nav');
+  if (nav) {
+    const items = Array.from(nav.querySelectorAll('li[data-section]')) as HTMLElement[];
+
+    const activate = (id: string) => {
+      items.forEach((li) => {
+        li.classList.toggle('active', li.dataset.section === id);
+      });
+    };
+
+    // Default: first section active
+    if (items[0]) activate(items[0].dataset.section!);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            activate(entry.target.id);
+          }
+        });
+      },
+      // Trigger when a section's top crosses the middle of the viewport
+      { rootMargin: '-25% 0px -65% 0px', threshold: 0 }
+    );
+
+    items.forEach((li) => {
+      const section = document.getElementById(li.dataset.section!);
+      if (section) observer.observe(section);
+    });
+
+    // Smooth scroll on click (fallback for browsers without scroll-behavior)
+    nav.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const id = (a as HTMLAnchorElement).hash.slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+</script>

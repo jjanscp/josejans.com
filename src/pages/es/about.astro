@@ -1,10 +1,21 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ContactInline from '~/components/ContactInline.astro';
+import PageNav from '~/components/PageNav.astro';
 import { profile } from '~/data/profile';
 import { bio } from '~/data/bio';
 
 const lang = 'es' as const;
+
+const navItems = [
+  { id: 'about',        label: 'Sobre mí' },
+  { id: 'research',     label: 'Investigación' },
+  { id: 'professional', label: 'Trayectoria' },
+  { id: 'teaching',     label: 'Docencia' },
+  { id: 'personal',     label: 'Más' },
+  { id: 'education',    label: 'Formación' },
+  { id: 'contact',      label: 'Contacto' },
+];
 ---
 <BaseLayout
   title="Sobre mí"
@@ -12,8 +23,10 @@ const lang = 'es' as const;
   lang={lang}
   current="about"
 >
+  <PageNav items={navItems} label="Contenido" />
+
   <!-- Hero banner — foto CPI, La Haya -->
-  <div class="photo-banner reveal-fade">
+  <div class="photo-banner banner-tall reveal-fade">
     <img
       src="/photos/icc-assembly.jpg"
       alt="José Jans Carretero Pardo en la Asamblea de Estados Partes de la CPI, La Haya"
@@ -25,7 +38,7 @@ const lang = 'es' as const;
   </div>
 
   <!-- Sobre mí: layout dividido — foto izquierda, bio derecha -->
-  <section class="section">
+  <section class="section" id="about">
     <div class="section-inner">
       <div class="about-split">
         <!-- Columna de foto -->
@@ -55,7 +68,7 @@ const lang = 'es' as const;
   </section>
 
   <!-- Agenda de investigación -->
-  <section class="section dark full-bleed">
+  <section class="section dark full-bleed" id="research">
     <div class="section-inner" style="max-width: var(--measure-wide);">
       <div class="section-eyebrow reveal">Agenda de investigación</div>
       <h2 class="section-title reveal">La agenda de investigación</h2>
@@ -70,7 +83,7 @@ const lang = 'es' as const;
   </section>
 
   <!-- Trayectoria profesional -->
-  <section class="section">
+  <section class="section" id="professional">
     <div class="section-inner" style="max-width: var(--measure);">
       <div class="section-eyebrow reveal">2015–2024 · Colombia</div>
       <h2 class="section-title reveal">Una década de práctica de primera línea</h2>
@@ -82,7 +95,7 @@ const lang = 'es' as const;
   </section>
 
   <!-- Docencia + foto clínica -->
-  <section class="section full-bleed" style="background: var(--bg-subtle);">
+  <section class="section full-bleed" style="background: var(--bg-subtle);" id="teaching">
     <div class="section-inner" style="max-width: var(--measure);">
       <div class="section-eyebrow reveal">Educación jurídica · Colombia</div>
       <h2 class="section-title reveal">Docencia y trabajo clínico</h2>
@@ -91,7 +104,7 @@ const lang = 'es' as const;
         <a class="btn btn-outline" href={`/${lang}/teaching/`}>Portafolio de docencia →</a>
       </p>
     </div>
-    <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: 320px;">
+    <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: clamp(200px, 22vh, 300px);">
       <img
         src="/photos/teaching-clinic.jpg"
         alt="Clínica Jurídica de Litigio Estratégico Carlos Gaviria Díaz — UIS"
@@ -105,13 +118,13 @@ const lang = 'es' as const;
   </section>
 
   <!-- Vida personal -->
-  <section class="section">
+  <section class="section" id="personal">
     <div class="section-inner" style="max-width: var(--measure);">
       <div class="section-eyebrow reveal">Más allá del trabajo</div>
       <h2 class="section-title reveal">Un poco más sobre mí</h2>
       <div class="section-body prose reveal" set:html={bio.personal[lang]} />
       <!-- Foto Ironman -->
-      <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: 280px; border-radius: 4px; overflow: hidden;">
+      <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: clamp(180px, 20vh, 260px); border-radius: 4px; overflow: hidden;">
         <img
           src="/photos/personal-ironman.jpg"
           alt="Meta del Ironman 70.3 Cartagena Colombia"
@@ -126,7 +139,7 @@ const lang = 'es' as const;
   </section>
 
   <!-- Formación académica -->
-  <section class="section dark full-bleed">
+  <section class="section dark full-bleed" id="education">
     <div class="section-inner" style="max-width: var(--measure);">
       <h2 class="section-title reveal">Formación académica</h2>
       <ul class="edu-list reveal-stagger">

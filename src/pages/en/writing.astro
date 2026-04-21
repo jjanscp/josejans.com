@@ -72,10 +72,10 @@ const hasSubstack = substackPosts.length > 0;
     </section>
   )}
 
-  <!-- Opinion & press -->
+  <!-- Opinion & Media -->
   <section class="section">
     <div class="section-inner" style="max-width: var(--measure);">
-      <h2 class="section-title">Opinion &amp; Press</h2>
+      <h2 class="section-title">Opinion &amp; Media</h2>
       <p class="muted">
         Op-eds, media appearances, and interviews will be listed here as they are published.
         Follow <a href={profile.social.twitter} target="_blank" rel="noopener noreferrer">X / Twitter</a> for real-time commentary.
@@ -87,18 +87,21 @@ const hasSubstack = substackPosts.length > 0;
           <div style="font-family:var(--font-serif);font-size:1.05rem;"><a href="URL">Title of piece</a></div>
         </li>
       -->
-      <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: 320px;">
-        <img
-          src="/photos/media-radio.jpg"
-          alt="Radio interview — José Jans Carretero Pardo"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="photo-banner-overlay"></div>
-        <div class="photo-banner-caption">Media · Radio interview</div>
-      </div>
     </div>
   </section>
+
+  <!-- Full-bleed photo between opinion section and newsletter -->
+  <div class="photo-banner banner-tall reveal-fade">
+    <img
+      src="/photos/media-radio.jpg"
+      alt="Radio interview — José Jans Carretero Pardo"
+      loading="lazy"
+      decoding="async"
+      style="object-position: center 35%;"
+    />
+    <div class="photo-banner-overlay"></div>
+    <div class="photo-banner-caption">Media · Radio</div>
+  </div>
 
   <!-- Newsletter subscribe -->
   <section class="section full-bleed" id="newsletter">

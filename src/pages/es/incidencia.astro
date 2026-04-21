@@ -145,18 +145,21 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
     <div class="section-inner" style="max-width: var(--measure);">
       <h2 class="section-title">{t.advocacy.sections.litigation[lang]}</h2>
       <div class="prose" style="font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.75;" set:html={bio.professional[lang]} />
-      <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: 340px;">
-        <img
-          src="/photos/advocacy-tribunales.jpg"
-          alt="Tribunales de Bogotá — Palacio de Justicia"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="photo-banner-overlay"></div>
-        <div class="photo-banner-caption">Tribunales · Bogotá · Colombia</div>
-      </div>
     </div>
   </section>
+
+  <!-- Full-bleed photo break entre litigio y consultoría -->
+  <div class="photo-banner banner-tall reveal-fade">
+    <img
+      src="/photos/advocacy-tribunales.jpg"
+      alt="Tribunales de Bogotá — Palacio de Justicia"
+      loading="lazy"
+      decoding="async"
+      style="object-position: center 60%;"
+    />
+    <div class="photo-banner-overlay"></div>
+    <div class="photo-banner-caption">Tribunales · Bogotá · Colombia</div>
+  </div>
 
   <!-- 4. Consultoría -->
   <section class="section">
