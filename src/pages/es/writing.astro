@@ -25,9 +25,10 @@ const hasSubstack = substackPosts.length > 0;
 >
   <!-- Encabezado -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.nav.writing[lang]}</div>
-      <h1 class="section-title">Textos, Blog y Medios</h1>
+      <h1 class="section-title">Opinión y Medios</h1>
+      <p class="lead">Escritura pública, columnas de opinión y comentario en prensa.</p>
       <p class="section-body">
         Ensayos breves, notas de investigación y comentarios sobre justicia transicional, política colombiana,
         cortes y movimientos sociales — publicados vía
@@ -37,10 +38,23 @@ const hasSubstack = substackPosts.length > 0;
     </div>
   </section>
 
+  <!-- Foto de entrevista radial (aspecto natural, centrada) -->
+  <section class="section">
+    <figure class="photo-inline reveal-fade">
+      <img
+        src="/photos/media-radio.jpg"
+        alt="Entrevista radial — Banco del Parque Radio, Colombia"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>Radio · Banco del Parque Radio · Colombia</figcaption>
+    </figure>
+  </section>
+
   <!-- Entradas del blog (Substack feed) -->
   {(hasLocal || hasSubstack) ? (
     <section class="section full-bleed">
-      <div class="section-inner">
+      <div class="section-inner reveal">
         <h2 class="section-title">{profile.newsletter.publicationName[lang]}</h2>
         <ul class="post-list">
           {hasLocal && localPosts.map((p: any) => (
@@ -72,10 +86,10 @@ const hasSubstack = substackPosts.length > 0;
     </section>
   )}
 
-  <!-- Opinión y Medios -->
+  <!-- Columnas y prensa -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <h2 class="section-title">Opinión y Medios</h2>
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <h2 class="section-title">Columnas y apariciones en prensa</h2>
       <p class="muted">
         Columnas de opinión, apariciones en medios y entrevistas se listarán aquí a medida que se publiquen.
         Seguir <a href={profile.social.twitter} target="_blank" rel="noopener noreferrer">X / Twitter</a> para comentario en tiempo real.
@@ -90,22 +104,9 @@ const hasSubstack = substackPosts.length > 0;
     </div>
   </section>
 
-  <!-- Foto de ancho completo entre opinión y boletín -->
-  <div class="photo-banner banner-tall reveal-fade">
-    <img
-      src="/photos/media-radio.jpg"
-      alt="Entrevista de radio — José Jans Carretero Pardo"
-      loading="lazy"
-      decoding="async"
-      style="object-position: center 35%;"
-    />
-    <div class="photo-banner-overlay"></div>
-    <div class="photo-banner-caption">Medios · Radio</div>
-  </div>
-
   <!-- Suscripción al boletín -->
   <section class="section full-bleed" id="newsletter">
-    <div class="section-inner">
+    <div class="section-inner reveal">
       <NewsletterEmbed lang={lang} />
     </div>
   </section>

@@ -49,21 +49,22 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
   lang={lang}
   current="advocacy"
 >
-  <!-- Hero banner — memorial vigil photo -->
-  <div class="photo-banner reveal-fade">
-    <img
-      src="/photos/advocacy-memorial.jpg"
-      alt="Human rights memorial vigil — Colombia"
-      loading="eager"
-      decoding="async"
-    />
-    <div class="photo-banner-overlay"></div>
-    <div class="photo-banner-caption">Colombia · Derechos humanos</div>
-  </div>
+  <!-- Hero banner — memorial vigil photo (landscape, no hard crop) -->
+  <section class="section" style="padding-block-start: var(--sp-6);">
+    <figure class="photo-inline wide reveal-fade">
+      <img
+        src="/photos/advocacy-memorial.jpg"
+        alt="Human rights memorial vigil — Plaza de Bolívar, Bogotá — ¡Más vivos que nunca!"
+        loading="eager"
+        decoding="async"
+      />
+      <figcaption>¡Más vivos que nunca! · Human rights memorial · Plaza de Bolívar, Bogotá</figcaption>
+    </figure>
+  </section>
 
   <!-- Header -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.advocacy.eyebrow[lang]}</div>
       <h1 class="section-title">{t.advocacy.headline[lang]}</h1>
       <p class="lead">{t.advocacy.intro[lang]}</p>
@@ -72,9 +73,9 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
 
   <!-- 1. Policy & Human Rights Reports -->
   <section class="section full-bleed">
-    <div class="section-inner">
+    <div class="section-inner reveal">
       <h2 class="section-title">{t.advocacy.sections.reports[lang]}</h2>
-      <ul class="pub-list">
+      <ul class="pub-list reveal-stagger">
         {reports.map((r) => (
           <li>
             <div class="pub-meta">{r.year} &middot; {r.authors}</div>
@@ -95,7 +96,7 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
 
   <!-- 2. Interventions table -->
   <section class="section">
-    <div class="section-inner">
+    <div class="section-inner reveal">
       <h2 class="section-title">{t.advocacy.sections.interventions[lang]}</h2>
       <p class="section-body muted" style="max-width: var(--measure); margin-bottom: var(--sp-5);">
         Amicus curiae briefs, citizen interventions, and constitutional actions filed 2017–2023.
@@ -143,28 +144,28 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
 
   <!-- 3. Strategic Litigation (JEP) -->
   <section class="section full-bleed">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.advocacy.sections.litigation[lang]}</h2>
       <div class="prose" style="font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.75;" set:html={bio.professional[lang]} />
     </div>
   </section>
 
-  <!-- Full-bleed photo break between litigation and consulting -->
-  <div class="photo-banner banner-tall reveal-fade">
-    <img
-      src="/photos/advocacy-tribunales.jpg"
-      alt="Tribunales de Bogotá — Palace of Justice"
-      loading="lazy"
-      decoding="async"
-      style="object-position: center 60%;"
-    />
-    <div class="photo-banner-overlay"></div>
-    <div class="photo-banner-caption">Tribunales · Bogotá · Colombia</div>
-  </div>
+  <!-- Tribunales photo inline at natural aspect -->
+  <section class="section">
+    <figure class="photo-inline wide reveal-fade">
+      <img
+        src="/photos/advocacy-tribunales.jpg"
+        alt="Litigation team at the Tribunales de Bogotá — Consejo Superior de la Judicatura"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>Tribunales de Bogotá · Litigation team · Colombia</figcaption>
+    </figure>
+  </section>
 
   <!-- 4. Consulting -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.advocacy.sections.consulting[lang]}</h2>
       <p class="lead">{t.labels.availableFor[lang]}.</p>
       <p class="section-body">{t.advocacy.consultingBlurb[lang]}</p>

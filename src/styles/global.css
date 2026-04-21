@@ -631,13 +631,60 @@ a.lang-btn:not(.active):hover {
 /* Square photo (profile) */
 .photo-profile {
   width: 100%;
-  max-width: 340px;
+  max-width: 420px;
   aspect-ratio: 3/4;
   object-fit: cover;
   object-position: center top;
   border-radius: 4px;
   display: block;
   box-shadow: 0 16px 48px rgba(12,29,64,0.3);
+}
+
+/* ---------- Inline photos (natural aspect, centered) ----------
+   For photos that shouldn't be full-bleed cropped: shows the full image
+   at its natural aspect ratio, centered within the text column. */
+.photo-inline {
+  margin: var(--sp-6) auto;
+  max-width: 760px;
+}
+.photo-inline.wide { max-width: 960px; }
+.photo-inline.narrow { max-width: 520px; }
+.photo-inline img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 16px 48px rgba(12,29,64,0.18);
+}
+.photo-inline figcaption {
+  margin-top: var(--sp-3);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+.section.dark .photo-inline figcaption { color: var(--text-on-dark-muted); }
+
+/* Two-column photo + text row (like Shaun's About page) */
+.photo-split {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: var(--sp-6);
+  align-items: start;
+}
+.photo-split.reverse { grid-template-columns: 1fr minmax(280px, 380px); }
+.photo-split img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 12px 36px rgba(12,29,64,0.16);
+}
+@media (max-width: 720px) {
+  .photo-split, .photo-split.reverse {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- Promise / What I do ---------- */

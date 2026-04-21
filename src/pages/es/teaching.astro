@@ -13,24 +13,28 @@ const lang = 'es' as const;
   current="teaching"
 >
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.nav.teaching[lang]}</div>
       <h1 class="section-title">Docencia y Educación Clínica</h1>
       <div class="lead prose" set:html={bio.teaching[lang]} />
     </div>
   </section>
 
-  <section class="section full-bleed" style="padding-block: 0;">
-    <ImagePlaceholder
-      kind="landscape"
-      emoji="🏛️"
-      desc="Foto de aula o clínica — seminario UIS o taller en Uniandes"
-      spec="2400×900 JPG · estudiantes y profesor en trabajo"
-    />
+  <!-- Foto de la clínica (aspecto natural) -->
+  <section class="section">
+    <figure class="photo-inline wide reveal-fade">
+      <img
+        src="/photos/teaching-clinic.jpg"
+        alt="Clínica Jurídica de Litigio Estratégico Carlos Gaviria Díaz — UIS — Socialización de metodología"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>Clínica Jurídica Carlos Gaviria Díaz · UIS · Socialización de metodología</figcaption>
+    </figure>
   </section>
 
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Profesor y Coordinador de Clínica</h2>
       <p class="muted small">Universidad Industrial de Santander (UIS), Bucaramanga &middot; Octubre 2020 – Febrero 2023</p>
       <ul class="cv-list">
@@ -51,7 +55,7 @@ const lang = 'es' as const;
   </section>
 
   <section class="section full-bleed">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Asistencias Docentes y de Investigación</h2>
       <p class="muted small">Universidad de los Andes, Bogotá &middot; 2013–2014, 2016, 2018–2019</p>
       <ul class="cv-list">
@@ -68,7 +72,7 @@ const lang = 'es' as const;
   </section>
 
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Beca de Investigación</h2>
       <ul class="cv-list">
         <li>
@@ -80,7 +84,7 @@ const lang = 'es' as const;
   </section>
 
   <section class="section full-bleed">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Educación Comunitaria y Talleres de Base</h2>
       <ul class="cv-list">
         <li>
@@ -93,16 +97,7 @@ const lang = 'es' as const;
     </div>
   </section>
 
-  <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <ImagePlaceholder
-        kind="square"
-        emoji="👩‍⚖️"
-        desc="Foto de sesión clínica o moot court"
-        spec="800×800 JPG"
-      />
-    </div>
-  </section>
+  <!-- (La foto de la clínica ya aparece al inicio de la página.) -->
 </BaseLayout>
 
 <style>

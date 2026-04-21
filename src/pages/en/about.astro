@@ -25,17 +25,7 @@ const navItems = [
 >
   <PageNav items={navItems} label="Contents" />
 
-  <!-- Hero banner — ICC Assembly photo -->
-  <div class="photo-banner banner-tall reveal-fade">
-    <img
-      src="/photos/icc-assembly.jpg"
-      alt="José Jans Carretero Pardo at the ICC Assembly of States Parties, The Hague"
-      loading="eager"
-      decoding="async"
-    />
-    <div class="photo-banner-overlay"></div>
-    <div class="photo-banner-caption">ICC Assembly of States Parties · The Hague</div>
-  </div>
+  <!-- No full-bleed cropping hero. Photos live inline at natural aspect within each section. -->
 
   <!-- About: split layout — headshot left, bio right -->
   <section class="section" id="about">
@@ -82,60 +72,70 @@ const navItems = [
     </div>
   </section>
 
-  <!-- Professional arc -->
+  <!-- Professional arc + JEP portrait -->
   <section class="section" id="professional">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <div class="section-eyebrow reveal">2015–2024 · Colombia</div>
-      <h2 class="section-title reveal">A decade of frontline practice</h2>
-      <div class="section-body prose reveal" set:html={bio.professional[lang]} />
-      <p style="margin-top: var(--sp-4);" class="reveal">
-        <a class="btn btn-outline" href={`/${lang}/advocacy/`}>Full advocacy portfolio →</a>
-      </p>
+    <div class="section-inner" style="max-width: var(--measure-wide);">
+      <div class="photo-split reveal">
+        <img
+          src="/photos/portrait-jep.jpg"
+          alt="José Jans Carretero Pardo at the Special Jurisdiction for Peace (JEP), Bogotá"
+          loading="lazy"
+          decoding="async"
+        />
+        <div>
+          <div class="section-eyebrow">2015–2024 · Colombia</div>
+          <h2 class="section-title">A decade of frontline practice</h2>
+          <div class="section-body prose" set:html={bio.professional[lang]} />
+          <p style="margin-top: var(--sp-4);">
+            <a class="btn btn-outline" href={`/${lang}/advocacy/`}>Full advocacy portfolio →</a>
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Teaching arc + clinic photo -->
-  <section class="section full-bleed" style="background: var(--bg-subtle);" id="teaching">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <div class="section-eyebrow reveal">Legal education · Colombia</div>
-      <h2 class="section-title reveal">Teaching and clinical work</h2>
-      <div class="section-body prose reveal" set:html={bio.teaching[lang]} />
-      <p style="margin-top: var(--sp-4);" class="reveal">
-        <a class="btn btn-outline" href={`/${lang}/teaching/`}>Teaching portfolio →</a>
-      </p>
-    </div>
-    <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: clamp(200px, 22vh, 300px);">
+  <!-- ICC assembly inline photo -->
+  <section class="section">
+    <figure class="photo-inline reveal-fade">
       <img
-        src="/photos/teaching-clinic.jpg"
-        alt="Carlos Gaviria Díaz Strategic Litigation Legal Clinic — UIS"
+        src="/photos/icc-assembly.jpg"
+        alt="José Jans Carretero Pardo at the ICC Assembly of States Parties, The Hague"
         loading="lazy"
         decoding="async"
-        style="object-position: center 40%;"
       />
-      <div class="photo-banner-overlay"></div>
-      <div class="photo-banner-caption">Clínica Jurídica Carlos Gaviria Díaz · UIS</div>
+      <figcaption>ICC Assembly of States Parties · The Hague · 2019</figcaption>
+    </figure>
+  </section>
+
+  <!-- Teaching arc — clinic photo lives on the Teaching page; teaser text here -->
+  <section class="section full-bleed" style="background: var(--bg-subtle);" id="teaching">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <div class="section-eyebrow">Legal education · Colombia</div>
+      <h2 class="section-title">Teaching and clinical work</h2>
+      <div class="section-body prose" set:html={bio.teaching[lang]} />
+      <p style="margin-top: var(--sp-4);">
+        <a class="btn btn-outline" href={`/${lang}/teaching/`}>Teaching portfolio →</a>
+      </p>
     </div>
   </section>
 
   <!-- Personal -->
   <section class="section" id="personal">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <div class="section-eyebrow reveal">Beyond the work</div>
-      <h2 class="section-title reveal">A bit more about me</h2>
-      <div class="section-body prose reveal" set:html={bio.personal[lang]} />
-      <!-- Ironman photo -->
-      <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: clamp(180px, 20vh, 260px); border-radius: 4px; overflow: hidden;">
-        <img
-          src="/photos/personal-ironman.jpg"
-          alt="Ironman 70.3 Cartagena Colombia finish line"
-          loading="lazy"
-          decoding="async"
-          style="object-position: center 30%;"
-        />
-        <div class="photo-banner-overlay" style="background: linear-gradient(to bottom, transparent 50%, rgba(12,29,64,0.6));"></div>
-        <div class="photo-banner-caption">Ironman 70.3 Cartagena · Colombia</div>
-      </div>
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <div class="section-eyebrow">Beyond the work</div>
+      <h2 class="section-title">A bit more about me</h2>
+      <div class="section-body prose" set:html={bio.personal[lang]} />
     </div>
+    <!-- Ironman inline photo at natural aspect -->
+    <figure class="photo-inline reveal-fade">
+      <img
+        src="/photos/personal-ironman.jpg"
+        alt="Ironman 70.3 Cartagena Colombia — finish line"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>Ironman 70.3 Cartagena · Colombia</figcaption>
+    </figure>
   </section>
 
   <!-- Education & formation -->

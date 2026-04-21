@@ -14,26 +14,29 @@ const lang = 'en' as const;
 >
   <!-- Header -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.nav.teaching[lang]}</div>
       <h1 class="section-title">Teaching &amp; Clinical Education</h1>
       <div class="lead prose" set:html={bio.teaching[lang]} />
     </div>
   </section>
 
-  <!-- Classroom photo placeholder -->
-  <section class="section full-bleed" style="padding-block: 0;">
-    <ImagePlaceholder
-      kind="landscape"
-      emoji="🏛️"
-      desc="Classroom or clinic photo — UIS seminar or Uniandes workshop"
-      spec="2400×900 JPG · students and professor at work"
-    />
+  <!-- Clinic session photo (inline, natural aspect) -->
+  <section class="section">
+    <figure class="photo-inline wide reveal-fade">
+      <img
+        src="/photos/teaching-clinic.jpg"
+        alt="Carlos Gaviria Díaz Strategic Litigation Legal Clinic — UIS — methodology workshop"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>Carlos Gaviria Díaz Strategic Litigation Legal Clinic · UIS · Socialización de metodología</figcaption>
+    </figure>
   </section>
 
   <!-- UIS -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Lecturer &amp; Clinical Professor</h2>
       <p class="muted small">Industrial University of Santander (UIS), Bucaramanga &middot; October 2020 – February 2023</p>
       <ul class="cv-list">
@@ -55,7 +58,7 @@ const lang = 'en' as const;
 
   <!-- Uniandes -->
   <section class="section full-bleed">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Teaching &amp; Research Fellowships</h2>
       <p class="muted small">Universidad de los Andes, Bogotá &middot; 2013–2014, 2016, 2018–2019</p>
       <ul class="cv-list">
@@ -73,7 +76,7 @@ const lang = 'en' as const;
 
   <!-- Research fellowship -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Research Fellowship</h2>
       <ul class="cv-list">
         <li>
@@ -86,7 +89,7 @@ const lang = 'en' as const;
 
   <!-- Community education -->
   <section class="section full-bleed">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Community Education &amp; Grassroots Workshops</h2>
       <ul class="cv-list">
         <li>
@@ -99,17 +102,7 @@ const lang = 'en' as const;
     </div>
   </section>
 
-  <!-- Photo slot: classroom activity -->
-  <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <ImagePlaceholder
-        kind="square"
-        emoji="👩‍⚖️"
-        desc="Clinic session or moot-court photo"
-        spec="800×800 JPG"
-      />
-    </div>
-  </section>
+  <!-- (Clinic photo already shown at top of page.) -->
 </BaseLayout>
 
 <style>

@@ -25,9 +25,10 @@ const hasSubstack = substackPosts.length > 0;
 >
   <!-- Header -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.nav.writing[lang]}</div>
-      <h1 class="section-title">Writing, Blog &amp; Media</h1>
+      <h1 class="section-title">Opinion &amp; Media</h1>
+      <p class="lead">Public scholarship, op-eds, and press commentary.</p>
       <p class="section-body">
         Short essays, research notes, and commentary on transitional justice, Colombian politics,
         courts, and social movements — published via
@@ -37,10 +38,23 @@ const hasSubstack = substackPosts.length > 0;
     </div>
   </section>
 
+  <!-- Inline radio-interview photo (natural aspect, centered) -->
+  <section class="section">
+    <figure class="photo-inline reveal-fade">
+      <img
+        src="/photos/media-radio.jpg"
+        alt="Radio interview — Banco del Parque Radio, Colombia"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>Radio · Banco del Parque Radio · Colombia</figcaption>
+    </figure>
+  </section>
+
   <!-- Blog posts (Substack feed) -->
   {(hasLocal || hasSubstack) ? (
     <section class="section full-bleed">
-      <div class="section-inner">
+      <div class="section-inner reveal">
         <h2 class="section-title">{profile.newsletter.publicationName[lang]}</h2>
         <ul class="post-list">
           {hasLocal && localPosts.map((p: any) => (
@@ -72,10 +86,10 @@ const hasSubstack = substackPosts.length > 0;
     </section>
   )}
 
-  <!-- Opinion & Media -->
+  <!-- Op-eds & Press -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <h2 class="section-title">Opinion &amp; Media</h2>
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <h2 class="section-title">Op-eds &amp; press appearances</h2>
       <p class="muted">
         Op-eds, media appearances, and interviews will be listed here as they are published.
         Follow <a href={profile.social.twitter} target="_blank" rel="noopener noreferrer">X / Twitter</a> for real-time commentary.
@@ -90,22 +104,9 @@ const hasSubstack = substackPosts.length > 0;
     </div>
   </section>
 
-  <!-- Full-bleed photo between opinion section and newsletter -->
-  <div class="photo-banner banner-tall reveal-fade">
-    <img
-      src="/photos/media-radio.jpg"
-      alt="Radio interview — José Jans Carretero Pardo"
-      loading="lazy"
-      decoding="async"
-      style="object-position: center 35%;"
-    />
-    <div class="photo-banner-overlay"></div>
-    <div class="photo-banner-caption">Media · Radio</div>
-  </div>
-
   <!-- Newsletter subscribe -->
   <section class="section full-bleed" id="newsletter">
-    <div class="section-inner">
+    <div class="section-inner reveal">
       <NewsletterEmbed lang={lang} />
     </div>
   </section>

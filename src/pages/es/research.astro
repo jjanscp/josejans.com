@@ -80,7 +80,7 @@ const showReports  = reports.length  > 0 ? reports  : staticReports;
   current="research"
 >
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.sections.featuredPubs[lang]}</div>
       <h1 class="section-title">Investigación y Publicaciones</h1>
       <div class="lead prose" set:html={bio.research[lang]} />
@@ -88,7 +88,7 @@ const showReports  = reports.length  > 0 ? reports  : staticReports;
   </section>
 
   <section class="section full-bleed">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Intereses de investigación</h2>
       <ul class="interest-list">
         {bio.interests[lang].map((item) => <li>{item}</li>)}
@@ -98,7 +98,7 @@ const showReports  = reports.length  > 0 ? reports  : staticReports;
 
   <!-- Trabajos en curso (bio.wip — datos bilingües) -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.sections.wip[lang]}</h2>
       {wip.length > 0 ? (
         <ul class="pub-list">
@@ -132,7 +132,7 @@ const showReports  = reports.length  > 0 ? reports  : staticReports;
   </section>
 
   <section class="section full-bleed">
-    <div class="section-inner">
+    <div class="section-inner reveal">
       <h2 class="section-title">{t.sections.peerReviewed[lang]}</h2>
       <ul class="pub-list rich">
         {showArticles.map((p: any) => (
@@ -160,7 +160,7 @@ const showReports  = reports.length  > 0 ? reports  : staticReports;
   </section>
 
   <section class="section">
-    <div class="section-inner">
+    <div class="section-inner reveal">
       <h2 class="section-title">{t.sections.chapters[lang]}</h2>
       <ul class="pub-list rich">
         {showChapters.map((p: any) => (
@@ -181,7 +181,7 @@ const showReports  = reports.length  > 0 ? reports  : staticReports;
   </section>
 
   <section class="section full-bleed">
-    <div class="section-inner">
+    <div class="section-inner reveal">
       <h2 class="section-title">{t.sections.reports[lang]}</h2>
       <ul class="pub-list rich">
         {showReports.map((p: any) => (
@@ -202,7 +202,7 @@ const showReports  = reports.length  > 0 ? reports  : staticReports;
   </section>
 
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.sections.datasets[lang]}</h2>
       <p class="section-body muted">Bases de datos empíricas compiladas durante una década de litigio estratégico y práctica de derechos humanos. Estructuradas y documentadas para su reutilización en investigación sociojurídica.</p>
       <ul class="pub-list">
@@ -226,7 +226,7 @@ const showReports  = reports.length  > 0 ? reports  : staticReports;
   </section>
 
   <section class="section full-bleed">
-    <div class="section-inner" style="max-width: var(--measure);">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.sections.interventions[lang]}</h2>
       <p class="section-body">
         Los más de 30 amicus curiae e intervenciones constitucionales presentados entre 2017 y 2023
