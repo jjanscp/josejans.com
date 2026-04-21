@@ -15,36 +15,44 @@ const socialLinks = [
   profile.social.researchgate && { label: 'ResearchGate', href: profile.social.researchgate, val: 'researchgate.net/profile/Jose-Carretero-5' },
   profile.social.academia && { label: 'Academia.edu', href: profile.social.academia, val: 'uniandes.academia.edu/josejanscarreteropardo' },
 ].filter(Boolean) as { label: string; href: string; val: string }[];
+
+const toc = [
+  { id: 'overview',   label: 'Resumen' },
+  { id: 'profiles',   label: 'Perfiles' },
+  { id: 'newsletter', label: 'Boletín' },
+];
 ---
-<BaseLayout title="Contacto" lang="es" current="contact">
-  <div class="eyebrow">Contacto</div>
-  <h1>Escríbeme</h1>
+<BaseLayout title="Contacto" lang="es" current="contact" toc={toc}>
+  <div id="overview">
+    <div class="eyebrow">Contacto</div>
+    <h1>Escríbeme</h1>
 
-  <p class="lead">{t.labels.contactHeadline.es}</p>
+    <p class="lead">{t.labels.contactHeadline.es}</p>
 
-  <form
-    name="contact"
-    method="POST"
-    data-netlify="true"
-    netlify-honeypot="bot-field"
-    class="contact-form"
-    action="/es/thanks/"
-  >
-    <input type="hidden" name="form-name" value="contact" />
-    <p hidden><label>No llenar: <input name="bot-field" /></label></p>
-    <label>{t.labels.yourName.es}
-      <input type="text" name="name" required autocomplete="name" />
-    </label>
-    <label>{t.labels.yourEmail.es}
-      <input type="email" name="email" required autocomplete="email" />
-    </label>
-    <label>{t.labels.yourMessage.es}
-      <textarea name="message" rows="5" required></textarea>
-    </label>
-    <button type="submit">{t.labels.contactSend.es}</button>
-  </form>
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      class="contact-form"
+      action="/es/thanks/"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p hidden><label>No llenar: <input name="bot-field" /></label></p>
+      <label>{t.labels.yourName.es}
+        <input type="text" name="name" required autocomplete="name" />
+      </label>
+      <label>{t.labels.yourEmail.es}
+        <input type="email" name="email" required autocomplete="email" />
+      </label>
+      <label>{t.labels.yourMessage.es}
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button type="submit">{t.labels.contactSend.es}</button>
+    </form>
+  </div>
 
-  <h2>Perfiles académicos y profesionales</h2>
+  <h2 id="profiles">Perfiles académicos y profesionales</h2>
   <ul class="profile-list">
     {socialLinks.map((l) => (
       <li>

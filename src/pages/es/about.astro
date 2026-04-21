@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ContactInline from '~/components/ContactInline.astro';
-import PageNav from '~/components/PageNav.astro';
 import { profile } from '~/data/profile';
 import { bio } from '~/data/bio';
 
@@ -22,8 +21,9 @@ const navItems = [
   description={`Sobre ${profile.name} — estudiante doctoral en Ciencia Política en UIC, becario Fulbright–MinCiencias, ex abogado líder en la JEP y abogado senior en CAJAR.`}
   lang={lang}
   current="about"
+  toc={navItems}
+  tocLabel="Contenido"
 >
-  <PageNav items={navItems} label="Contenido" />
 
   <!-- Sin banner recortado. Las fotos viven inline a aspecto natural dentro de cada sección. -->
 

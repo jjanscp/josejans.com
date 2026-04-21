@@ -77,6 +77,16 @@ const advocacyItems = [
   },
 ];
 
+const toc = [
+  { id: 'overview', label: 'Resumen' },
+  { id: 'explore',  label: 'Explora' },
+  { id: 'research', label: 'Investigación' },
+  { id: 'advocacy', label: 'Litigio' },
+  { id: 'teaching', label: 'Docencia' },
+  { id: 'writing',  label: 'Escritura' },
+  { id: 'contact',  label: 'Contacto' },
+];
+
 const teachingItems = [
   {
     meta: 'Cl\u00ednica Jur\u00eddica UIS',
@@ -97,9 +107,12 @@ const teachingItems = [
   description={`${profile.name} — Estudiante doctoral en Ciencia Política en UIC, becario Fulbright–MinCiencias. Investigación sobre justicia transicional, cortes y movilización de derechos.`}
   lang={lang}
   current="home"
+  toc={toc}
 >
   <!-- 1. Hero -->
-  <HomeHero lang={lang} />
+  <div id="overview">
+    <HomeHero lang={lang} />
+  </div>
 
   <!-- 2. Lo que hago (Promise) -->
   <Promise lang={lang} />
@@ -111,50 +124,93 @@ const teachingItems = [
     </div>
   </section>
 
-  <!-- 4. CTAs sutiles — después de la bio -->
-  <section class="section cta-strip">
-    <div class="section-inner cta-strip-inner">
-      <a class="btn btn-primary" href={`/${lang}/research/`}>Investigación y Publicaciones</a>
-      <a class="btn btn-outline" href={`/${lang}/cv/`}>Descargar CV</a>
-      <a class="btn btn-outline" href={`mailto:${profile.email}`}>Contacto</a>
+  <!-- 4. Explorar el sitio — grid de atajos -->
+  <section class="section" id="explore">
+    <div class="section-inner">
+      <div class="section-eyebrow reveal">Explora el sitio</div>
+      <h2 class="section-title reveal" style="margin-bottom: var(--sp-5);">¿Por dónde seguir?</h2>
+      <div class="explore-grid reveal-stagger">
+        <a class="explore-card" href={`/${lang}/research/`}>
+          <div class="explore-eyebrow">01</div>
+          <h3>Investigación y Publicaciones</h3>
+          <p>Artículos arbitrados, capítulos de libro, reportes de política y trabajos en curso.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/incidencia/`}>
+          <div class="explore-eyebrow">02</div>
+          <h3>Litigio</h3>
+          <p>Más de 30 amicus curiae e intervenciones ante altas cortes colombianas, el Sistema Interamericano y la CPI.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/teaching/`}>
+          <div class="explore-eyebrow">03</div>
+          <h3>Docencia</h3>
+          <p>Teoría Constitucional, Metodologías de Investigación y educación jurídica clínica en UIS y Los Andes.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/writing/`}>
+          <div class="explore-eyebrow">04</div>
+          <h3>Opinión y Medios</h3>
+          <p>Columnas, apariciones en prensa, radio y pódcast sobre justicia transicional y derechos humanos.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/cv/`}>
+          <div class="explore-eyebrow">05</div>
+          <h3>Hoja de vida</h3>
+          <p>Formación, becas, experiencia de investigación, publicaciones y servicio.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/contact/`}>
+          <div class="explore-eyebrow">06</div>
+          <h3>Contacto</h3>
+          <p>Colaboraciones, consultorías, peritajes, invitaciones o consultas de prensa.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- 5. Tease Investigación -->
-  <SectionTease
-    lang={lang}
-    eyebrow={t.home.researchEyebrow[lang]}
-    title="Art\u00edculos arbitrados, reportes de pol\u00edtica y bases de datos de investigaci\u00f3n."
-    body={t.home.researchBody[lang]}
-    href={`/${lang}/research/`}
-    ctaLabel={t.labels.viewFull[lang]}
-    items={researchItems}
-    variant="subtle"
-  />
+  <div id="research">
+    <SectionTease
+      lang={lang}
+      eyebrow={t.home.researchEyebrow[lang]}
+      title="Art\u00edculos arbitrados, reportes de pol\u00edtica y bases de datos de investigaci\u00f3n."
+      body={t.home.researchBody[lang]}
+      href={`/${lang}/research/`}
+      ctaLabel={t.labels.viewFull[lang]}
+      items={researchItems}
+      variant="subtle"
+    />
+  </div>
 
   <!-- 6. Tease Incidencia -->
-  <SectionTease
-    lang={lang}
-    eyebrow={t.home.advocacyEyebrow[lang]}
-    title="M\u00e1s de treinta amicus curiae e intervenciones constitucionales."
-    body={t.home.advocacyBody[lang]}
-    href={`/${lang}/incidencia/`}
-    ctaLabel={t.labels.viewFull[lang]}
-    items={advocacyItems}
-    variant="light"
-  />
+  <div id="advocacy">
+    <SectionTease
+      lang={lang}
+      eyebrow={t.home.advocacyEyebrow[lang]}
+      title="M\u00e1s de treinta amicus curiae e intervenciones constitucionales."
+      body={t.home.advocacyBody[lang]}
+      href={`/${lang}/incidencia/`}
+      ctaLabel={t.labels.viewFull[lang]}
+      items={advocacyItems}
+      variant="light"
+    />
+  </div>
 
   <!-- 7. Tease Docencia -->
-  <SectionTease
-    lang={lang}
-    eyebrow={t.home.teachingEyebrow[lang]}
-    title="Docencia cl\u00ednica, constitucional y metodol\u00f3gica."
-    body={t.home.teachingBody[lang]}
-    href={`/${lang}/teaching/`}
-    ctaLabel={t.labels.viewFull[lang]}
-    items={teachingItems}
-    variant="subtle"
-  />
+  <div id="teaching">
+    <SectionTease
+      lang={lang}
+      eyebrow={t.home.teachingEyebrow[lang]}
+      title="Docencia cl\u00ednica, constitucional y metodol\u00f3gica."
+      body={t.home.teachingBody[lang]}
+      href={`/${lang}/teaching/`}
+      ctaLabel={t.labels.viewFull[lang]}
+      items={teachingItems}
+      variant="subtle"
+    />
+  </div>
 
   <!-- 8. Textos y Boletín (sección unificada) -->
   <section class="section full-bleed" id="writing">

@@ -34,17 +34,27 @@ const chips: (Chip | null)[] = [
 ];
 const socialChips = chips.filter(Boolean) as Chip[];
 const year = new Date().getFullYear();
+const followLabel = lang === 'en' ? 'Follow my work' : 'Sigue mi trabajo';
 ---
 
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <div class="footer-social">
-      {socialChips.map((l) => (
-        <a href={l.href} rel="noopener noreferrer" target={l.href.startsWith('mailto') ? '_self' : '_blank'} aria-label={l.label}>
-          <span class="icon-sm" aria-hidden="true" set:html={l.svg}></span>
-          <span>{l.label}</span>
-        </a>
-      ))}
+    <div class="footer-social-block">
+      <div class="footer-social-label">{followLabel}</div>
+      <div class="footer-social">
+        {socialChips.map((l) => (
+          <a
+            class="footer-social-icon"
+            href={l.href}
+            rel="noopener noreferrer"
+            target={l.href.startsWith('mailto') ? '_self' : '_blank'}
+            aria-label={l.label}
+            title={l.label}
+          >
+            <span class="icon-lg" aria-hidden="true" set:html={l.svg}></span>
+          </a>
+        ))}
+      </div>
     </div>
     <div class="footer-meta">
       &copy; {year} {profile.name} &middot;

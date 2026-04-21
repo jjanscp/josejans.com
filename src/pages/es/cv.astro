@@ -1,21 +1,35 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+
+const toc = [
+  { id: 'overview',     label: 'Resumen' },
+  { id: 'education',    label: 'Formación' },
+  { id: 'training',     label: 'Formación adicional' },
+  { id: 'professional', label: 'Experiencia' },
+  { id: 'research',     label: 'Docencia e investigación' },
+  { id: 'grants',       label: 'Becas' },
+  { id: 'publications', label: 'Publicaciones' },
+  { id: 'service',      label: 'Servicio' },
+  { id: 'languages',    label: 'Idiomas' },
+];
 ---
-<BaseLayout title="CV" lang="es" current="cv">
-  <h1>Hoja de vida</h1>
+<BaseLayout title="CV" lang="es" current="cv" toc={toc}>
+  <div id="overview">
+    <h1>Hoja de vida</h1>
 
-  <p>
-    <a href="/cv.pdf" download>📄 Descargar CV (PDF)</a> — actualizado en septiembre de 2025.
-  </p>
+    <p>
+      <a href="/cv.pdf" download>📄 Descargar CV (PDF)</a> — actualizado en septiembre de 2025.
+    </p>
+  </div>
 
-  <h2>Formación académica</h2>
+  <h2 id="education">Formación académica</h2>
   <ul>
     <li><strong>PhD en Ciencia Política</strong> — University of Illinois Chicago, 2025–2030. <em>Becario Fulbright–MinCiencias.</em></li>
     <li><strong>Magíster en Derecho (LL.M.)</strong> — Universidad de los Andes, Bogotá, 2018–2019.</li>
     <li><strong>Abogado (LL.B.)</strong> — Universidad de los Andes, Bogotá, 2008–2015.</li>
   </ul>
 
-  <h2>Formación adicional</h2>
+  <h2 id="training">Formación adicional</h2>
   <ul>
     <li>CIDE, México — Diplomado en Política de Drogas, Salud y Derechos Humanos (2020).</li>
     <li>Harvard Kennedy School — Certificación Leading Change (2018).</li>
@@ -23,7 +37,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
     <li>University of the Witwatersrand / CALS — Bertha Justice Human Rights Global Convening (2018).</li>
   </ul>
 
-  <h2>Experiencia profesional</h2>
+  <h2 id="professional">Experiencia profesional</h2>
   <ul>
     <li><strong>Abogado líder de representación judicial</strong>, Jurisdicción Especial para la Paz (JEP), Bogotá — Feb 2023–Dic 2024.</li>
     <li><strong>Abogado, litigio internacional y de interés público</strong>, Comité de Solidaridad con los Presos Políticos (CSPP), Bogotá — Ago 2020–Jun 2021.</li>
@@ -31,14 +45,14 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
     <li><strong>Abogado senior, litigio de interés público</strong>, Colectivo de Abogados José Alvear Restrepo (CAJAR), Bogotá — Ago 2016–Jun 2020.</li>
   </ul>
 
-  <h2>Experiencia docente y de investigación</h2>
+  <h2 id="research">Experiencia docente y de investigación</h2>
   <ul>
     <li><strong>Profesor, investigador y coordinador de clínica</strong>, Universidad Industrial de Santander (UIS), Bucaramanga — Oct 2020–Feb 2023.</li>
     <li><strong>Investigador, Política de Drogas y Justicia Transicional</strong>, CIDE, México — Ago–Oct 2017.</li>
     <li><strong>Asistencias docentes y de investigación</strong>, Universidad de los Andes — 2013–2014, 2016, 2018–2019.</li>
   </ul>
 
-  <h2>Becas y reconocimientos</h2>
+  <h2 id="grants">Becas y reconocimientos</h2>
   <ul>
     <li>Beca Fulbright–MinCiencias para estudios doctorales (2024).</li>
     <li>Bertha Justice Fellowship, Bertha Foundation (2017–2018).</li>
@@ -48,10 +62,10 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
     <li>Premio "Andrés Bello" a las Ciencias Sociales — Examen Saber 11 (2007).</li>
   </ul>
 
-  <h2>Publicaciones seleccionadas</h2>
+  <h2 id="publications">Publicaciones seleccionadas</h2>
   <p>Ver la <a href="/es/publications/">lista completa de publicaciones</a>.</p>
 
-  <h2>Liderazgo y servicio</h2>
+  <h2 id="service">Liderazgo y servicio</h2>
   <ul>
     <li>Coach certificado Ironman University y UCI Cycling (2024); finisher Ironman 70.3.</li>
     <li>Miembro del Comité Asesor, Bertha Justice Global Network (2018–2020).</li>
@@ -59,7 +73,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
     <li>Representante estudiantil, Consejo Superior Universidad de los Andes (2015–2016).</li>
   </ul>
 
-  <h2>Idiomas</h2>
+  <h2 id="languages">Idiomas</h2>
   <ul>
     <li>Español — lengua materna.</li>
     <li>Inglés — TOEFL-ITP 106; Duolingo 120.</li>

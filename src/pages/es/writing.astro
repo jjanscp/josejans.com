@@ -16,15 +16,23 @@ const substackPosts = feedUrl ? await fetchSubstackFeed(feedUrl, 20) : [];
 
 const hasLocal = localPosts.length > 0;
 const hasSubstack = substackPosts.length > 0;
+
+const toc = [
+  { id: 'overview',   label: 'Resumen' },
+  { id: 'posts',      label: 'Entradas' },
+  { id: 'press',      label: 'Prensa' },
+  { id: 'newsletter', label: 'Boletín' },
+];
 ---
 <BaseLayout
   title="Textos y Medios"
   description={`Blog, ensayos de opinión y apariciones en prensa de ${profile.name}.`}
   lang={lang}
   current="writing"
+  toc={toc}
 >
   <!-- Encabezado -->
-  <section class="section">
+  <section class="section" id="overview">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.nav.writing[lang]}</div>
       <h1 class="section-title">Opinión y Medios</h1>
@@ -53,7 +61,7 @@ const hasSubstack = substackPosts.length > 0;
 
   <!-- Entradas del blog (Substack feed) -->
   {(hasLocal || hasSubstack) ? (
-    <section class="section full-bleed">
+    <section class="section full-bleed" id="posts">
       <div class="section-inner reveal">
         <h2 class="section-title">{profile.newsletter.publicationName[lang]}</h2>
         <ul class="post-list">
@@ -79,7 +87,7 @@ const hasSubstack = substackPosts.length > 0;
       </div>
     </section>
   ) : (
-    <section class="section">
+    <section class="section" id="posts">
       <div class="section-inner" style="max-width: var(--measure);">
         <p class="muted">{t.labels.noPostsYet[lang]}</p>
       </div>
@@ -87,7 +95,7 @@ const hasSubstack = substackPosts.length > 0;
   )}
 
   <!-- Columnas y prensa -->
-  <section class="section">
+  <section class="section" id="press">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Columnas y apariciones en prensa</h2>
       <p class="muted">

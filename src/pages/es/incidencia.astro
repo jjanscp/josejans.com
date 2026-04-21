@@ -41,12 +41,22 @@ const reports = [
 ];
 
 const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'));
+
+const toc = [
+  { id: 'overview',      label: 'Resumen' },
+  { id: 'reports',       label: 'Reportes' },
+  { id: 'interventions', label: 'Intervenciones' },
+  { id: 'litigation',    label: 'Litigio' },
+  { id: 'consulting',    label: 'Consultoría' },
+  { id: 'contact',       label: 'Contacto' },
+];
 ---
 <BaseLayout
   title="Incidencia y Consultoría"
   description="Portafolio de litigio estratégico, amicus curiae e intervenciones constitucionales de José Jans Carretero Pardo — más de 30 intervenciones ante altas cortes colombianas, la CIDH y la CPI."
   lang={lang}
   current="advocacy"
+  toc={toc}
 >
   <!-- Foto conmemorativa, aspecto natural (sin recortar) -->
   <section class="section" style="padding-block-start: var(--sp-6);">
@@ -62,7 +72,7 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
   </section>
 
   <!-- Encabezado -->
-  <section class="section">
+  <section class="section" id="overview">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.advocacy.eyebrow[lang]}</div>
       <h1 class="section-title">{t.advocacy.headline[lang]}</h1>
@@ -71,7 +81,7 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
   </section>
 
   <!-- 1. Reportes de política y DDHH -->
-  <section class="section full-bleed">
+  <section class="section full-bleed" id="reports">
     <div class="section-inner reveal">
       <h2 class="section-title">{t.advocacy.sections.reports[lang]}</h2>
       <ul class="pub-list reveal-stagger">
@@ -94,7 +104,7 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
   </section>
 
   <!-- 2. Tabla de intervenciones -->
-  <section class="section">
+  <section class="section" id="interventions">
     <div class="section-inner reveal">
       <h2 class="section-title">{t.advocacy.sections.interventions[lang]}</h2>
       <p class="section-body muted" style="max-width: var(--measure); margin-bottom: var(--sp-5);">
@@ -142,7 +152,7 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
   </section>
 
   <!-- 3. Litigio estratégico (JEP) -->
-  <section class="section full-bleed">
+  <section class="section full-bleed" id="litigation">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.advocacy.sections.litigation[lang]}</h2>
       <div class="prose" style="font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.75;" set:html={bio.professional[lang]} />
@@ -163,7 +173,7 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
   </section>
 
   <!-- 4. Consultoría -->
-  <section class="section">
+  <section class="section" id="consulting">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.advocacy.sections.consulting[lang]}</h2>
       <p class="lead">{t.labels.availableFor[lang]}.</p>

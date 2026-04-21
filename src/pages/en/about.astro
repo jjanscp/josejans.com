@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ContactInline from '~/components/ContactInline.astro';
-import PageNav from '~/components/PageNav.astro';
 import { profile } from '~/data/profile';
 import { bio } from '~/data/bio';
 
@@ -22,8 +21,9 @@ const navItems = [
   description={`About ${profile.name} — PhD student in Political Science at UIC, Fulbright–MinCiencias Scholar, former Lead Counsel at the JEP and senior attorney at CAJAR.`}
   lang={lang}
   current="about"
+  toc={navItems}
+  tocLabel="Contents"
 >
-  <PageNav items={navItems} label="Contents" />
 
   <!-- No full-bleed cropping hero. Photos live inline at natural aspect within each section. -->
 

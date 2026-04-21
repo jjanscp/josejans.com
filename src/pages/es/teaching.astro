@@ -5,14 +5,23 @@ import { bio } from '~/data/bio';
 import { t } from '~/data/i18n';
 
 const lang = 'es' as const;
+
+const toc = [
+  { id: 'overview',   label: 'Resumen' },
+  { id: 'uis',        label: 'UIS' },
+  { id: 'uniandes',   label: 'Uniandes' },
+  { id: 'fellowship', label: 'Beca' },
+  { id: 'community',  label: 'Comunidad' },
+];
 ---
 <BaseLayout
   title="Docencia"
   description="Portafolio de docencia de José Jans Carretero Pardo — teoría constitucional, metodología de investigación, clínica de litigio estratégico y educación comunitaria."
   lang={lang}
   current="teaching"
+  toc={toc}
 >
-  <section class="section">
+  <section class="section" id="overview">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.nav.teaching[lang]}</div>
       <h1 class="section-title">Docencia y Educación Clínica</h1>
@@ -33,7 +42,7 @@ const lang = 'es' as const;
     </figure>
   </section>
 
-  <section class="section">
+  <section class="section" id="uis">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Profesor y Coordinador de Clínica</h2>
       <p class="muted small">Universidad Industrial de Santander (UIS), Bucaramanga &middot; Octubre 2020 – Febrero 2023</p>
@@ -54,7 +63,7 @@ const lang = 'es' as const;
     </div>
   </section>
 
-  <section class="section full-bleed">
+  <section class="section full-bleed" id="uniandes">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Asistencias Docentes y de Investigación</h2>
       <p class="muted small">Universidad de los Andes, Bogotá &middot; 2013–2014, 2016, 2018–2019</p>
@@ -71,7 +80,7 @@ const lang = 'es' as const;
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="fellowship">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Beca de Investigación</h2>
       <ul class="cv-list">
@@ -83,7 +92,7 @@ const lang = 'es' as const;
     </div>
   </section>
 
-  <section class="section full-bleed">
+  <section class="section full-bleed" id="community">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Educación Comunitaria y Talleres de Base</h2>
       <ul class="cv-list">

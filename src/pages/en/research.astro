@@ -49,18 +49,21 @@ const staticReports = [
     year: 2020,
     title: 'Colombia at Risk of Impunity: Blind spots of transitional justice regarding international crimes under ICC jurisdiction',
     tags: ['transitional justice', 'ICC', 'impunity', 'Colombia'],
+    cover: '/covers/cover-fidh-2020.jpg',
   },
   {
     authors: 'CSPP et al. (Carretero Pardo, J. J., co-author)',
     year: 2020,
     title: 'Dismantling Paramilitarism: Proposal for public policy guidelines',
     tags: ['paramilitarism', 'policy', 'Colombia'],
+    cover: '/covers/cover-desmantel-2020.jpg',
   },
   {
     authors: 'CAJAR (Carretero Pardo, J. J., contributor)',
     year: 2019,
     title: 'Web of Impunity: Voices of resilience against state and paramilitary violence in Magdalena Medio (1998–2000)',
     tags: ['impunity', 'human rights', 'Colombia'],
+    cover: '/covers/cover-telaranas-2019.jpg',
   },
   {
     authors: 'CAJAR (Carretero Pardo, J. J., contributor)',
@@ -70,19 +73,37 @@ const staticReports = [
   },
 ];
 
+// Book chapter covers (attach by year+publisher when no CMS entry exists)
+const chapterCovers: Record<string, string> = {
+  '2018-Universidad Libre': '/covers/cover-libre-2018.jpg',
+};
+
 // Merge CMS + static (CMS entries take precedence if they exist)
 const showArticles  = articles.length  > 0 ? articles  : staticArticles;
 const showChapters  = chapters.length  > 0 ? chapters  : staticChapters;
 const showReports   = reports.length   > 0 ? reports   : staticReports;
+
+const toc = [
+  { id: 'agenda',    label: 'Agenda' },
+  { id: 'interests', label: 'Interests' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'wip',       label: 'Works in progress' },
+  { id: 'articles',  label: 'Articles' },
+  { id: 'chapters',  label: 'Chapters' },
+  { id: 'reports',   label: 'Reports' },
+  { id: 'datasets',  label: 'Datasets' },
+  { id: 'interventions', label: 'Interventions' },
+];
 ---
 <BaseLayout
   title="Research & Publications"
   description="Research agenda, peer-reviewed articles, book chapters, policy reports, and datasets by José Jans Carretero Pardo on transitional justice, courts, and rights mobilization."
   lang={lang}
   current="research"
+  toc={toc}
 >
   <!-- Header -->
-  <section class="section">
+  <section class="section" id="agenda">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.sections.featuredPubs[lang]}</div>
       <h1 class="section-title">Research &amp; Publications</h1>
@@ -91,7 +112,7 @@ const showReports   = reports.length   > 0 ? reports   : staticReports;
   </section>
 
   <!-- Research interests -->
-  <section class="section full-bleed">
+  <section class="section full-bleed" id="interests">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Research interests</h2>
       <ul class="interest-list">
@@ -100,8 +121,58 @@ const showReports   = reports.length   > 0 ? reports   : staticReports;
     </div>
   </section>
 
+  <!-- Research experience -->
+  <section class="section" id="experience">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <h2 class="section-title">Research experience</h2>
+      <ul class="exp-list">
+        <li>
+          <div class="exp-period muted">2025</div>
+          <div class="exp-role">Research Consultant</div>
+          <div class="exp-host">Prof. Yanilda González · Harvard Kennedy School, Harvard University</div>
+          <p class="exp-body">
+            Specialized research on legal mechanisms for the investigation and sanctioning of
+            aggressions and homicides committed by Colombia's <em>fuerza pública</em>. Mapped
+            victims' and social-movement strategies for rights enforcement through legal and
+            social channels. Consulting undertaken as part of Prof. González's forthcoming
+            academic book on police accountability and state violence in Latin America.
+          </p>
+        </li>
+        <li>
+          <div class="exp-period muted">Aug–Oct 2017</div>
+          <div class="exp-role">Research Fellow · Drug Policy and Transitional Justice</div>
+          <div class="exp-host">CIDE — Center for Research and Teaching in Economics, Aguascalientes, Mexico</div>
+          <p class="exp-body">
+            Open Society Foundation Fellowship. Contributed to the Drug Policy Program's
+            comparative study of transitional justice in Mexico and Colombia.
+            Supervisor: Javier Treviño Rangel, Ph.D.
+          </p>
+        </li>
+        <li>
+          <div class="exp-period muted">2016–2017</div>
+          <div class="exp-role">Research Assistant · Office of the Academic Vice President</div>
+          <div class="exp-host">Universidad de los Andes, Bogotá</div>
+          <p class="exp-body">
+            Supported research coordination for a portfolio of peace-oriented studies responding
+            to post-conflict educational needs in Colombia. Supervisor: Silvia Restrepo Restrepo, Ph.D.
+          </p>
+        </li>
+        <li>
+          <div class="exp-period muted">2013–2014</div>
+          <div class="exp-role">Research Assistant · Socio-Legal Research Center (CIJUS)</div>
+          <div class="exp-host">School of Law, Universidad de los Andes</div>
+          <p class="exp-body">
+            Contributed to <em>The Enforcement of Tutela Rulings in Colombia</em> (2012–2014), a
+            joint project with Emory University and the World Bank — coded the complexity and
+            clarity of court orders. Supervisor: Isabel Cristina Jaramillo, Ph.D.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <!-- Works in progress (from bio.wip — bilingual data) -->
-  <section class="section">
+  <section class="section" id="wip">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.sections.wip[lang]}</h2>
       {wip.length > 0 ? (
@@ -136,7 +207,7 @@ const showReports   = reports.length   > 0 ? reports   : staticReports;
   </section>
 
   <!-- Peer-reviewed articles -->
-  <section class="section full-bleed">
+  <section class="section full-bleed" id="articles">
     <div class="section-inner reveal">
       <h2 class="section-title">{t.sections.peerReviewed[lang]}</h2>
       <ul class="pub-list rich">
@@ -171,54 +242,69 @@ const showReports   = reports.length   > 0 ? reports   : staticReports;
   </section>
 
   <!-- Book chapters -->
-  <section class="section">
+  <section class="section" id="chapters">
     <div class="section-inner reveal">
       <h2 class="section-title">{t.sections.chapters[lang]}</h2>
-      <ul class="pub-list rich">
-        {showChapters.map((p: any) => (
-          <li>
-            <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {p.data?.venue ?? p.venue ?? p.data?.publisher ?? p.publisher ?? ''}</div>
-            <div class="pub-title">{p.data?.title ?? p.title}</div>
-            <div class="pub-authors muted">{(p.data?.authors ?? p.authors)?.join(', ')}</div>
-            {(p.data?.abstract ?? p.abstract) && (
-              <details class="pub-abstract">
-                <summary>{t.labels.abstract[lang]}</summary>
-                <p>{p.data?.abstract ?? p.abstract}</p>
-              </details>
-            )}
-            <div class="pub-tags">
-              {(p.data?.tags ?? p.tags ?? []).map((tag: string) => <span class="tag">{tag}</span>)}
-            </div>
-          </li>
-        ))}
+      <ul class="pub-list rich with-covers">
+        {showChapters.map((p: any) => {
+          const year = p.data?.year ?? p.year;
+          const publisher = p.data?.publisher ?? p.publisher ?? '';
+          const coverKey = `${year}-${publisher}`;
+          const cover = p.data?.cover ?? p.cover ?? chapterCovers[coverKey];
+          return (
+            <li class="pub-with-cover">
+              {cover && <img class="pub-cover" src={cover} alt="" loading="lazy" />}
+              <div class="pub-body">
+                <div class="pub-meta muted">{year} &middot; {p.data?.venue ?? p.venue ?? publisher}</div>
+                <div class="pub-title">{p.data?.title ?? p.title}</div>
+                <div class="pub-authors muted">{(p.data?.authors ?? p.authors)?.join(', ')}</div>
+                {(p.data?.abstract ?? p.abstract) && (
+                  <details class="pub-abstract">
+                    <summary>{t.labels.abstract[lang]}</summary>
+                    <p>{p.data?.abstract ?? p.abstract}</p>
+                  </details>
+                )}
+                <div class="pub-tags">
+                  {(p.data?.tags ?? p.tags ?? []).map((tag: string) => <span class="tag">{tag}</span>)}
+                </div>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   </section>
 
   <!-- Policy & HR reports -->
-  <section class="section full-bleed">
+  <section class="section full-bleed" id="reports">
     <div class="section-inner reveal">
       <h2 class="section-title">{t.sections.reports[lang]}</h2>
-      <ul class="pub-list rich">
-        {showReports.map((p: any) => (
-          <li>
-            <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {p.data?.authors ?? p.authors}</div>
-            <div class="pub-title">
-              {(p.data?.url ?? p.url)
-                ? <a href={p.data?.url ?? p.url} target="_blank" rel="noopener noreferrer">{p.data?.title ?? p.title}</a>
-                : (p.data?.title ?? p.title)}
-            </div>
-            <div class="pub-tags">
-              {(p.data?.tags ?? p.tags ?? []).map((tag: string) => <span class="tag">{tag}</span>)}
-            </div>
-          </li>
-        ))}
+      <ul class="pub-list rich with-covers">
+        {showReports.map((p: any) => {
+          const cover = p.data?.cover ?? p.cover;
+          return (
+            <li class="pub-with-cover">
+              {cover && <img class="pub-cover" src={cover} alt="" loading="lazy" />}
+              <div class="pub-body">
+                <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {p.data?.authors ?? p.authors}</div>
+                <div class="pub-title">
+                  {(p.data?.url ?? p.url)
+                    ? <a href={p.data?.url ?? p.url} target="_blank" rel="noopener noreferrer">{p.data?.title ?? p.title}</a>
+                    : (p.data?.title ?? p.title)}
+                </div>
+                <div class="pub-tags">
+                  {(p.data?.tags ?? p.tags ?? []).map((tag: string) => <span class="tag">{tag}</span>)}
+                </div>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   </section>
 
   <!-- Datasets -->
-  <section class="section">
+  <section class="section" id="datasets">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.sections.datasets[lang]}</h2>
       <p class="section-body muted">
@@ -246,7 +332,7 @@ const showReports   = reports.length   > 0 ? reports   : staticReports;
   </section>
 
   <!-- Amicus note -->
-  <section class="section full-bleed">
+  <section class="section full-bleed" id="interventions">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.sections.interventions[lang]}</h2>
       <p class="section-body">
@@ -362,5 +448,66 @@ const showReports   = reports.length   > 0 ? reports   : staticReports;
     font-family: var(--font-serif);
     font-size: 1.05rem;
     line-height: 1.75;
+  }
+  .exp-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+  .exp-list li {
+    border-left: 3px solid var(--rule);
+    padding-left: var(--sp-4);
+  }
+  .exp-period {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .exp-role {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin-top: var(--sp-1);
+  }
+  .exp-host {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .exp-body {
+    margin-top: var(--sp-2);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .pub-list.with-covers { gap: var(--sp-6); }
+  .pub-with-cover {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    gap: var(--sp-4);
+    align-items: start;
+  }
+  .pub-with-cover.pub-list.rich li,
+  .pub-list.rich .pub-with-cover {
+    /* keep border on body only */
+  }
+  .pub-cover {
+    width: 112px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 6px 18px rgba(12, 29, 64, 0.18), 0 0 0 1px rgba(12, 29, 64, 0.08);
+    display: block;
+  }
+  .pub-body { min-width: 0; }
+  @media (max-width: 640px) {
+    .pub-with-cover {
+      grid-template-columns: 80px 1fr;
+      gap: var(--sp-3);
+    }
+    .pub-cover { width: 80px; height: 107px; }
   }
 </style>
