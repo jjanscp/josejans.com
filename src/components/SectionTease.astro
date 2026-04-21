@@ -19,28 +19,55 @@ interface Props {
   lang?: Lang;
 }
 const { eyebrow, title, body, href, ctaLabel, items = [], variant = 'light' } = Astro.props;
-const cls = variant === 'subtle' ? 'section full-bleed' : variant === 'dark' ? 'section dark' : 'section';
+
+const sectionClass = [
+  'tease-section',
+  variant === 'subtle' ? 'alt' : '',
+  variant === 'dark'   ? 'dark-tease' : '',
+].filter(Boolean).join(' ');
 ---
-<section class={cls}>
-  <div class="section-inner">
-    <div class="section-eyebrow">{eyebrow}</div>
-    <h2 class="section-title">{title}</h2>
-    <div class="section-body" set:html={body}></div>
+<section class={sectionClass}>
+  <div class="tease-inner reveal">
+    <!-- Left: headline + body + CTA -->
+    <div class="tease-left">
+      <div class="tease-eyebrow">{eyebrow}</div>
+      <h2 class="tease-headline">{title}</h2>
+      <p class="tease-body" set:html={body}></p>
+      <a class="btn btn-outline tease-cta" href={href}>{ctaLabel} →</a>
+    </div>
+
+    <!-- Right: item list -->
     {items.length > 0 && (
-      <div class="tease-items">
+      <ul class="tease-items">
         {items.map((it) => (
-          it.href
-            ? (<a class="tease-item" href={it.href}>
-                {(it.year || it.meta) && <span class="tease-meta">{it.year ?? it.meta}</span>}
-                <h4>{it.title}</h4>
-              </a>)
-            : (<div class="tease-item">
-                {(it.year || it.meta) && <span class="tease-meta">{it.year ?? it.meta}</span>}
-                <h4>{it.title}</h4>
-              </div>)
+          <li>
+            {(it.year || it.meta) && (
+              <div class="tease-item-meta">{it.meta ?? it.year}</div>
+            )}
+            <div class="tease-item-title">
+              {it.href
+                ? <a href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a>
+                : it.title}
+            </div>
+          </li>
         ))}
-      </div>
+      </ul>
     )}
-    <a class="section-cta" href={href}>{ctaLabel} →</a>
   </div>
 </section>
+
+<style>
+  .tease-cta {
+    margin-top: var(--sp-2);
+  }
+  /* Dark variant overrides for btn-outline */
+  .dark-tease .btn-outline {
+    color: var(--cream);
+    border-color: rgba(215,209,161,0.3);
+  }
+  .dark-tease .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(217,164,7,0.1);
+  }
+</style>
