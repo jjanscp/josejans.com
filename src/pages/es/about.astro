@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import Avatar from '~/components/Avatar.astro';
-import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
 import ContactInline from '~/components/ContactInline.astro';
 import { profile } from '~/data/profile';
 import { bio } from '~/data/bio';
@@ -14,112 +12,149 @@ const lang = 'es' as const;
   lang={lang}
   current="about"
 >
-  <!-- Encabezado -->
-  <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <div class="section-eyebrow">Sobre mí</div>
-      <h1 class="section-title">{profile.name}</h1>
-      <p class="lead">{profile.title[lang]} &middot; {profile.affiliation[lang]}</p>
-    </div>
-  </section>
-
-  <!-- Foto de portada -->
-  <section class="section full-bleed" style="padding-block: 0;">
-    <ImagePlaceholder
-      kind="landscape"
-      emoji="📷"
-      desc="Foto de portada — en campo, en audiencia o en el aula"
-      spec="2400×900 JPG · fondo oscuro o neutro preferido"
+  <!-- Hero banner — foto CPI, La Haya -->
+  <div class="photo-banner reveal-fade">
+    <img
+      src="/photos/icc-assembly.jpg"
+      alt="José Jans Carretero Pardo en la Asamblea de Estados Partes de la CPI, La Haya"
+      loading="eager"
+      decoding="async"
     />
-  </section>
+    <div class="photo-banner-overlay"></div>
+    <div class="photo-banner-caption">Asamblea de Estados Partes · CPI · La Haya</div>
+  </div>
 
-  <!-- Bloque 1: Agenda de investigación -->
+  <!-- Sobre mí: layout dividido — foto izquierda, bio derecha -->
   <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <div class="section-eyebrow">Estudiante doctoral · Becario Fulbright</div>
-      <h2 class="section-title">La agenda de investigación</h2>
-      <div class="section-body prose" set:html={bio.research[lang]} />
-      <h3 style="margin-top: var(--sp-6);">Intereses de investigación</h3>
-      <ul class="interest-list">
-        {bio.interests[lang].map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-  </section>
+    <div class="section-inner">
+      <div class="about-split">
+        <!-- Columna de foto -->
+        <div class="photo-col reveal">
+          <img
+            class="photo-profile"
+            src="/photos/headshot.jpg"
+            alt="José Jans Carretero Pardo"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
 
-  <!-- Bloque 2: Trayectoria de práctica profesional -->
-  <section class="section full-bleed">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <div class="section-eyebrow">2015–2024 · Colombia</div>
-      <h2 class="section-title">Una década de práctica de primera línea</h2>
-      <div class="section-body prose" set:html={bio.professional[lang]} />
-      <p style="margin-top: var(--sp-4);">
-        <a class="section-cta" href={`/${lang}/incidencia/`}>
-          Ver portafolio completo de incidencia →
-        </a>
-      </p>
-    </div>
-  </section>
-
-  <!-- Bloque 3: Docencia -->
-  <section class="section">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <div class="section-eyebrow">Educación jurídica · Colombia</div>
-      <h2 class="section-title">Docencia y trabajo clínico</h2>
-      <div class="section-body prose" set:html={bio.teaching[lang]} />
-      <p style="margin-top: var(--sp-4);">
-        <a class="section-cta" href={`/${lang}/teaching/`}>
-          Portafolio de docencia →
-        </a>
-      </p>
-      <div style="margin-top: var(--sp-6);">
-        <ImagePlaceholder
-          kind="landscape"
-          emoji="🏛️"
-          desc="Foto de aula o clínica — seminario UIS o Uniandes"
-          spec="1200×600 JPG"
-        />
+        <!-- Columna de texto -->
+        <div class="reveal">
+          <div class="section-eyebrow">Estudiante doctoral · Becario Fulbright</div>
+          <h1 class="section-title">{profile.name}</h1>
+          <p class="lead">{profile.title[lang]} &middot; {profile.affiliation[lang]}</p>
+          <div style="margin-top: var(--sp-5);" class="prose" set:html={bio.short[lang]} />
+          <div style="margin-top: var(--sp-5); display:flex; gap: var(--sp-3); flex-wrap: wrap;">
+            <a class="btn btn-primary" href={`/${lang}/research/`}>Investigación y Publicaciones</a>
+            <a class="btn btn-outline" href="/cv.pdf" target="_blank" rel="noopener">Descargar hoja de vida</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Bloque 4: Historia personal -->
-  <section class="section full-bleed">
-    <div class="section-inner" style="max-width: var(--measure);">
-      <div class="section-eyebrow">Más allá del trabajo</div>
-      <h2 class="section-title">Un poco más sobre mí</h2>
-      <div class="section-body prose" set:html={bio.personal[lang]} />
+  <!-- Agenda de investigación -->
+  <section class="section dark full-bleed">
+    <div class="section-inner" style="max-width: var(--measure-wide);">
+      <div class="section-eyebrow reveal">Agenda de investigación</div>
+      <h2 class="section-title reveal">La agenda de investigación</h2>
+      <div class="lead prose reveal" set:html={bio.research[lang]} />
+      <div style="margin-top: var(--sp-6);" class="reveal">
+        <h3 style="color: var(--cream-light); font-size: 1rem; margin-bottom: var(--sp-3); font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.72rem;">Intereses de investigación</h3>
+        <ul class="interest-list dark-list reveal-stagger">
+          {bio.interests[lang].map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- Bloque 5: Formación -->
+  <!-- Trayectoria profesional -->
   <section class="section">
     <div class="section-inner" style="max-width: var(--measure);">
-      <h2 class="section-title">Formación académica</h2>
-      <ul class="cv-list">
+      <div class="section-eyebrow reveal">2015–2024 · Colombia</div>
+      <h2 class="section-title reveal">Una década de práctica de primera línea</h2>
+      <div class="section-body prose reveal" set:html={bio.professional[lang]} />
+      <p style="margin-top: var(--sp-4);" class="reveal">
+        <a class="btn btn-outline" href={`/${lang}/advocacy/`}>Portafolio completo de incidencia →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Docencia + foto clínica -->
+  <section class="section full-bleed" style="background: var(--bg-subtle);">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow reveal">Educación jurídica · Colombia</div>
+      <h2 class="section-title reveal">Docencia y trabajo clínico</h2>
+      <div class="section-body prose reveal" set:html={bio.teaching[lang]} />
+      <p style="margin-top: var(--sp-4);" class="reveal">
+        <a class="btn btn-outline" href={`/${lang}/teaching/`}>Portafolio de docencia →</a>
+      </p>
+    </div>
+    <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: 320px;">
+      <img
+        src="/photos/teaching-clinic.jpg"
+        alt="Clínica Jurídica de Litigio Estratégico Carlos Gaviria Díaz — UIS"
+        loading="lazy"
+        decoding="async"
+        style="object-position: center 40%;"
+      />
+      <div class="photo-banner-overlay"></div>
+      <div class="photo-banner-caption">Clínica Jurídica Carlos Gaviria Díaz · UIS</div>
+    </div>
+  </section>
+
+  <!-- Vida personal -->
+  <section class="section">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <div class="section-eyebrow reveal">Más allá del trabajo</div>
+      <h2 class="section-title reveal">Un poco más sobre mí</h2>
+      <div class="section-body prose reveal" set:html={bio.personal[lang]} />
+      <!-- Foto Ironman -->
+      <div class="photo-banner reveal-fade" style="margin-top: var(--sp-6); height: 280px; border-radius: 4px; overflow: hidden;">
+        <img
+          src="/photos/personal-ironman.jpg"
+          alt="Meta del Ironman 70.3 Cartagena Colombia"
+          loading="lazy"
+          decoding="async"
+          style="object-position: center 30%;"
+        />
+        <div class="photo-banner-overlay" style="background: linear-gradient(to bottom, transparent 50%, rgba(12,29,64,0.6));"></div>
+        <div class="photo-banner-caption">Ironman 70.3 Cartagena · Colombia</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formación académica -->
+  <section class="section dark full-bleed">
+    <div class="section-inner" style="max-width: var(--measure);">
+      <h2 class="section-title reveal">Formación académica</h2>
+      <ul class="edu-list reveal-stagger">
         {bio.education[lang].map((item) => (
           <li set:html={item} />
         ))}
       </ul>
 
-      <h3 style="margin-top: var(--sp-6);">Formación adicional</h3>
-      <ul class="cv-list">
+      <h3 class="reveal" style="font-size:1rem; margin-top: var(--sp-6); margin-bottom: var(--sp-3); color: var(--cream); font-family: var(--font-sans); text-transform:uppercase; letter-spacing:0.1em; font-size:0.72rem;">Formación adicional</h3>
+      <ul class="edu-list reveal-stagger">
         {bio.training[lang].map((item) => (
           <li set:html={item} />
         ))}
       </ul>
 
-      <h3 style="margin-top: var(--sp-6);">Afiliaciones</h3>
-      <ul class="cv-list">
+      <h3 class="reveal" style="font-size:1rem; margin-top: var(--sp-6); margin-bottom: var(--sp-3); color: var(--cream); font-family: var(--font-sans); text-transform:uppercase; letter-spacing:0.1em; font-size:0.72rem;">Afiliaciones</h3>
+      <ul class="edu-list reveal-stagger">
         {bio.affiliations[lang].map((item) => (
           <li set:html={item} />
         ))}
       </ul>
 
-      <h3 style="margin-top: var(--sp-6);">Idiomas</h3>
-      <p>{bio.languages[lang]}</p>
+      <p class="reveal" style="margin-top: var(--sp-3); color: var(--text-on-dark-muted);">
+        Idiomas: {bio.languages[lang]}
+      </p>
 
-      <p style="margin-top: var(--sp-6);">
-        <a class="btn btn-outline" href="/cv.pdf" target="_blank" rel="noopener">Descargar hoja de vida (PDF)</a>
+      <p style="margin-top: var(--sp-6);" class="reveal">
+        <a class="btn btn-ghost-light" href="/cv.pdf" target="_blank" rel="noopener">Descargar hoja de vida completa (PDF)</a>
       </p>
     </div>
   </section>
@@ -129,41 +164,7 @@ const lang = 'es' as const;
 </BaseLayout>
 
 <style>
-  .interest-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-  }
-  .interest-list li {
-    padding-left: var(--sp-4);
-    position: relative;
-  }
-  .interest-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-family: var(--font-sans);
-  }
-  .cv-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-3);
-  }
-  .cv-list li {
-    border-left: 3px solid var(--rule);
-    padding-left: var(--sp-4);
-    line-height: 1.65;
-  }
-  .prose {
-    line-height: 1.75;
-    font-family: var(--font-serif);
-    font-size: 1.05rem;
-  }
+  .dark-list li { color: var(--text-on-dark-muted); }
+  .dark-list li::before { color: var(--gold); }
+  .about-split .photo-col { align-self: start; }
 </style>
