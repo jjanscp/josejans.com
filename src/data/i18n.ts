@@ -55,12 +55,12 @@ export const t = {
       en: 'New posts coming soon. Subscribe below to get notified.',
       es: 'Próximamente nuevas entradas. Suscríbete para recibir avisos.',
     },
-    availableFor: { en: 'Available for consulting and training', es: 'Disponible para consultorías y formaciones' },
+    availableFor: { en: 'Open to consulting, expert reports, and training', es: 'Abierto a consultorías, peritajes y formación especializada' },
     scrollForMore: { en: 'Scroll to explore', es: 'Desplázate para explorar' },
     requestFullCaseLog: { en: 'Request full case log', es: 'Solicitar bitácora completa' },
   },
   pubTypes: {
-    article: { en: 'Peer-reviewed article', es: 'Artículo arbitrado' },
+    article: { en: 'Peer-reviewed article', es: 'Artículo académico' },
     chapter: { en: 'Book chapter', es: 'Capítulo de libro' },
     report: { en: 'Policy & HR report', es: 'Reporte de política / DDHH' },
     intervention: { en: 'Amicus curiae brief', es: 'Amicus curiae / Intervención ciudadana' },
@@ -69,7 +69,7 @@ export const t = {
   },
   sections: {
     featuredPubs: { en: 'Featured work', es: 'Trabajos destacados' },
-    peerReviewed: { en: 'Peer-reviewed articles', es: 'Artículos arbitrados' },
+    peerReviewed: { en: 'Peer-reviewed articles', es: 'Artículos académicos' },
     chapters: { en: 'Book chapters', es: 'Capítulos de libro' },
     reports: { en: 'Policy & human rights reports', es: 'Reportes de política y derechos humanos' },
     interventions: {
@@ -140,8 +140,8 @@ export const t = {
   advocacy: {
     eyebrow: { en: 'Advocacy & Consulting', es: 'Incidencia y Consultoría' },
     headline: {
-      en: 'Turning case work into precedent.',
-      es: 'Convertir casos en precedente.',
+      en: 'Turning strategic litigation into precedent.',
+      es: 'Convertir el litigio estratégico en precedentes.',
     },
     intro: {
       en: 'A decade of strategic litigation, amicus curiae briefs, and policy advice before Colombian high courts, the Inter-American system, and the International Criminal Court — alongside human-rights reports that have been cited by the UN, the IACHR, and the ICC.',

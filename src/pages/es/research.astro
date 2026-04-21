@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
 import { getCollection } from 'astro:content';
 import { t } from '~/data/i18n';
 import { bio } from '~/data/bio';
@@ -7,7 +8,7 @@ import { profile } from '~/data/profile';
 
 const lang = 'es' as const;
 
-const all = (await getCollection('publications', (p: any) => p.data.lang === 'es' || p.data.lang === 'en' || !p.data.lang))
+const all = (await getCollection('publications', (p: any) => p.data.lang === 'es' || !p.data.lang))
   .sort((a: any, b: any) => b.data.year - a.data.year);
 
 const articles  = all.filter((p: any) => p.data.type === 'article');
@@ -60,15 +61,16 @@ const staticReports = [
   {
     authors: 'CAJAR (Carretero Pardo, J. J., colaborador)',
     year: 2019,
-    title: 'Tejido de impunidad: voces de resistencia contra la violencia estatal y paramilitar en el Magdalena Medio (1998–2000)',
+    title: 'Tejido de impunidad, voces de resistencia contra la violencia estatal y paramilitar en el Magdalena Medio (1998–2000)',
     tags: ['impunidad', 'derechos humanos', 'Colombia'],
     cover: '/covers/cover-telaranas-2019.jpg',
   },
   {
     authors: 'CAJAR (Carretero Pardo, J. J., colaborador)',
     year: 2019,
-    title: 'La verdadera historia del pueblo Wiwa — Desde el corazón del mundo — en el contexto del conflicto armado interno (1990–2017)',
+    title: 'La verdadera historia del pueblo Wiwa, desde el corazón del mundo, en el contexto del conflicto armado interno (1990–2017)',
     tags: ['derechos indígenas', 'conflicto armado', 'Colombia'],
+    cover: '/covers/cover-wiwa-2019.jpg',
   },
 ];
 
@@ -80,6 +82,10 @@ const chapterCovers: Record<string, string> = {
 const showArticles = articles.length > 0 ? articles : staticArticles;
 const showChapters = chapters.length > 0 ? chapters : staticChapters;
 const showReports  = reports.length  > 0 ? reports  : staticReports;
+
+// Helper: handle authors as string OR array (CMS entries use array; static entries use string)
+const authStr = (a: string | string[] | undefined): string =>
+  Array.isArray(a) ? a.join(', ') : (a ?? '');
 
 const toc = [
   { id: 'agenda',        label: 'Agenda' },
@@ -95,11 +101,19 @@ const toc = [
 ---
 <BaseLayout
   title="Investigación y Publicaciones"
-  description="Agenda de investigación, artículos arbitrados, capítulos de libro, reportes de política y bases de datos de José Jans Carretero Pardo sobre justicia transicional, cortes y movilización de derechos."
+  description="Agenda de investigación, artículos académicos, capítulos de libro, reportes de política y bases de datos de José Jans Carretero Pardo sobre justicia transicional, cortes y derechos."
   lang={lang}
   current="research"
   toc={toc}
 >
+  <!-- Foto hero -->
+  <SectionHero
+    src="/photos/advocacy-memorial.jpg"
+    alt="Vigilia conmemorativa de derechos humanos, Plaza de Bolívar, Bogotá"
+    caption="¡Más vivos que nunca! · Vigilia conmemorativa · Plaza de Bolívar, Bogotá"
+    position="center 40%"
+  />
+
   <section class="section" id="agenda">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.sections.featuredPubs[lang]}</div>
@@ -216,7 +230,7 @@ const toc = [
                 ? <a href={p.data?.url ?? p.url} target="_blank" rel="noopener noreferrer">{p.data?.title ?? p.title}</a>
                 : (p.data?.title ?? p.title)}
             </div>
-            <div class="pub-authors muted">{(p.data?.authors ?? p.authors)?.join(', ')}</div>
+            <div class="pub-authors muted">{authStr(p.data?.authors ?? p.authors)}</div>
             {(p.data?.doi ?? p.doi) && (
               <div class="pub-links"><a href={`https://doi.org/${p.data?.doi ?? p.doi}`} target="_blank" rel="noopener noreferrer">DOI →</a></div>
             )}
@@ -242,12 +256,12 @@ const toc = [
           const coverKey = `${year}-${publisher}`;
           const cover = p.data?.cover ?? p.cover ?? chapterCovers[coverKey];
           return (
-            <li class="pub-with-cover">
+            <li class={cover ? 'pub-with-cover' : 'pub-list-item'}>
               {cover && <img class="pub-cover" src={cover} alt="" loading="lazy" />}
               <div class="pub-body">
                 <div class="pub-meta muted">{year} &middot; {p.data?.venue ?? p.venue ?? publisher}</div>
                 <div class="pub-title">{p.data?.title ?? p.title}</div>
-                <div class="pub-authors muted">{(p.data?.authors ?? p.authors)?.join(', ')}</div>
+                <div class="pub-authors muted">{authStr(p.data?.authors ?? p.authors)}</div>
                 {(p.data?.abstract ?? p.abstract) && (
                   <details class="pub-abstract"><summary>{t.labels.abstract[lang]}</summary><p>{p.data?.abstract ?? p.abstract}</p></details>
                 )}
@@ -269,7 +283,7 @@ const toc = [
         {showReports.map((p: any) => {
           const cover = p.data?.cover ?? p.cover;
           return (
-            <li class="pub-with-cover">
+            <li class={cover ? 'pub-with-cover' : 'pub-list-item'}>
               {cover && <img class="pub-cover" src={cover} alt="" loading="lazy" />}
               <div class="pub-body">
                 <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {p.data?.authors ?? p.authors}</div>
@@ -369,6 +383,7 @@ const toc = [
   .exp-host { font-size: 0.88rem; color: var(--muted); margin-top: 2px; }
   .exp-body { margin-top: var(--sp-2); font-size: 0.95rem; line-height: 1.65; }
   .pub-list.with-covers { gap: var(--sp-6); }
+  .pub-list-item { border-left: 3px solid var(--rule); padding-left: var(--sp-4); }
   .pub-with-cover {
     display: grid;
     grid-template-columns: 112px 1fr;

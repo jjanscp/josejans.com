@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import SectionHero from '~/components/SectionHero.astro';
 import { bio } from '~/data/bio';
 import { t } from '~/data/i18n';
 
@@ -21,25 +21,20 @@ const toc = [
   current="teaching"
   toc={toc}
 >
+  <!-- Hero de sección — Clínica Carlos Gaviria Díaz -->
+  <SectionHero
+    src="/photos/teaching-clinic.jpg"
+    alt="Clínica Jurídica de Litigio Estratégico Carlos Gaviria Díaz, UIS, socialización de metodología"
+    caption="Clínica Carlos Gaviria Díaz · UIS · Socialización de metodología"
+    position="center 30%"
+  />
+
   <section class="section" id="overview">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.nav.teaching[lang]}</div>
       <h1 class="section-title">Docencia y Educación Clínica</h1>
       <div class="lead prose" set:html={bio.teaching[lang]} />
     </div>
-  </section>
-
-  <!-- Foto de la clínica (aspecto natural) -->
-  <section class="section">
-    <figure class="photo-inline wide reveal-fade">
-      <img
-        src="/photos/teaching-clinic.jpg"
-        alt="Clínica Jurídica de Litigio Estratégico Carlos Gaviria Díaz — UIS — Socialización de metodología"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Clínica Jurídica Carlos Gaviria Díaz · UIS · Socialización de metodología</figcaption>
-    </figure>
   </section>
 
   <section class="section" id="uis">
@@ -85,7 +80,7 @@ const toc = [
       <h2 class="section-title">Beca de Investigación</h2>
       <ul class="cv-list">
         <li>
-          <strong>Política de drogas y justicia transicional</strong> — Centro de Investigación y Docencia Económicas (<strong>CIDE</strong>), Ciudad de México.
+          <strong>Política de drogas y justicia transicional</strong>, Centro de Investigación y Docencia Económicas (<strong>CIDE</strong>), Ciudad de México.
           Beca Open Society Foundation sobre marcos comparados de política de drogas y justicia transicional en México y Colombia, 2017.
         </li>
       </ul>
@@ -106,7 +101,6 @@ const toc = [
     </div>
   </section>
 
-  <!-- (La foto de la clínica ya aparece al inicio de la página.) -->
 </BaseLayout>
 
 <style>

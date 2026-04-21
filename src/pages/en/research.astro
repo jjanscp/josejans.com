@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
 import { getCollection } from 'astro:content';
 import { t } from '~/data/i18n';
 import { bio } from '~/data/bio';
@@ -68,8 +69,9 @@ const staticReports = [
   {
     authors: 'CAJAR (Carretero Pardo, J. J., contributor)',
     year: 2019,
-    title: 'The true story of the Wiwa people — From the heart of the world — in the context of the internal armed conflict (1990–2017)',
+    title: 'The true story of the Wiwa people, from the heart of the world, in the context of the internal armed conflict (1990–2017)',
     tags: ['indigenous rights', 'armed conflict', 'Colombia'],
+    cover: '/covers/cover-wiwa-2019.jpg',
   },
 ];
 
@@ -82,6 +84,10 @@ const chapterCovers: Record<string, string> = {
 const showArticles  = articles.length  > 0 ? articles  : staticArticles;
 const showChapters  = chapters.length  > 0 ? chapters  : staticChapters;
 const showReports   = reports.length   > 0 ? reports   : staticReports;
+
+// Helper: handle authors as string OR array
+const authStr = (a: string | string[] | undefined): string =>
+  Array.isArray(a) ? a.join(', ') : (a ?? '');
 
 const toc = [
   { id: 'agenda',    label: 'Agenda' },
@@ -102,6 +108,14 @@ const toc = [
   current="research"
   toc={toc}
 >
+  <!-- Hero photo -->
+  <SectionHero
+    src="/photos/advocacy-memorial.jpg"
+    alt="Human rights memorial vigil, Plaza de Bolívar, Bogotá"
+    caption="¡Más vivos que nunca! · Human rights memorial · Plaza de Bolívar, Bogotá"
+    position="center 40%"
+  />
+
   <!-- Header -->
   <section class="section" id="agenda">
     <div class="section-inner reveal" style="max-width: var(--measure);">
@@ -219,7 +233,7 @@ const toc = [
                 ? <a href={p.data?.url ?? p.url} target="_blank" rel="noopener noreferrer">{p.data?.title ?? p.title}</a>
                 : (p.data?.title ?? p.title)}
             </div>
-            <div class="pub-authors muted">{(p.data?.authors ?? p.authors)?.join(', ')}</div>
+            <div class="pub-authors muted">{authStr(p.data?.authors ?? p.authors)}</div>
             {(p.data?.doi ?? p.doi) && (
               <div class="pub-links">
                 <a href={`https://doi.org/${p.data?.doi ?? p.doi}`} target="_blank" rel="noopener noreferrer">DOI →</a>
@@ -252,12 +266,12 @@ const toc = [
           const coverKey = `${year}-${publisher}`;
           const cover = p.data?.cover ?? p.cover ?? chapterCovers[coverKey];
           return (
-            <li class="pub-with-cover">
+            <li class={cover ? 'pub-with-cover' : 'pub-list-item'}>
               {cover && <img class="pub-cover" src={cover} alt="" loading="lazy" />}
               <div class="pub-body">
                 <div class="pub-meta muted">{year} &middot; {p.data?.venue ?? p.venue ?? publisher}</div>
                 <div class="pub-title">{p.data?.title ?? p.title}</div>
-                <div class="pub-authors muted">{(p.data?.authors ?? p.authors)?.join(', ')}</div>
+                <div class="pub-authors muted">{authStr(p.data?.authors ?? p.authors)}</div>
                 {(p.data?.abstract ?? p.abstract) && (
                   <details class="pub-abstract">
                     <summary>{t.labels.abstract[lang]}</summary>
@@ -283,7 +297,7 @@ const toc = [
         {showReports.map((p: any) => {
           const cover = p.data?.cover ?? p.cover;
           return (
-            <li class="pub-with-cover">
+            <li class={cover ? 'pub-with-cover' : 'pub-list-item'}>
               {cover && <img class="pub-cover" src={cover} alt="" loading="lazy" />}
               <div class="pub-body">
                 <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {p.data?.authors ?? p.authors}</div>
@@ -484,6 +498,7 @@ const toc = [
     line-height: 1.65;
   }
   .pub-list.with-covers { gap: var(--sp-6); }
+  .pub-list-item { border-left: 3px solid var(--rule); padding-left: var(--sp-4); }
   .pub-with-cover {
     display: grid;
     grid-template-columns: 112px 1fr;

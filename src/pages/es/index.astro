@@ -42,20 +42,21 @@ const latestPosts = [
 
 const researchItems = [
   {
+    year: 2026,
+    meta: 'MPSA 2026, Chicago · En evaluación',
+    title: 'El Enfoque de Investigación Sistémica: cómo el diseño institucional permite investigar redes estado-criminales',
+    href: null,
+  },
+  {
     year: 2021,
-    meta: "IdeAs \u2014 Id\u00e9es d'Am\u00e9riques",
-    title: 'Campos en disputa en la protecci\u00f3n de l\u00edderes sociales en Colombia',
+    meta: "IdeAs — Idées d'Amériques",
+    title: 'Campos en disputa en la protección de líderes sociales en Colombia',
     href: 'https://journals.openedition.org/ideas/10381?lang=en',
   },
   {
     year: 2020,
     meta: 'Reporte FIDH & CAJAR',
-    title: 'Colombia en riesgo de impunidad: puntos ciegos de la justicia transicional frente a cr\u00edmenes internacionales',
-  },
-  {
-    year: 2018,
-    meta: 'Cap\u00edtulo de libro \u2014 Universidad Libre',
-    title: 'De La Habana al Congreso colombiano: \u00bfd\u00f3nde quedaron los derechos de las v\u00edctimas?',
+    title: 'Colombia en riesgo de impunidad: puntos ciegos de la justicia transicional frente a crímenes internacionales',
   },
 ];
 
@@ -63,17 +64,17 @@ const advocacyItems = [
   {
     year: '2019\u20132020',
     meta: 'Corte Constitucional',
-    title: 'Derechos de las v\u00edctimas en la Ley de Procedimiento de la JEP \u2014 C-590/2019, C-050/2020',
+    title: 'Derechos de las v\u00edctimas en la Ley de Procedimiento de la JEP: C-590/2019, C-050/2020',
   },
   {
     year: '2022\u20132023',
     meta: 'Corte Constitucional',
-    title: 'Libertad de expresi\u00f3n y derechos ind\u00edgenas \u2014 T-087/2023, SU-545/2023, SU-546/2023',
+    title: 'Libertad de expresi\u00f3n y derechos ind\u00edgenas: T-087/2023, SU-545/2023, SU-546/2023',
   },
   {
     year: 2018,
     meta: 'Consejo de Estado',
-    title: 'Pol\u00edtica de drogas como asunto de salud p\u00fablica \u2014 201800444',
+    title: 'Pol\u00edtica de drogas como asunto de salud p\u00fablica: expediente 201800444',
   },
 ];
 
@@ -90,7 +91,7 @@ const toc = [
 const teachingItems = [
   {
     meta: 'Cl\u00ednica Jur\u00eddica UIS',
-    title: 'Coordinador fundador \u2014 Cl\u00ednica de Litigio Estrat\u00e9gico Carlos Gaviria D\u00edaz',
+    title: 'Coordinador fundador, Cl\u00ednica de Litigio Estrat\u00e9gico Carlos Gaviria D\u00edaz',
   },
   {
     meta: 'Maestr\u00eda UIS',
@@ -114,6 +115,13 @@ const teachingItems = [
     <HomeHero lang={lang} />
   </div>
 
+  <!-- 1b. Franja social — fila compacta bajo el hero -->
+  <div class="social-hero-strip">
+    <div class="section-inner" style="padding-block: var(--sp-3);">
+      <SocialRow lang={lang} />
+    </div>
+  </div>
+
   <!-- 2. Lo que hago (Promise) -->
   <Promise lang={lang} />
 
@@ -121,52 +129,6 @@ const teachingItems = [
   <section class="section">
     <div class="section-inner" style="max-width: var(--measure);">
       <p class="lead" set:html={bio.short[lang]} />
-    </div>
-  </section>
-
-  <!-- 4. Explorar el sitio — grid de atajos -->
-  <section class="section" id="explore">
-    <div class="section-inner">
-      <div class="section-eyebrow reveal">Explora el sitio</div>
-      <h2 class="section-title reveal" style="margin-bottom: var(--sp-5);">¿Por dónde seguir?</h2>
-      <div class="explore-grid reveal-stagger">
-        <a class="explore-card" href={`/${lang}/research/`}>
-          <div class="explore-eyebrow">01</div>
-          <h3>Investigación y Publicaciones</h3>
-          <p>Artículos arbitrados, capítulos de libro, reportes de política y trabajos en curso.</p>
-          <span class="explore-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="explore-card" href={`/${lang}/incidencia/`}>
-          <div class="explore-eyebrow">02</div>
-          <h3>Litigio</h3>
-          <p>Más de 30 amicus curiae e intervenciones ante altas cortes colombianas, el Sistema Interamericano y la CPI.</p>
-          <span class="explore-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="explore-card" href={`/${lang}/teaching/`}>
-          <div class="explore-eyebrow">03</div>
-          <h3>Docencia</h3>
-          <p>Teoría Constitucional, Metodologías de Investigación y educación jurídica clínica en UIS y Los Andes.</p>
-          <span class="explore-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="explore-card" href={`/${lang}/writing/`}>
-          <div class="explore-eyebrow">04</div>
-          <h3>Opinión y Medios</h3>
-          <p>Columnas, apariciones en prensa, radio y pódcast sobre justicia transicional y derechos humanos.</p>
-          <span class="explore-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="explore-card" href={`/${lang}/cv/`}>
-          <div class="explore-eyebrow">05</div>
-          <h3>Hoja de vida</h3>
-          <p>Formación, becas, experiencia de investigación, publicaciones y servicio.</p>
-          <span class="explore-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="explore-card" href={`/${lang}/contact/`}>
-          <div class="explore-eyebrow">06</div>
-          <h3>Contacto</h3>
-          <p>Colaboraciones, consultorías, peritajes, invitaciones o consultas de prensa.</p>
-          <span class="explore-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
     </div>
   </section>
 
@@ -212,6 +174,52 @@ const teachingItems = [
     />
   </div>
 
+  <!-- 7b. Explora el sitio — grid de navegación (al final de los teases) -->
+  <section class="section" id="explore">
+    <div class="section-inner">
+      <div class="section-eyebrow reveal">Explora el sitio</div>
+      <h2 class="section-title reveal" style="margin-bottom: var(--sp-5);">¿Por dónde seguir?</h2>
+      <div class="explore-grid reveal-stagger">
+        <a class="explore-card" href={`/${lang}/research/`}>
+          <div class="explore-eyebrow">01</div>
+          <h3>Investigación y Publicaciones</h3>
+          <p>Artículos académicos, capítulos de libro, reportes de política y trabajos en curso.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/incidencia/`}>
+          <div class="explore-eyebrow">02</div>
+          <h3>Litigio</h3>
+          <p>Más de 30 amicus curiae e intervenciones ante altas cortes colombianas, el Sistema Interamericano y la CPI.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/teaching/`}>
+          <div class="explore-eyebrow">03</div>
+          <h3>Docencia</h3>
+          <p>Teoría Constitucional, Metodologías de Investigación y educación jurídica clínica en UIS y Los Andes.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/writing/`}>
+          <div class="explore-eyebrow">04</div>
+          <h3>Opinión y Medios</h3>
+          <p>Columnas, apariciones en prensa, radio y pódcast sobre justicia transicional y derechos humanos.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/cv/`}>
+          <div class="explore-eyebrow">05</div>
+          <h3>Hoja de vida</h3>
+          <p>Formación, becas, experiencia de investigación, publicaciones y servicio.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card" href={`/${lang}/contact/`}>
+          <div class="explore-eyebrow">06</div>
+          <h3>Contacto</h3>
+          <p>Colaboraciones, consultorías, peritajes, invitaciones o consultas de prensa.</p>
+          <span class="explore-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- 8. Textos y Boletín (sección unificada) -->
   <section class="section full-bleed" id="writing">
     <div class="section-inner">
@@ -248,7 +256,7 @@ const teachingItems = [
   <!-- 9. Redes sociales -->
   <section class="section">
     <div class="section-inner">
-      <div class="section-eyebrow">Enc\u00faentrame en l\u00ednea</div>
+      <div class="section-eyebrow">Encuéntrame en línea</div>
       <SocialRow lang={lang} />
     </div>
   </section>

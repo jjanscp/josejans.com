@@ -1,0 +1,45 @@
+---
+/**
+ * SectionHero — full-width animated photo header for section pages.
+ * Usage:
+ *   <SectionHero src="/photos/advocacy-tribunales.jpg" alt="..." caption="..." />
+ */
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  /** object-position for the img tag (default: "center center") */
+  position?: string;
+}
+const { src, alt, caption, position = 'center center' } = Astro.props;
+---
+
+<div class="section-hero">
+  <img
+    class="section-hero-img"
+    src={src}
+    alt={alt}
+    loading="eager"
+    decoding="async"
+    style={`object-position: ${position};`}
+  />
+  <div class="section-hero-overlay" aria-hidden="true"></div>
+  {caption && <p class="section-hero-caption">{caption}</p>}
+</div>
+
+<script>
+  // Subtle parallax: image translates slightly as page scrolls
+  const heroes = document.querySelectorAll<HTMLElement>('.section-hero-img');
+  if (heroes.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const update = () => {
+      heroes.forEach((img) => {
+        const rect = (img.parentElement as HTMLElement).getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        const progress = Math.max(-1, Math.min(1, (rect.top / window.innerHeight)));
+        img.style.transform = `scale(1.04) translateY(${progress * -6}%)`;
+      });
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+</script>

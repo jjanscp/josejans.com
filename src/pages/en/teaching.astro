@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import ImagePlaceholder from '~/components/ImagePlaceholder.astro';
+import SectionHero from '~/components/SectionHero.astro';
 import { bio } from '~/data/bio';
 import { t } from '~/data/i18n';
 
@@ -21,6 +21,14 @@ const toc = [
   current="teaching"
   toc={toc}
 >
+  <!-- Section hero — Carlos Gaviria Díaz Legal Clinic -->
+  <SectionHero
+    src="/photos/teaching-clinic.jpg"
+    alt="Carlos Gaviria Díaz Strategic Litigation Legal Clinic, UIS, methodology workshop"
+    caption="Carlos Gaviria Díaz Legal Clinic · UIS · Socialización de metodología"
+    position="center 30%"
+  />
+
   <!-- Header -->
   <section class="section" id="overview">
     <div class="section-inner reveal" style="max-width: var(--measure);">
@@ -30,19 +38,6 @@ const toc = [
     </div>
   </section>
 
-  <!-- Clinic session photo (inline, natural aspect) -->
-  <section class="section">
-    <figure class="photo-inline wide reveal-fade">
-      <img
-        src="/photos/teaching-clinic.jpg"
-        alt="Carlos Gaviria Díaz Strategic Litigation Legal Clinic — UIS — methodology workshop"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Carlos Gaviria Díaz Strategic Litigation Legal Clinic · UIS · Socialización de metodología</figcaption>
-    </figure>
-  </section>
-
   <!-- UIS -->
   <section class="section" id="uis">
     <div class="section-inner reveal" style="max-width: var(--measure);">
@@ -50,11 +45,11 @@ const toc = [
       <p class="muted small">Industrial University of Santander (UIS), Bucaramanga &middot; October 2020 – February 2023</p>
       <ul class="cv-list">
         <li>
-          <strong>Constitutional Theory</strong> — Undergraduate Law Program.
+          <strong>Constitutional Theory</strong>, Undergraduate Law Program.
           Designed and delivered the full course; syllabus built around case-based reading of Colombian Constitutional Court rulings.
         </li>
         <li>
-          <strong>Research Methodologies</strong> — LLM in Human Rights.
+          <strong>Research Methodologies</strong>, LLM in Human Rights.
           Designed and delivered the course with focus on sociolegal methods, action-research design, and mixed-methods approaches to studying courts and social movements.
         </li>
         <li>
@@ -71,9 +66,9 @@ const toc = [
       <h2 class="section-title">Teaching &amp; Research Fellowships</h2>
       <p class="muted small">Universidad de los Andes, Bogotá &middot; 2013–2014, 2016, 2018–2019</p>
       <ul class="cv-list">
-        <li>TA Fellowship, Center for Interdisciplinary Development Studies — "Colombia: Space, Time, and Differences" (Fall 2018 &amp; Spring 2019, Prof. Nathalia Franco).</li>
-        <li>TA Fellowship, School of Government — "The Right to the City" (Spring 2016, Prof. Amy Ritterbush).</li>
-        <li>RA Fellowship, Office of the Academic Vice President — "Post-Conflict Educational Needs" (Prof. Silvia Restrepo).</li>
+        <li>TA Fellowship, Center for Interdisciplinary Development Studies, "Colombia: Space, Time, and Differences" (Fall 2018 &amp; Spring 2019, Prof. Nathalia Franco).</li>
+        <li>TA Fellowship, School of Government, "The Right to the City" (Spring 2016, Prof. Amy Ritterbush).</li>
+        <li>RA Fellowship, Office of the Academic Vice President, "Post-Conflict Educational Needs" (Prof. Silvia Restrepo).</li>
         <li>
           RA, Socio-Legal Research Center (<strong>CIJUS</strong>), School of Law —
           <em>The Enforcement of Tutela Rulings in Colombia</em>
@@ -89,7 +84,7 @@ const toc = [
       <h2 class="section-title">Research Fellowship</h2>
       <ul class="cv-list">
         <li>
-          <strong>Drug Policy and Transitional Justice</strong> — Center for Research and Teaching in Economics (<strong>CIDE</strong>), Mexico City.
+          <strong>Drug Policy and Transitional Justice</strong>, Center for Research and Teaching in Economics (<strong>CIDE</strong>), Mexico City.
           Open Society Foundation fellowship on comparative drug-policy and transitional-justice frameworks in Mexico and Colombia, 2017.
         </li>
       </ul>
@@ -102,16 +97,15 @@ const toc = [
       <h2 class="section-title">Community Education &amp; Grassroots Workshops</h2>
       <ul class="cv-list">
         <li>
-          <strong>Cañamomo Indigenous peoples' advocacy network</strong> — workshops on memory, rights, and collective action with community leaders and base organizations.
+          <strong>Cañamomo Indigenous peoples' advocacy network</strong>: workshops on memory, rights, and collective action with community leaders and base organizations.
         </li>
         <li>
-          <strong>Leading Change Network (LCS)</strong> — community organizing training for peacebuilding initiatives; Harvard Kennedy School methodology adapted for Colombian contexts.
+          <strong>Leading Change Network (LCS)</strong>: community organizing training for peacebuilding initiatives; Harvard Kennedy School methodology adapted for Colombian contexts.
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- (Clinic photo already shown at top of page.) -->
 </BaseLayout>
 
 <style>

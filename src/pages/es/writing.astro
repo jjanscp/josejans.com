@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
 import NewsletterEmbed from '~/components/NewsletterEmbed.astro';
 import { getCollection } from 'astro:content';
 import { fetchSubstackFeed } from '~/lib/substackFeed';
@@ -31,6 +32,14 @@ const toc = [
   current="writing"
   toc={toc}
 >
+  <!-- Hero de sección — entrevista radial -->
+  <SectionHero
+    src="/photos/media-radio.jpg"
+    alt="Entrevista radial, Banco del Parque Radio, Colombia"
+    caption="Radio · Banco del Parque Radio · Colombia"
+    position="center 35%"
+  />
+
   <!-- Encabezado -->
   <section class="section" id="overview">
     <div class="section-inner reveal" style="max-width: var(--measure);">
@@ -44,19 +53,6 @@ const toc = [
         Para consultas de prensa escribir a <a href={`mailto:${profile.email}`}>{profile.email}</a>.
       </p>
     </div>
-  </section>
-
-  <!-- Foto de entrevista radial (aspecto natural, centrada) -->
-  <section class="section">
-    <figure class="photo-inline reveal-fade">
-      <img
-        src="/photos/media-radio.jpg"
-        alt="Entrevista radial — Banco del Parque Radio, Colombia"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Radio · Banco del Parque Radio · Colombia</figcaption>
-    </figure>
   </section>
 
   <!-- Entradas del blog (Substack feed) -->

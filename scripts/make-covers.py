@@ -178,10 +178,62 @@ def cover_telaranas():
     img.save(OUT / "cover-telaranas-2019.jpg", quality=88)
 
 
+def cover_wiwa():
+    """CAJAR — La verdadera historia del pueblo Wiwa."""
+    img = Image.new("RGB", (W, H), (20, 18, 14))  # deep earth-dark
+    d = ImageDraw.Draw(img)
+    # Sky & mountain gradient (Sierra Nevada de Santa Marta feel)
+    for y in range(0, 320):
+        t = y / 320
+        r = int(30 + t * 80)
+        g = int(40 + t * 60)
+        b = int(80 - t * 40)
+        d.line([(0, y), (W, y)], fill=(r, g, b))
+    # Mountain silhouette (snowy peaks)
+    d.polygon([(0, 260), (80, 160), (160, 220), (260, 130), (360, 200), (W, 170), (W, 320), (0, 320)],
+              fill=(160, 180, 200))
+    d.polygon([(0, 290), (100, 240), (200, 270), (320, 230), (W, 255), (W, 320), (0, 320)],
+              fill=(80, 90, 100))
+    # Ground / forest band
+    d.rectangle([(0, 310), (W, H)], fill=(28, 44, 28))
+    # Figures (silhouettes of ceremonial circle)
+    circle_cx, circle_cy, radius = 240, 420, 65
+    import math
+    for i in range(7):
+        angle = (2 * math.pi * i / 7) - math.pi / 2
+        px = int(circle_cx + radius * math.cos(angle))
+        py = int(circle_cy + radius * math.sin(angle))
+        # Head
+        d.ellipse([(px-9, py-28), (px+9, py-10)], fill=(200, 170, 130))
+        # Body (flowing robe)
+        d.polygon([(px-11, py-12), (px+11, py-12), (px+16, py+28), (px-16, py+28)],
+                  fill=(220, 215, 200))
+        # Red accent (headwrap)
+        d.ellipse([(px-10, py-32), (px+10, py-18)], fill=(180, 40, 40))
+    # Ceremonial fire center
+    d.ellipse([(circle_cx-8, circle_cy-8), (circle_cx+8, circle_cy+8)], fill=(255, 200, 60))
+    d.ellipse([(circle_cx-5, circle_cy-5), (circle_cx+5, circle_cy+5)], fill=(255, 240, 150))
+    # Title area (dark band)
+    d.rectangle([(0, 500), (W, H)], fill=(15, 12, 10))
+    # SIVJRNR badge
+    d.rectangle([(30, 470), (W-30, 498)], fill=(60, 50, 35))
+    d.text((40, 475), "INFORME AL SIVJRNR  ·  2019", font=font(10, bold=True), fill=(215, 195, 140))
+    # Title
+    y = draw_text_block(d, "La historia cierta del pueblo Wiwa",
+                        520, font(30, bold=True, serif=True), (215, 195, 140))
+    draw_text_block(d, "desde el corazón del mundo, en el contexto del conflicto armado",
+                    y + 10, font(16, serif=True), (180, 165, 130))
+    # CAJAR footer
+    d.text((30, H-36), "COLECTIVO DE ABOGADOS  ·  JOSÉ ALVEAR RESTREPO",
+           font=font(10, bold=True), fill=(140, 130, 110))
+    img.save(OUT / "cover-wiwa-2019.jpg", quality=88)
+
+
 if __name__ == "__main__":
     cover_libre()
     cover_fidh()
     cover_desmantel()
     cover_telaranas()
+    cover_wiwa()
     for p in sorted(OUT.glob("*.jpg")):
         print(p.name, p.stat().st_size, "bytes")

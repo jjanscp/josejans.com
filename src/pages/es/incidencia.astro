@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ContactInline from '~/components/ContactInline.astro';
+import SectionHero from '~/components/SectionHero.astro';
 import { profile } from '~/data/profile';
 import { t } from '~/data/i18n';
 import { bio } from '~/data/bio';
@@ -34,7 +35,7 @@ const reports = [
   {
     year: 2019,
     authors: 'CAJAR',
-    title: 'La verdadera historia del pueblo Wiwa — Desde el corazón del mundo — en el contexto del conflicto armado interno (1990–2017)',
+    title: 'La verdadera historia del pueblo Wiwa, desde el corazón del mundo, en el contexto del conflicto armado interno (1990–2017)',
     url: null,
     tags: ['derechos indígenas', 'conflicto armado'],
   },
@@ -44,9 +45,9 @@ const sorted = interventionsByYear().filter(i => !i.tags?.includes('portfolio'))
 
 const toc = [
   { id: 'overview',      label: 'Resumen' },
-  { id: 'reports',       label: 'Reportes' },
   { id: 'interventions', label: 'Intervenciones' },
   { id: 'litigation',    label: 'Litigio' },
+  { id: 'reports',       label: 'Reportes' },
   { id: 'consulting',    label: 'Consultoría' },
   { id: 'contact',       label: 'Contacto' },
 ];
@@ -58,18 +59,13 @@ const toc = [
   current="advocacy"
   toc={toc}
 >
-  <!-- Foto conmemorativa, aspecto natural (sin recortar) -->
-  <section class="section" style="padding-block-start: var(--sp-6);">
-    <figure class="photo-inline wide reveal-fade">
-      <img
-        src="/photos/advocacy-memorial.jpg"
-        alt="Vigilia conmemorativa de derechos humanos — Plaza de Bolívar, Bogotá — ¡Más vivos que nunca!"
-        loading="eager"
-        decoding="async"
-      />
-      <figcaption>¡Más vivos que nunca! · Vigilia conmemorativa · Plaza de Bolívar, Bogotá</figcaption>
-    </figure>
-  </section>
+  <!-- Hero de sección — Tribunales de Bogotá -->
+  <SectionHero
+    src="/photos/advocacy-tribunales.jpg"
+    alt="Equipo de litigio en los Tribunales de Bogotá, Consejo Superior de la Judicatura, Colombia"
+    caption="Tribunales de Bogotá · Equipo de litigio · Colombia"
+    position="center center"
+  />
 
   <!-- Encabezado -->
   <section class="section" id="overview">
@@ -80,30 +76,7 @@ const toc = [
     </div>
   </section>
 
-  <!-- 1. Reportes de política y DDHH -->
-  <section class="section full-bleed" id="reports">
-    <div class="section-inner reveal">
-      <h2 class="section-title">{t.advocacy.sections.reports[lang]}</h2>
-      <ul class="pub-list reveal-stagger">
-        {reports.map((r) => (
-          <li>
-            <div class="pub-meta">{r.year} &middot; {r.authors}</div>
-            <div class="pub-title">
-              {r.url
-                ? <a href={r.url} target="_blank" rel="noopener noreferrer">{r.title}</a>
-                : r.title
-              }
-            </div>
-            <div class="pub-tags">
-              {r.tags.map(tag => <span class="badge">{tag}</span>)}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <!-- 2. Tabla de intervenciones -->
+  <!-- 1. Intervenciones ante altas cortes -->
   <section class="section" id="interventions">
     <div class="section-inner reveal">
       <h2 class="section-title">{t.advocacy.sections.interventions[lang]}</h2>
@@ -151,7 +124,7 @@ const toc = [
     </div>
   </section>
 
-  <!-- 3. Litigio estratégico (JEP) -->
+  <!-- 2. Litigio estratégico (JEP) -->
   <section class="section full-bleed" id="litigation">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.advocacy.sections.litigation[lang]}</h2>
@@ -159,27 +132,43 @@ const toc = [
     </div>
   </section>
 
-  <!-- Foto tribunales inline, aspecto natural -->
-  <section class="section">
-    <figure class="photo-inline wide reveal-fade">
-      <img
-        src="/photos/advocacy-tribunales.jpg"
-        alt="Equipo de litigio en los Tribunales de Bogotá — Consejo Superior de la Judicatura"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Tribunales de Bogotá · Equipo de litigio · Colombia</figcaption>
-    </figure>
+  <!-- 3. Reportes de política y DDHH -->
+  <section class="section" id="reports">
+    <div class="section-inner reveal">
+      <h2 class="section-title">{t.advocacy.sections.reports[lang]}</h2>
+      <ul class="pub-list reveal-stagger">
+        {reports.map((r) => (
+          <li>
+            <div class="pub-meta">{r.year} &middot; {r.authors}</div>
+            <div class="pub-title">
+              {r.url
+                ? <a href={r.url} target="_blank" rel="noopener noreferrer">{r.title}</a>
+                : r.title
+              }
+            </div>
+            <div class="pub-tags">
+              {r.tags.map(tag => <span class="badge">{tag}</span>)}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   </section>
 
   <!-- 4. Consultoría -->
-  <section class="section" id="consulting">
+  <section class="section full-bleed" id="consulting">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">{t.advocacy.sections.consulting[lang]}</h2>
-      <p class="lead">{t.labels.availableFor[lang]}.</p>
       <p class="section-body">{t.advocacy.consultingBlurb[lang]}</p>
+      <ul class="services-list">
+        <li>Peritajes y testimonios de experto ante cortes nacionales e internacionales</li>
+        <li>Litigio estratégico y elaboración de amicus curiae</li>
+        <li>Demandas de inconstitucionalidad y acciones públicas</li>
+        <li>Tutelas para la protección de derechos fundamentales</li>
+        <li>Formación en metodología de litigio estratégico y clínica jurídica</li>
+      </ul>
       <p style="margin-top: var(--sp-5);">
-        <a class="btn btn-accent" href={`mailto:${profile.email}`}>Escríbeme →</a>
+        <a class="btn btn-accent" href={`mailto:${profile.email}`}>Agenda una cita →</a>
       </p>
     </div>
   </section>
@@ -230,5 +219,28 @@ const toc = [
     background: color-mix(in srgb, var(--accent) 12%, transparent);
     color: var(--accent);
     border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+  .services-list {
+    list-style: none;
+    margin: var(--sp-4) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .services-list li {
+    padding-left: var(--sp-4);
+    position: relative;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .services-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
   }
 </style>
