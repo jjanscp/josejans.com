@@ -1,7 +1,7 @@
 /* =========================================================================
    josejans.com — v4
    Palette: Navy #0C1D40 · Gold #D9A407 · Olive #6E550A · Cream #D7D1A1 · Charcoal #3C351E
-   Typography: Cormorant Garamond display · Lora prose · DM Sans UI
+   Typography: Freight Text Cmp display · Freight Text Pro prose · Acumin Pro UI
    ========================================================================= */
 
 /* ---------- Design tokens ---------- */
@@ -45,10 +45,10 @@
   --rule:         rgba(60,53,30,0.14);
   --rule-dark:    rgba(215,209,161,0.15);
 
-  /* Typography stacks */
-  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-serif:   'Lora', 'Georgia', 'Times New Roman', serif;
-  --font-sans:    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Typography stacks — Adobe Fonts (Typekit: ydc1ssn) */
+  --font-display: 'freighttextcmp-pro', Georgia, 'Times New Roman', serif;
+  --font-serif:   'freight-text-pro', Georgia, 'Times New Roman', serif;
+  --font-sans:    'acumin-pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:    ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Spacing scale */
