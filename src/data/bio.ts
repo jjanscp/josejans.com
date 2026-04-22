@@ -22,7 +22,7 @@ export const bio = {
 
   // Personal / story-telling paragraph — verbatim from user.
   personal: {
-    en: `Away from the courtroom and the classroom, I am an endurance athlete, a certified running and strength coach, a community organizer, and a lifelong student of political theory. Most mornings you will find me training along the Chicago lakefront or in Little Village. I love cooking and sharing food from around the world with friends, I work my way through audiobooks and podcasts, I keep a close eye on technology, and I watch Real Madrid matches with my cats — the small rituals that keep the soul in good company.`,
+    en: `Outside the courtroom and the classroom, I am an endurance athlete, a certified running and strength coach, a community organizer, and a lifelong student of political theory. Most mornings I train along the Chicago lakefront or in Little Village. I love to cook and to share food from around the world with friends; I move steadily through audiobooks and podcasts, follow technology closely, and watch Real Madrid matches with my cats — the small rituals that keep the soul in good company.`,
     es: `Fuera de las audiencias y las aulas soy deportista de fondo, entrenador certificado en carreras de resistencia y fuerza, organizador comunitario y estudiante permanente de teoría política. Casi todas las mañanas entreno en el lago de Chicago o en Little Village. Me encanta cocinar y compartir comidas del mundo con amigos, disfruto los audiolibros y los podcasts, sigo de cerca la tecnología, y veo los partidos del Real Madrid con mis gatos — los pequeños rituales que mantienen el alma en buena compañía.`,
   },
 
