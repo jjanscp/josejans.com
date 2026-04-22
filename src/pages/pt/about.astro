@@ -1,0 +1,145 @@
+---
+import FrPtLayout from '~/layouts/FrPtLayout.astro';
+import { profile } from '~/data/profile';
+
+const lang = 'pt' as const;
+---
+<FrPtLayout
+  title="Sobre"
+  description="Sobre José Jans Carretero Pardo — doutorando em Ciência Política na UIC, bolsista Fulbright–MinCiencias, ex-advogado principal diante da JEP e advogado sênior do CAJAR."
+  lang={lang}
+  current="about"
+>
+  <!-- Perfil -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <div class="about-split">
+        <div class="photo-col reveal">
+          <img
+            class="photo-profile"
+            src="/photos/headshot.jpg"
+            alt="José Jans Carretero Pardo"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div class="reveal">
+          <div class="section-eyebrow">Doutorando · Bolsista Fulbright</div>
+          <h1 class="section-title">{profile.name}</h1>
+          <p class="lead">Doutorando em Ciência Política · Universidade de Illinois em Chicago</p>
+          <div class="prose" style="margin-top: var(--sp-5); font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.8;">
+            <p>
+              Sou doutorando em Ciência Política na Universidade de Illinois em Chicago (UIC)
+              e bolsista <strong>Fulbright–MinCiencias</strong> (2025–2030). Meu trabalho é
+              <em>anfíbio</em>: transita entre os arquivos e a sala de audiência, entre
+              a teoria constitucional e o terreno empírico, entre a Colômbia e Chicago,
+              mobilizando <strong>métodos mistos</strong> — análise qualitativa (arquivos,
+              etnografia, comparação de casos) e análise macro-histórica quantitativa. Após
+              uma década de prática jurídica de primeira linha em justiça transicional,
+              direitos humanos e contencioso de interesse público, prossigo com as questões
+              teóricas que essa prática me impôs.
+            </p>
+          </div>
+          <div style="margin-top: var(--sp-5); display:flex; gap: var(--sp-3); flex-wrap: wrap;">
+            <a class="btn btn-primary" href="/en/research/">Pesquisa &amp; Publicações <sup style="font-size:0.65em; opacity:0.6">EN</sup></a>
+            <a class="btn btn-outline" href="/cv.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda de pesquisa -->
+  <section class="section dark full-bleed" id="research">
+    <div class="section-inner reveal" style="max-width: var(--measure-wide);">
+      <div class="section-eyebrow">Agenda de pesquisa</div>
+      <h2 class="section-title">Eixos de pesquisa</h2>
+      <p style="font-family:var(--font-serif);font-size:1.05rem;line-height:1.8;color:rgba(215,209,161,0.9);margin-bottom:var(--sp-5);">
+        Minha pesquisa situa-se na intersecção da <strong>política comparada, do direito constitucional
+        e da sociologia política do direito</strong> — alimentada por uma década de prática de
+        primeira linha no coração do processo de paz colombiano. Mobilizo métodos mistos:
+        pesquisa-ação participativa, análise de arquivos, comparação macro-histórica, análise
+        do discurso e trabalho de campo etnográfico.
+      </p>
+      <div class="research-pillars">
+        <div class="research-pillar">
+          <div class="pillar-num">01</div>
+          <div class="pillar-title">Governança criminal &amp; responsabilidade do Estado</div>
+          <p class="pillar-body">Como os Estados e os atores armados co-produzem violência e redes criminais — e como projetar instituições capazes de desmantelá-las. Desenvolvo a <em>Abordagem de Pesquisa Sistêmica</em> (SRA), um modelo de governança judicial que permite a responsabilização ascendente dos comandantes superiores.</p>
+        </div>
+        <div class="research-pillar">
+          <div class="pillar-num">02</div>
+          <div class="pillar-title">Direito constitucional, direitos civis &amp; democracia</div>
+          <p class="pillar-body">Como os tribunais, as organizações da sociedade civil e os movimentos sociais contestam os limites dos direitos e moldam as instituições democráticas — com atenção especial ao modo como a pesquisa-ação participativa transforma a produção de conhecimento jurídico nos contextos constitucional e de justiça transicional.</p>
+        </div>
+        <div class="research-pillar">
+          <div class="pillar-num">03</div>
+          <div class="pillar-title">Política de drogas, proibicionismo &amp; direitos à saúde</div>
+          <p class="pillar-body">Como a mobilização jurídica na América Latina desafia os regimes proibicionistas por meio do direito constitucional e do direito internacional dos direitos humanos — reencadrando o uso de drogas como uma questão de saúde pública e de direitos.</p>
+        </div>
+      </div>
+      <p style="margin-top:var(--sp-5);">
+        <a class="btn btn-ghost-light" href="/en/research/">Publicações completas <sup style="font-size:0.65em; opacity:0.7">EN</sup> →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Trajetória profissional -->
+  <section class="section" id="professional">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <div class="section-eyebrow">2015–2024 · Colômbia</div>
+      <h2 class="section-title">Uma década de prática de primeira linha</h2>
+      <div class="prose" style="font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.75;">
+        <p>
+          Recentemente atuei como <strong>advogado principal de representação judicial</strong>
+          diante da <em>Jurisdição Especial para a Paz</em> (JEP) da Colômbia. Liderei uma equipe
+          de seis advogados representando mais de 2&nbsp;079 vítimas individuais e 26 vítimas coletivas
+          nas macro-causas sobre execuções extrajudiciais (<em>falsos positivos</em>) — trabalho
+          que contribuiu para o indiciamento de 25 oficiais do exército, incluindo cinco generais.
+          Anteriormente, fui advogado sênior no Coletivo de Advogados José Alvear Restrepo (CAJAR),
+          consultor internacional para a Federação Internacional dos Direitos Humanos (FIDH) e
+          advogado do Comitê de Solidariedade com os Presos Políticos (CSPP). Nessas funções,
+          apresentei mais de 30 memoriais amicus curiae e ações constitucionais diante da Corte
+          Constitucional da Colômbia, do Supremo Tribunal de Justiça, da JEP, da Corte Interamericana
+          de Direitos Humanos e do Tribunal Penal Internacional.
+        </p>
+      </div>
+      <p style="margin-top: var(--sp-4);">
+        <a class="btn btn-outline" href="/en/advocacy/">Portfólio de contencioso <sup style="font-size:0.65em; opacity:0.6">EN</sup> →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Formação -->
+  <section class="section dark full-bleed" id="education">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <h2 class="section-title">Formação</h2>
+      <ul class="edu-list">
+        <li><strong>Doutorado em Ciência Política</strong>, University of Illinois Chicago, 2025–2030 (Bolsista Fulbright–MinCiencias).</li>
+        <li><strong>Mestrado em Direito (LL.M.)</strong>, Universidad de los Andes, Bogotá, 2018–2019.</li>
+        <li><strong>Bacharelado em Direito (LL.B.)</strong>, Universidad de los Andes, Bogotá, 2008–2015 (Melhor aluno da turma, Saber Pro).</li>
+      </ul>
+      <p style="margin-top: var(--sp-5);">
+        <a class="btn btn-ghost-light" href="/cv.pdf" target="_blank" rel="noopener">Baixar CV completo (PDF)</a>
+      </p>
+    </div>
+  </section>
+</FrPtLayout>
+
+<style>
+  .about-split {
+    display: grid;
+    grid-template-columns: minmax(200px, 280px) 1fr;
+    gap: var(--sp-8);
+    align-items: start;
+  }
+  .photo-profile {
+    width: 100%;
+    border-radius: var(--radius);
+    display: block;
+  }
+  @media (max-width: 640px) {
+    .about-split { grid-template-columns: 1fr; }
+    .photo-col { max-width: 200px; margin: 0 auto; }
+  }
+</style>

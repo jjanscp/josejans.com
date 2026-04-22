@@ -1,0 +1,158 @@
+---
+import FrPtLayout from '~/layouts/FrPtLayout.astro';
+import { profile } from '~/data/profile';
+
+const lang = 'pt' as const;
+---
+<FrPtLayout
+  title="Início"
+  description="José Jans Carretero Pardo — Doutorando em Ciência Política, Universidade de Illinois em Chicago. Pesquisador em justiça transicional, governança criminal e direitos humanos na América Latina."
+  lang={lang}
+  current="home"
+>
+  <!-- Hero -->
+  <section class="section" id="home">
+    <div class="section-inner">
+      <div class="about-split">
+        <div class="photo-col reveal">
+          <img
+            class="photo-profile"
+            src="/photos/headshot.jpg"
+            alt="José Jans Carretero Pardo"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div class="reveal">
+          <div class="section-eyebrow">Doutorando · Bolsista Fulbright</div>
+          <h1 class="section-title">{profile.name}</h1>
+          <p class="lead">
+            Doutorando em Ciência Política · Universidade de Illinois em Chicago ·
+            Bolsista Fulbright–MinCiencias (2025–2030)
+          </p>
+          <div class="prose" style="margin-top: var(--sp-5); font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.8;">
+            <p>
+              Sou doutorando em Ciência Política na Universidade de Illinois em Chicago (UIC)
+              e bolsista <strong>Fulbright–MinCiencias</strong> (2025–2030). Meu trabalho é
+              <em>anfíbio</em>: transita entre os arquivos e a sala de audiência, entre
+              a teoria constitucional e o trabalho de campo, entre a Colômbia e Chicago —
+              mobilizando <strong>métodos mistos</strong> que combinam análise qualitativa
+              (arquivos, etnografia, comparação de casos) com comparação macro-histórica quantitativa.
+            </p>
+            <p>
+              Após uma década de prática jurídica de primeira linha na intersecção da
+              justiça transicional, dos direitos humanos e do contencioso de interesse público,
+              prossigo hoje com as questões teóricas que essa prática me impôs.
+            </p>
+          </div>
+          <div style="margin-top: var(--sp-5); display:flex; gap: var(--sp-3); flex-wrap: wrap;">
+            <a class="btn btn-primary" href="/pt/about/">Sobre</a>
+            <a class="btn btn-outline" href="/en/research/">Pesquisa &amp; Publicações <sup style="font-size:0.65em; opacity:0.6">EN</sup></a>
+            <a class="btn btn-outline" href="/cv.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destaques -->
+  <section class="section full-bleed" style="background: var(--bg-subtle);">
+    <div class="section-inner">
+      <div class="tease-grid reveal">
+
+        <div class="tease-card">
+          <div class="section-eyebrow">Pesquisa</div>
+          <h2 class="tease-title">Justiça transicional &amp; governança criminal</h2>
+          <p class="tease-body">
+            Minha pesquisa situa-se na intersecção da política comparada, do direito constitucional
+            e da sociologia política do direito, com foco na América Latina.
+          </p>
+          <a class="btn btn-outline" href="/en/research/">
+            Publicações &amp; trabalhos <sup style="font-size:0.65em; opacity:0.6">EN</sup> →
+          </a>
+        </div>
+
+        <div class="tease-card">
+          <div class="section-eyebrow">Contencioso estratégico</div>
+          <h2 class="tease-title">30+ memoriais amicus curiae</h2>
+          <p class="tease-body">
+            Ex-advogado principal diante da Jurisdição Especial para a Paz (JEP) na Colômbia,
+            representando mais de 2.000 vítimas de crimes de guerra.
+          </p>
+          <a class="btn btn-outline" href="/en/advocacy/">
+            Portfólio de contencioso <sup style="font-size:0.65em; opacity:0.6">EN</sup> →
+          </a>
+        </div>
+
+        <div class="tease-card">
+          <div class="section-eyebrow">Docência</div>
+          <h2 class="tease-title">Clínica jurídica &amp; teoria constitucional</h2>
+          <p class="tease-body">
+            Coordenador fundador da Clínica de Contencioso Estratégico Carlos Gaviria Díaz (UIS).
+            Cursos sobre teoria constitucional e métodos de pesquisa.
+          </p>
+          <a class="btn btn-outline" href="/en/teaching/">
+            Portfólio de docência <sup style="font-size:0.65em; opacity:0.6">EN</sup> →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato CTA -->
+  <section class="section">
+    <div class="section-inner reveal" style="max-width: var(--measure); text-align: center;">
+      <h2 class="section-title">Vamos conversar</h2>
+      <p class="lead">Pesquisa, consultoria, convites para conferências.</p>
+      <div style="margin-top: var(--sp-4); display:flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap;">
+        <a class="btn btn-primary" href={`mailto:${profile.email}`}>{profile.email}</a>
+        <a class="btn btn-outline" href="/en/contact/">Formulário de contato <sup style="font-size:0.65em; opacity:0.6">EN</sup></a>
+      </div>
+    </div>
+  </section>
+</FrPtLayout>
+
+<style>
+  .about-split {
+    display: grid;
+    grid-template-columns: minmax(200px, 280px) 1fr;
+    gap: var(--sp-8);
+    align-items: start;
+  }
+  .photo-profile {
+    width: 100%;
+    border-radius: var(--radius);
+    display: block;
+  }
+  .tease-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--sp-6);
+  }
+  .tease-card {
+    padding: var(--sp-5);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .tease-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.35;
+    margin: 0;
+  }
+  .tease-body {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--text-soft);
+    flex: 1;
+  }
+  @media (max-width: 640px) {
+    .about-split { grid-template-columns: 1fr; }
+    .photo-col { max-width: 200px; margin: 0 auto; }
+  }
+</style>

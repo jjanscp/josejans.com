@@ -1,0 +1,145 @@
+---
+import FrPtLayout from '~/layouts/FrPtLayout.astro';
+import { profile } from '~/data/profile';
+
+const lang = 'fr' as const;
+---
+<FrPtLayout
+  title="À propos"
+  description="À propos de José Jans Carretero Pardo — doctorant en Sciences Politiques à UIC, boursier Fulbright–MinCiencias, ancien conseil principal devant la JEP et avocat senior du CAJAR."
+  lang={lang}
+  current="about"
+>
+  <!-- Profil -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <div class="about-split">
+        <div class="photo-col reveal">
+          <img
+            class="photo-profile"
+            src="/photos/headshot.jpg"
+            alt="José Jans Carretero Pardo"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div class="reveal">
+          <div class="section-eyebrow">Doctorant · Boursier Fulbright</div>
+          <h1 class="section-title">{profile.name}</h1>
+          <p class="lead">Doctorant en Sciences Politiques · Université de l'Illinois à Chicago</p>
+          <div class="prose" style="margin-top: var(--sp-5); font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.8;">
+            <p>
+              Je suis doctorant en Sciences Politiques à l'Université de l'Illinois à Chicago (UIC)
+              et boursier <strong>Fulbright–MinCiencias</strong> (2025–2030). Mon travail est
+              <em>amphibien</em> : il se déplace entre les archives et la salle d'audience, entre
+              la théorie constitutionnelle et le terrain empirique, entre la Colombie et Chicago,
+              en mobilisant des <strong>méthodes mixtes</strong> — analyse qualitative (archives,
+              ethnographie, comparaison de cas) et analyse macro-historique quantitative. Après
+              une décennie de pratique juridique de première ligne en justice transitionnelle,
+              droits humains et contentieux d'intérêt public, je poursuis les questions théoriques
+              que cette pratique m'a imposées.
+            </p>
+          </div>
+          <div style="margin-top: var(--sp-5); display:flex; gap: var(--sp-3); flex-wrap: wrap;">
+            <a class="btn btn-primary" href="/en/research/">Recherche &amp; Publications <sup style="font-size:0.65em; opacity:0.6">EN</sup></a>
+            <a class="btn btn-outline" href="/cv.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda de recherche -->
+  <section class="section dark full-bleed" id="research">
+    <div class="section-inner reveal" style="max-width: var(--measure-wide);">
+      <div class="section-eyebrow">Agenda de recherche</div>
+      <h2 class="section-title">Axes de recherche</h2>
+      <p style="font-family:var(--font-serif);font-size:1.05rem;line-height:1.8;color:rgba(215,209,161,0.9);margin-bottom:var(--sp-5);">
+        Mes recherches se situent à l'intersection de la <strong>politique comparée, du droit constitutionnel
+        et de la sociologie politique du droit</strong> — nourries par une décennie de pratique de
+        première ligne au cœur du processus de paix colombien. Je mobilise des méthodes mixtes :
+        recherche-action participative, analyse d'archives, comparaison macro-historique, analyse
+        du discours et travail de terrain ethnographique.
+      </p>
+      <div class="research-pillars">
+        <div class="research-pillar">
+          <div class="pillar-num">01</div>
+          <div class="pillar-title">Gouvernance criminelle &amp; responsabilité de l'État</div>
+          <p class="pillar-body">Comment les États et les acteurs armés co-produisent violence et réseaux criminels — et comment concevoir des institutions capables de les démanteler. Je développe l'<em>Approche de Recherche Systémique</em> (SRA), un modèle de gouvernance judiciaire qui permet la responsabilité ascendante des commandants supérieurs.</p>
+        </div>
+        <div class="research-pillar">
+          <div class="pillar-num">02</div>
+          <div class="pillar-title">Droit constitutionnel, droits civils &amp; démocratie</div>
+          <p class="pillar-body">Comment les tribunaux, les organisations de la société civile et les mouvements sociaux contestent les limites des droits et façonnent les institutions démocratiques — avec une attention particulière à la façon dont la recherche-action participative transforme la production de connaissance juridique dans les contextes constitutionnels et de justice transitionnelle.</p>
+        </div>
+        <div class="research-pillar">
+          <div class="pillar-num">03</div>
+          <div class="pillar-title">Politique des drogues, prohibition &amp; droits de santé</div>
+          <p class="pillar-body">Comment la mobilisation juridique en Amérique latine défie les régimes prohibitionnistes à travers le droit constitutionnel et le droit international des droits humains — en recadrant la consommation de drogues comme un enjeu de santé publique et de droits.</p>
+        </div>
+      </div>
+      <p style="margin-top:var(--sp-5);">
+        <a class="btn btn-ghost-light" href="/en/research/">Publications complètes <sup style="font-size:0.65em; opacity:0.7">EN</sup> →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Parcours professionnel -->
+  <section class="section" id="professional">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <div class="section-eyebrow">2015–2024 · Colombie</div>
+      <h2 class="section-title">Une décennie de pratique de première ligne</h2>
+      <div class="prose" style="font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.75;">
+        <p>
+          Récemment, j'ai exercé comme <strong>conseil principal pour la représentation judiciaire</strong>
+          devant la <em>Juridiction Spéciale pour la Paix</em> (JEP) de Colombie. J'ai dirigé une équipe
+          de six avocats représentant plus de 2&nbsp;079 victimes individuelles et 26 victimes collectives
+          dans les macro-causes sur les exécutions extrajudiciaires (<em>falsos positivos</em>) — travail
+          qui a contribué à la mise en accusation de 25 officiers de l'armée, dont cinq généraux.
+          Auparavant, j'étais avocat senior au Collectif d'avocats José Alvear Restrepo (CAJAR),
+          consultant international pour la Fédération internationale des droits humains (FIDH) et
+          avocat du Comité de solidarité avec les prisonniers politiques (CSPP). Dans ces fonctions,
+          j'ai déposé plus de 30 mémoires amicus curiae et actions constitutionnelles devant la Cour
+          constitutionnelle de Colombie, la Cour suprême, la JEP, la Cour interaméricaine des droits
+          de l'homme et la Cour pénale internationale.
+        </p>
+      </div>
+      <p style="margin-top: var(--sp-4);">
+        <a class="btn btn-outline" href="/en/advocacy/">Portefeuille de contentieux <sup style="font-size:0.65em; opacity:0.6">EN</sup> →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Formation -->
+  <section class="section dark full-bleed" id="education">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <h2 class="section-title">Formation</h2>
+      <ul class="edu-list">
+        <li><strong>Doctorat en Sciences Politiques</strong>, University of Illinois Chicago, 2025–2030 (Boursier Fulbright–MinCiencias).</li>
+        <li><strong>Master en Droit (LL.M.)</strong>, Universidad de los Andes, Bogotá, 2018–2019.</li>
+        <li><strong>Licence en Droit (LL.B.)</strong>, Universidad de los Andes, Bogotá, 2008–2015 (Major de promotion, Saber Pro).</li>
+      </ul>
+      <p style="margin-top: var(--sp-5);">
+        <a class="btn btn-ghost-light" href="/cv.pdf" target="_blank" rel="noopener">Télécharger le CV complet (PDF)</a>
+      </p>
+    </div>
+  </section>
+</FrPtLayout>
+
+<style>
+  .about-split {
+    display: grid;
+    grid-template-columns: minmax(200px, 280px) 1fr;
+    gap: var(--sp-8);
+    align-items: start;
+  }
+  .photo-profile {
+    width: 100%;
+    border-radius: var(--radius);
+    display: block;
+  }
+  @media (max-width: 640px) {
+    .about-split { grid-template-columns: 1fr; }
+    .photo-col { max-width: 200px; margin: 0 auto; }
+  }
+</style>

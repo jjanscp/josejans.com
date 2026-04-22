@@ -72,8 +72,8 @@ const switchHref = pathname.replace(`/${lang}/`, `/${other}/`);
           class={`lang-btn ${lang === 'es' ? 'active' : ''}`}
           aria-current={lang === 'es' ? 'true' : undefined}
         >ES</a>
-        <span class="lang-btn disabled" title="Coming soon">FR</span>
-        <span class="lang-btn disabled" title="Coming soon">PT</span>
+        <a href="/fr/" class="lang-btn">FR</a>
+        <a href="/pt/" class="lang-btn">PT</a>
       </div>
     </nav>
   </div>
