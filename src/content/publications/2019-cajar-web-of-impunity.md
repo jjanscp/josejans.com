@@ -6,5 +6,6 @@ type: report
 publisher: "CAJAR"
 abstract: "Human rights report documenting systemic patterns of state and paramilitary violence in the Magdalena Medio region of Colombia between 1998 and 2000. Based on victim testimony, archival research, and legal analysis. Submitted as evidentiary input in transitional justice proceedings."
 tags: ["human rights", "Magdalena Medio", "Colombia", "paramilitarism", "state violence"]
+cover: "/covers/cover-telaranas-2019.jpg"
 lang: en
 ---

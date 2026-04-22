@@ -6,5 +6,6 @@ type: report
 publisher: "CAJAR"
 abstract: "Ethnographically grounded human rights report reconstructing the Wiwa Indigenous people's experience of the Colombian internal armed conflict between 1990 and 2017. Combines oral histories, archival work, and legal analysis; contributed to strategic litigation before the Constitutional Court and the Inter-American system on Indigenous rights."
 tags: ["Indigenous rights", "Wiwa", "Colombia", "armed conflict", "ethnographic research"]
+cover: "/covers/cover-wiwa-2019.jpg"
 lang: en
 ---

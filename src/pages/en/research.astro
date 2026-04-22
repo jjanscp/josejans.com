@@ -250,7 +250,7 @@ const toc = [
             <li class={cover ? 'pub-with-cover' : 'pub-list-item'}>
               {cover && <img class="pub-cover" src={cover} alt="" loading="lazy" />}
               <div class="pub-body">
-                <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {p.data?.authors ?? p.authors}</div>
+                <div class="pub-meta muted">{p.data?.year ?? p.year} &middot; {authStr(p.data?.authors ?? p.authors)}</div>
                 <div class="pub-title">
                   {(p.data?.url ?? p.url)
                     ? <a href={p.data?.url ?? p.url} target="_blank" rel="noopener noreferrer">{p.data?.title ?? p.title}</a>

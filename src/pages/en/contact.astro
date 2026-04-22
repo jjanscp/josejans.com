@@ -84,18 +84,20 @@ const toc = [
       <div class="section-eyebrow">Newsletter</div>
       <h2 class="section-title" style="font-size: 1.6rem;">Research updates, a few times a year.</h2>
       <p class="section-body">{t.labels.newsletterHeadline.en}</p>
-      {profile.newsletter.username ? (
-        <form
-          action={`https://buttondown.com/api/emails/embed-subscribe/${profile.newsletter.username}`}
-          method="post"
-          target="popupwindow"
-          onsubmit={`window.open('https://buttondown.com/${profile.newsletter.username}', 'popupwindow')`}
-          class="newsletter-inline-form"
-          style="margin-top: var(--sp-4);"
-        >
-          <input type="email" name="email" placeholder="you@example.com" required />
-          <button type="submit" class="btn btn-accent">{t.labels.newsletterCTA.en}</button>
-        </form>
+      {profile.newsletter.substackEmbedUrl ? (
+        <iframe
+          src={profile.newsletter.substackEmbedUrl}
+          width="100%"
+          height="150"
+          style="border: 1px solid var(--rule); border-radius: var(--radius); background: var(--bg-raised); margin-top: var(--sp-4);"
+          frameborder="0"
+          scrolling="no"
+          title="Newsletter signup"
+        />
+      ) : profile.newsletter.substackUrl ? (
+        <p style="margin-top: var(--sp-4);">
+          <a class="btn btn-accent" href={profile.newsletter.substackUrl} target="_blank" rel="noopener">Subscribe on Substack →</a>
+        </p>
       ) : (
         <p class="muted small" style="margin-top: var(--sp-3);">Newsletter signup coming soon.</p>
       )}
