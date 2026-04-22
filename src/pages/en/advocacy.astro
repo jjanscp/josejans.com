@@ -125,11 +125,22 @@ const toc = [
     </div>
   </section>
 
-  <!-- 2. Strategic Litigation (JEP) -->
+  <!-- 2. Strategic Litigation (JEP) + ICC photo -->
   <section class="section full-bleed" id="litigation">
-    <div class="section-inner reveal" style="max-width: var(--measure);">
-      <h2 class="section-title">{t.advocacy.sections.litigation[lang]}</h2>
-      <div class="prose" style="font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.75;" set:html={bio.professional[lang]} />
+    <div class="section-inner" style="max-width: var(--measure-wide);">
+      <div class="photo-split reveal">
+        <img
+          src="/photos/icc-assembly.jpg"
+          alt="José Jans Carretero Pardo at the ICC Assembly of States Parties, The Hague, 2019"
+          loading="lazy"
+          decoding="async"
+        />
+        <div>
+          <h2 class="section-title">{t.advocacy.sections.litigation[lang]}</h2>
+          <div class="prose" style="font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.75;" set:html={bio.professional[lang]} />
+          <p class="muted small" style="margin-top: var(--sp-3);">ICC Assembly of States Parties · The Hague · 2019</p>
+        </div>
+      </div>
     </div>
   </section>
 

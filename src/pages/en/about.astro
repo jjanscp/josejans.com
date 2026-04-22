@@ -62,13 +62,7 @@ const navItems = [
     <div class="section-inner" style="max-width: var(--measure-wide);">
       <div class="section-eyebrow reveal">Research agenda</div>
       <h2 class="section-title reveal">The research agenda</h2>
-      <div class="lead prose reveal" set:html={bio.research[lang]} />
-      <div style="margin-top: var(--sp-6);" class="reveal">
-        <h3 style="color: var(--cream-light); font-size: 1rem; margin-bottom: var(--sp-3); font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.72rem;">Research interests</h3>
-        <ul class="interest-list dark-list reveal-stagger">
-          {bio.interests[lang].map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
+      <div class="reveal" set:html={bio.research[lang]} />
     </div>
   </section>
 
@@ -92,19 +86,6 @@ const navItems = [
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ICC assembly inline photo -->
-  <section class="section">
-    <figure class="photo-inline reveal-fade">
-      <img
-        src="/photos/icc-assembly.jpg"
-        alt="José Jans Carretero Pardo at the ICC Assembly of States Parties, The Hague"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>ICC Assembly of States Parties · The Hague · 2019</figcaption>
-    </figure>
   </section>
 
   <!-- Teaching arc — clinic photo lives on the Teaching page; teaser text here -->

@@ -92,13 +92,13 @@ const authStr = (a: string | string[] | undefined): string =>
 const toc = [
   { id: 'agenda',    label: 'Agenda' },
   { id: 'interests', label: 'Interests' },
-  { id: 'experience', label: 'Experience' },
   { id: 'wip',       label: 'Works in progress' },
   { id: 'articles',  label: 'Articles' },
   { id: 'chapters',  label: 'Chapters' },
   { id: 'reports',   label: 'Reports' },
   { id: 'datasets',  label: 'Datasets' },
   { id: 'interventions', label: 'Interventions' },
+  { id: 'experience', label: 'Experience' },
 ];
 ---
 <BaseLayout
@@ -121,66 +121,16 @@ const toc = [
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.sections.featuredPubs[lang]}</div>
       <h1 class="section-title">Research &amp; Publications</h1>
-      <div class="lead prose" set:html={bio.research[lang]} />
+      <div class="lead prose" set:html={bio.researchBrief[lang]} />
     </div>
   </section>
 
-  <!-- Research interests -->
+  <!-- Research interests — horizontal pills -->
   <section class="section full-bleed" id="interests">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Research interests</h2>
-      <ul class="interest-list">
-        {bio.interests[lang].map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  <!-- Research experience -->
-  <section class="section" id="experience">
-    <div class="section-inner reveal" style="max-width: var(--measure);">
-      <h2 class="section-title">Research experience</h2>
-      <ul class="exp-list">
-        <li>
-          <div class="exp-period muted">2025</div>
-          <div class="exp-role">Research Consultant</div>
-          <div class="exp-host">Prof. Yanilda González · Harvard Kennedy School, Harvard University</div>
-          <p class="exp-body">
-            Specialized research on legal mechanisms for the investigation and sanctioning of
-            aggressions and homicides committed by Colombia's <em>fuerza pública</em>. Mapped
-            victims' and social-movement strategies for rights enforcement through legal and
-            social channels. Consulting undertaken as part of Prof. González's forthcoming
-            academic book on police accountability and state violence in Latin America.
-          </p>
-        </li>
-        <li>
-          <div class="exp-period muted">Aug–Oct 2017</div>
-          <div class="exp-role">Research Fellow · Drug Policy and Transitional Justice</div>
-          <div class="exp-host">CIDE — Center for Research and Teaching in Economics, Aguascalientes, Mexico</div>
-          <p class="exp-body">
-            Open Society Foundation Fellowship. Contributed to the Drug Policy Program's
-            comparative study of transitional justice in Mexico and Colombia.
-            Supervisor: Javier Treviño Rangel, Ph.D.
-          </p>
-        </li>
-        <li>
-          <div class="exp-period muted">2016–2017</div>
-          <div class="exp-role">Research Assistant · Office of the Academic Vice President</div>
-          <div class="exp-host">Universidad de los Andes, Bogotá</div>
-          <p class="exp-body">
-            Supported research coordination for a portfolio of peace-oriented studies responding
-            to post-conflict educational needs in Colombia. Supervisor: Silvia Restrepo Restrepo, Ph.D.
-          </p>
-        </li>
-        <li>
-          <div class="exp-period muted">2013–2014</div>
-          <div class="exp-role">Research Assistant · Socio-Legal Research Center (CIJUS)</div>
-          <div class="exp-host">School of Law, Universidad de los Andes</div>
-          <p class="exp-body">
-            Contributed to <em>The Enforcement of Tutela Rulings in Colombia</em> (2012–2014), a
-            joint project with Emory University and the World Bank — coded the complexity and
-            clarity of court orders. Supervisor: Isabel Cristina Jaramillo, Ph.D.
-          </p>
-        </li>
+      <ul class="interest-pills">
+        {bio.interests[lang].map((item) => <li class="interest-pill">{item}</li>)}
       </ul>
     </div>
   </section>
@@ -359,28 +309,59 @@ const toc = [
       </p>
     </div>
   </section>
+
+  <!-- Research experience (moved below publications) -->
+  <section class="section" id="experience">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <h2 class="section-title">Research experience</h2>
+      <ul class="exp-list">
+        <li>
+          <div class="exp-period muted">June–Aug. 2025</div>
+          <div class="exp-role">Research Consultant</div>
+          <div class="exp-host">Prof. Yanilda González · Harvard Kennedy School, Harvard University</div>
+          <p class="exp-body">
+            Specialized research on legal mechanisms for the investigation and sanctioning of
+            aggressions and homicides committed by Colombia's <em>fuerza pública</em>. Mapped
+            victims' and social-movement strategies for rights enforcement through legal and
+            social channels. Consulting undertaken as part of Prof. González's forthcoming
+            academic book on police accountability and state violence in Latin America.
+          </p>
+        </li>
+        <li>
+          <div class="exp-period muted">Aug–Oct 2017</div>
+          <div class="exp-role">Research Fellow · Drug Policy and Transitional Justice</div>
+          <div class="exp-host">CIDE — Center for Research and Teaching in Economics, Aguascalientes, Mexico</div>
+          <p class="exp-body">
+            Open Society Foundation Fellowship. Contributed to the Drug Policy Program's
+            comparative study of transitional justice in Mexico and Colombia.
+            Supervisor: Javier Treviño Rangel, Ph.D.
+          </p>
+        </li>
+        <li>
+          <div class="exp-period muted">2016–2017</div>
+          <div class="exp-role">Research Assistant · Office of the Academic Vice President</div>
+          <div class="exp-host">Universidad de los Andes, Bogotá</div>
+          <p class="exp-body">
+            Supported research coordination for a portfolio of peace-oriented studies responding
+            to post-conflict educational needs in Colombia. Supervisor: Silvia Restrepo Restrepo, Ph.D.
+          </p>
+        </li>
+        <li>
+          <div class="exp-period muted">2013–2014</div>
+          <div class="exp-role">Research Assistant · Socio-Legal Research Center (CIJUS)</div>
+          <div class="exp-host">School of Law, Universidad de los Andes</div>
+          <p class="exp-body">
+            Contributed to <em>The Enforcement of Tutela Rulings in Colombia</em> (2012–2014), a
+            joint project with Emory University and the World Bank — coded the complexity and
+            clarity of court orders. Supervisor: Isabel Cristina Jaramillo, Ph.D.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .interest-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-  }
-  .interest-list li {
-    padding-left: var(--sp-4);
-    position: relative;
-    line-height: 1.6;
-  }
-  .interest-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-  }
   .pub-list {
     list-style: none;
     margin: 0;

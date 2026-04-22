@@ -2,8 +2,11 @@
 import { profile } from '~/data/profile';
 import type { Lang } from '~/data/i18n';
 
-interface Props { lang: Lang; variant?: 'default' | 'home'; }
-const { lang } = Astro.props;
+interface Props { lang: Lang; variant?: 'default' | 'home'; compact?: boolean; }
+const { lang, compact = false } = Astro.props;
+
+// Networks shown in the compact (hero) strip — top 5 only
+const COMPACT_KEYS = ['LinkedIn', 'X / Twitter', 'Instagram', 'Google Scholar', 'Email'];
 
 type Chip = { icon: string; label: string; handle?: string; href: string };
 
@@ -34,7 +37,8 @@ const raw: (Chip | null)[] = [
   { icon: icons.uic,  label: 'UIC Profile',   handle: 'pols.uic.edu',    href: profile.social.uic },
   { icon: icons.mail, label: lang === 'en' ? 'Email' : 'Correo', handle: profile.email, href: `mailto:${profile.email}` },
 ];
-const chips = raw.filter((c): c is Chip => Boolean(c && c.href));
+const allChips = raw.filter((c): c is Chip => Boolean(c && c.href));
+const chips = compact ? allChips.filter((c) => COMPACT_KEYS.includes(c.label)) : allChips;
 ---
 <div class="social-row">
   {chips.map((c) => (

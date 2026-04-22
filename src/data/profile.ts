@@ -11,16 +11,16 @@ export const profile = {
     es: 'Universidad de Illinois en Chicago',
   },
   tracks: {
-    en: 'Comparative Politics & Political Theory',
-    es: 'Política Comparada y Teoría Política',
+    en: 'Research on Justice, Criminal Politics & Peacebuilding | Advocacy in Human Rights',
+    es: 'Investigación en Justicia, Política Criminal y Construcción de Paz | Incidencia en Derechos Humanos',
   },
   fellowship: 'Fulbright–MinCiencias Scholar (2025–2030)',
   email: 'jcarr74@uic.edu',
 
-  // Hero subtitle (approved v2 — minimalist, LLM degree, PhD student track)
+  // Hero subtitle (approved v3 — research identity framing)
   heroSubtitle: {
-    en: 'Lawyer (LL.M.) · PhD student in Political Science, University of Illinois Chicago · Tracks in Comparative Politics and Political Theory.',
-    es: 'Abogado (LL.M.) · Estudiante doctoral en Ciencia Política, Universidad de Illinois en Chicago · Líneas de Política Comparada y Teoría Política.',
+    en: 'Lawyer (LL.M.) · PhD student in Political Science, University of Illinois Chicago · Research on Justice, Criminal Politics & Peacebuilding.',
+    es: 'Abogado (LL.M.) · Estudiante doctoral en Ciencia Política, Universidad de Illinois en Chicago · Investigación en Justicia, Política Criminal y Construcción de Paz.',
   },
 
   // Social / professional links

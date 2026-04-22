@@ -90,13 +90,13 @@ const authStr = (a: string | string[] | undefined): string =>
 const toc = [
   { id: 'agenda',        label: 'Agenda' },
   { id: 'interests',     label: 'Intereses' },
-  { id: 'experience',    label: 'Experiencia' },
   { id: 'wip',           label: 'En curso' },
   { id: 'articles',      label: 'Artículos' },
   { id: 'chapters',      label: 'Capítulos' },
   { id: 'reports',       label: 'Reportes' },
   { id: 'datasets',      label: 'Bases de datos' },
   { id: 'interventions', label: 'Intervenciones' },
+  { id: 'experience',    label: 'Experiencia' },
 ];
 ---
 <BaseLayout
@@ -118,67 +118,16 @@ const toc = [
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <div class="section-eyebrow">{t.sections.featuredPubs[lang]}</div>
       <h1 class="section-title">Investigación y Publicaciones</h1>
-      <div class="lead prose" set:html={bio.research[lang]} />
+      <div class="lead prose" set:html={bio.researchBrief[lang]} />
     </div>
   </section>
 
+  <!-- Intereses de investigación — píldoras horizontales -->
   <section class="section full-bleed" id="interests">
     <div class="section-inner reveal" style="max-width: var(--measure);">
       <h2 class="section-title">Intereses de investigación</h2>
-      <ul class="interest-list">
-        {bio.interests[lang].map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  <!-- Experiencia de investigación -->
-  <section class="section" id="experience">
-    <div class="section-inner reveal" style="max-width: var(--measure);">
-      <h2 class="section-title">Experiencia de investigación</h2>
-      <ul class="exp-list">
-        <li>
-          <div class="exp-period muted">2025</div>
-          <div class="exp-role">Consultor de investigación</div>
-          <div class="exp-host">Prof. Yanilda González · Harvard Kennedy School, Harvard University</div>
-          <p class="exp-body">
-            Investigación especializada sobre los mecanismos jurídicos para la investigación y
-            sanción de agresiones y homicidios cometidos por la <em>fuerza pública</em> en
-            Colombia. Mapeé las estrategias de víctimas y movimientos sociales para la exigibilidad
-            de derechos a través de canales legales y sociales. Consultoría realizada como parte del
-            próximo libro académico de la Prof. González sobre rendición de cuentas policial y
-            violencia estatal en América Latina.
-          </p>
-        </li>
-        <li>
-          <div class="exp-period muted">Ago–Oct 2017</div>
-          <div class="exp-role">Investigador · Política de Drogas y Justicia Transicional</div>
-          <div class="exp-host">CIDE — Centro de Investigación y Docencia Económicas, Aguascalientes, México</div>
-          <p class="exp-body">
-            Beca Open Society Foundation. Contribuí al Programa de Política de Drogas en un estudio
-            comparado de la justicia transicional en México y Colombia.
-            Supervisor: Javier Treviño Rangel, Ph.D.
-          </p>
-        </li>
-        <li>
-          <div class="exp-period muted">2016–2017</div>
-          <div class="exp-role">Asistente de investigación · Vicerrectoría Académica</div>
-          <div class="exp-host">Universidad de los Andes, Bogotá</div>
-          <p class="exp-body">
-            Apoyé la coordinación de un portafolio de investigación orientado a la paz, en
-            respuesta a las necesidades educativas del posconflicto en Colombia.
-            Supervisora: Silvia Restrepo Restrepo, Ph.D.
-          </p>
-        </li>
-        <li>
-          <div class="exp-period muted">2013–2014</div>
-          <div class="exp-role">Asistente de investigación · CIJUS</div>
-          <div class="exp-host">Facultad de Derecho, Universidad de los Andes</div>
-          <p class="exp-body">
-            Contribuí a <em>La efectividad de las sentencias de tutela en Colombia</em> (2012–2014),
-            un proyecto conjunto con Emory University y el Banco Mundial. Codifiqué la complejidad
-            y claridad de las órdenes judiciales. Supervisora: Isabel Cristina Jaramillo, Ph.D.
-          </p>
-        </li>
+      <ul class="interest-pills">
+        {bio.interests[lang].map((item) => <li class="interest-pill">{item}</li>)}
       </ul>
     </div>
   </section>
@@ -340,15 +289,61 @@ const toc = [
       </p>
     </div>
   </section>
+
+  <!-- Experiencia de investigación (movida al final, después de publicaciones) -->
+  <section class="section" id="experience">
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <h2 class="section-title">Experiencia de investigación</h2>
+      <ul class="exp-list">
+        <li>
+          <div class="exp-period muted">Jun.–Ago. 2025</div>
+          <div class="exp-role">Consultor de investigación</div>
+          <div class="exp-host">Prof. Yanilda González · Harvard Kennedy School, Harvard University</div>
+          <p class="exp-body">
+            Investigación especializada sobre los mecanismos jurídicos para la investigación y
+            sanción de agresiones y homicidios cometidos por la <em>fuerza pública</em> en
+            Colombia. Mapeé las estrategias de víctimas y movimientos sociales para la exigibilidad
+            de derechos a través de canales legales y sociales. Consultoría realizada como parte del
+            próximo libro académico de la Prof. González sobre rendición de cuentas policial y
+            violencia estatal en América Latina.
+          </p>
+        </li>
+        <li>
+          <div class="exp-period muted">Ago–Oct 2017</div>
+          <div class="exp-role">Investigador · Política de Drogas y Justicia Transicional</div>
+          <div class="exp-host">CIDE — Centro de Investigación y Docencia Económicas, Aguascalientes, México</div>
+          <p class="exp-body">
+            Beca Open Society Foundation. Contribuí al Programa de Política de Drogas en un estudio
+            comparado de la justicia transicional en México y Colombia.
+            Supervisor: Javier Treviño Rangel, Ph.D.
+          </p>
+        </li>
+        <li>
+          <div class="exp-period muted">2016–2017</div>
+          <div class="exp-role">Asistente de investigación · Vicerrectoría Académica</div>
+          <div class="exp-host">Universidad de los Andes, Bogotá</div>
+          <p class="exp-body">
+            Apoyé la coordinación de un portafolio de investigación orientado a la paz, en
+            respuesta a las necesidades educativas del posconflicto en Colombia.
+            Supervisora: Silvia Restrepo Restrepo, Ph.D.
+          </p>
+        </li>
+        <li>
+          <div class="exp-period muted">2013–2014</div>
+          <div class="exp-role">Asistente de investigación · CIJUS</div>
+          <div class="exp-host">Facultad de Derecho, Universidad de los Andes</div>
+          <p class="exp-body">
+            Contribuí a <em>La efectividad de las sentencias de tutela en Colombia</em> (2012–2014),
+            un proyecto conjunto con Emory University y el Banco Mundial. Codifiqué la complejidad
+            y claridad de las órdenes judiciales. Supervisora: Isabel Cristina Jaramillo, Ph.D.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .interest-list {
-    margin: 0; padding: 0; list-style: none;
-    display: flex; flex-direction: column; gap: var(--sp-2);
-  }
-  .interest-list li { padding-left: var(--sp-4); position: relative; line-height: 1.6; }
-  .interest-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
   .pub-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-5); }
   .pub-list.rich li { border-left: 3px solid var(--rule); padding-left: var(--sp-4); }
   .pub-title { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.5; margin-block: var(--sp-1); }

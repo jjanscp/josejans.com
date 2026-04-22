@@ -62,13 +62,7 @@ const navItems = [
     <div class="section-inner" style="max-width: var(--measure-wide);">
       <div class="section-eyebrow reveal">Agenda de investigación</div>
       <h2 class="section-title reveal">La agenda de investigación</h2>
-      <div class="lead prose reveal" set:html={bio.research[lang]} />
-      <div style="margin-top: var(--sp-6);" class="reveal">
-        <h3 style="color: var(--cream-light); font-size: 1rem; margin-bottom: var(--sp-3); font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.72rem;">Intereses de investigación</h3>
-        <ul class="interest-list dark-list reveal-stagger">
-          {bio.interests[lang].map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
+      <div class="reveal" set:html={bio.research[lang]} />
     </div>
   </section>
 
@@ -92,19 +86,6 @@ const navItems = [
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Foto CPI (La Haya) inline -->
-  <section class="section">
-    <figure class="photo-inline reveal-fade">
-      <img
-        src="/photos/icc-assembly.jpg"
-        alt="José Jans Carretero Pardo en la Asamblea de Estados Partes de la CPI, La Haya"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>Asamblea de Estados Partes · CPI · La Haya · 2019</figcaption>
-    </figure>
   </section>
 
   <!-- Docencia (la foto de la clínica vive en la página de docencia) -->

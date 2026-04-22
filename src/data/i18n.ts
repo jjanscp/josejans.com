@@ -117,7 +117,7 @@ export const t = {
     // Section tease bodies
     researchBody: {
       en: 'Peer-reviewed articles, book chapters, policy reports, and empirical datasets on transitional justice, state accountability for macro-criminal violence, criminal governance, and rights mobilization in conflict-to-peace transitions.',
-      es: 'Artículos arbitrados, capítulos de libro, reportes de política y bases de datos empíricas sobre justicia transicional, responsabilidad estatal por crímenes de sistema, estructuras criminales del Estado y movilización de derechos en transiciones.',
+      es: 'Artículos académicos, capítulos de libro, reportes de política y bases de datos empíricas sobre justicia transicional, responsabilidad estatal por crímenes de sistema, estructuras criminales del Estado y movilización de derechos en transiciones.',
     },
     advocacyBody: {
       en: 'Thirty-plus amicus curiae briefs and constitutional interventions filed before Colombian high courts, the Inter-American system, and the International Criminal Court. Available for consulting, expert reports, and training.',
