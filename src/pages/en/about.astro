@@ -57,12 +57,18 @@ const navItems = [
     </div>
   </section>
 
-  <!-- Research agenda -->
+  <!-- Research overview (brief + interests) -->
   <section class="section dark full-bleed" id="research">
-    <div class="section-inner" style="max-width: var(--measure-wide);">
-      <div class="section-eyebrow reveal">Research agenda</div>
-      <h2 class="section-title reveal">The research agenda</h2>
-      <div class="reveal" set:html={bio.research[lang]} />
+    <div class="section-inner reveal" style="max-width: var(--measure);">
+      <div class="section-eyebrow">Research agenda</div>
+      <h2 class="section-title">Research &amp; Publications</h2>
+      <div class="prose" style="font-family:var(--font-serif);font-size:1.05rem;line-height:1.8;color:rgba(215,209,161,0.9);margin-bottom:var(--sp-5);" set:html={bio.researchBrief[lang]} />
+      <ul class="interest-pills interest-pills--dark">
+        {bio.interests[lang].map((item) => <li class="interest-pill interest-pill--dark">{item}</li>)}
+      </ul>
+      <p style="margin-top:var(--sp-5);">
+        <a class="btn btn-ghost-light" href={`/${lang}/research/`}>Full research agenda &amp; publications →</a>
+      </p>
     </div>
   </section>
 

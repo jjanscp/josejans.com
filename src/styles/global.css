@@ -1682,6 +1682,13 @@ hr {
   white-space: nowrap;
 }
 
+/* Dark-section pill variants (About research overview) */
+.interest-pill--dark {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(215,209,161,0.25);
+  color: rgba(215,209,161,0.85);
+}
+
 /* ---------- Responsive tweaks ---------- */
 @media (max-width: 820px) {
   .nav-toggle { display: inline-flex; }

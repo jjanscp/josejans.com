@@ -29,7 +29,7 @@ export const profile = {
     linkedin: 'https://www.linkedin.com/in/josejans/',
     twitter: 'https://x.com/josejanscp',
     instagram: 'https://www.instagram.com/josejanscp/',
-    github: 'https://github.com/josejanscp',
+    github: 'https://github.com/jjanscp',
     // Institutional
     uic: 'https://pols.uic.edu/profiles/carretero-padro-jose-jans/',
     // Research identifiers

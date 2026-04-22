@@ -116,22 +116,12 @@ const toc = [
     position="center 40%"
   />
 
-  <!-- Header -->
-  <section class="section" id="agenda">
-    <div class="section-inner reveal" style="max-width: var(--measure);">
-      <div class="section-eyebrow">{t.sections.featuredPubs[lang]}</div>
-      <h1 class="section-title">Research &amp; Publications</h1>
-      <div class="lead prose" set:html={bio.researchBrief[lang]} />
-    </div>
-  </section>
-
-  <!-- Research interests — horizontal pills -->
-  <section class="section full-bleed" id="interests">
-    <div class="section-inner reveal" style="max-width: var(--measure);">
-      <h2 class="section-title">Research interests</h2>
-      <ul class="interest-pills">
-        {bio.interests[lang].map((item) => <li class="interest-pill">{item}</li>)}
-      </ul>
+  <!-- Header + full research agenda (pillars) -->
+  <section class="section dark full-bleed" id="agenda">
+    <div class="section-inner" style="max-width: var(--measure-wide);">
+      <div class="section-eyebrow reveal">Research agenda</div>
+      <h1 class="section-title reveal">The research agenda</h1>
+      <div class="reveal" set:html={bio.research[lang]} />
     </div>
   </section>
 

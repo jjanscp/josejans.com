@@ -105,35 +105,33 @@ const followLabel = lang === 'fr' ? 'Suivez mes travaux' : 'Acompanhe meu trabal
     <slot />
   </main>
 
-  <!-- Footer (minimal) -->
+  <!-- Footer — uses same classes as Footer.astro for consistent styling -->
   <footer class="site-footer">
     <div class="site-footer-inner">
-      <p class="footer-follow">{followLabel}</p>
-      <div class="footer-chips">
-        <a class="footer-chip" href={`mailto:${profile.email}`} aria-label="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-          <span>{profile.email}</span>
-        </a>
-        <a class="footer-chip" href={profile.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          <span>LinkedIn</span>
-        </a>
-        {profile.social.scholar && (
-          <a class="footer-chip" href={profile.social.scholar} target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 11v5c0 2.76 2.69 5 6 5s6-2.24 6-5v-5"/><path d="M22 8v4"/></svg>
-            <span>Scholar</span>
+      <div class="footer-social-block">
+        <div class="footer-social-label">{followLabel}</div>
+        <div class="footer-social">
+          <a class="footer-social-icon" href={`mailto:${profile.email}`} aria-label="Email" title="Email">
+            <span class="icon-lg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></span>
           </a>
-        )}
-        <a class="footer-chip" href="/cv.pdf" target="_blank" rel="noopener" aria-label="CV">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          <span>CV (PDF)</span>
-        </a>
+          <a class="footer-social-icon" href={profile.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+            <span class="icon-lg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
+          </a>
+          {profile.social.scholar && (
+            <a class="footer-social-icon" href={profile.social.scholar} target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar">
+              <span class="icon-lg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 11v5c0 2.76 2.69 5 6 5s6-2.24 6-5v-5"/><path d="M22 8v4"/></svg></span>
+            </a>
+          )}
+          <a class="footer-social-icon" href="/cv.pdf" target="_blank" rel="noopener" aria-label="CV (PDF)" title="CV (PDF)">
+            <span class="icon-lg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span>
+          </a>
+        </div>
       </div>
-      <p class="footer-legal">
+      <div class="footer-meta">
         &copy; {year} {profile.name} &middot;
         <a href="/en/">English</a> &middot;
         <a href="/es/">Español</a>
-      </p>
+      </div>
     </div>
   </footer>
 
